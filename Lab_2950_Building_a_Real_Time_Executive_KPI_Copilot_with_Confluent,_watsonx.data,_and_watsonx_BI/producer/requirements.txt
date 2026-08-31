@@ -1,0 +1,14 @@
+# Python dependencies for the Real-Time Executive KPI Copilot event generator
+# Install with:  pip install -r requirements.txt
+#
+# confluent-kafka is the official Confluent Python client. It bundles the
+# high-performance librdkafka C library and handles SASL/SSL auth to
+# Confluent Cloud out of the box.
+#
+# The [json,schemaregistry] extras add the Schema Registry client and the
+# JSON Schema serializer, which auto-register schemas so Apache Flink sees
+# proper columns (not raw bytes) with no manual UI inference.
+confluent-kafka[json,schemaregistry]==2.5.3
+
+# JSON Schema validation used by the serializer.
+jsonschema>=4.0.0

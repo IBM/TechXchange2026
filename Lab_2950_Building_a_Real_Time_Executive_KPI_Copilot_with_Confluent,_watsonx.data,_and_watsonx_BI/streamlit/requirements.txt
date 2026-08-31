@@ -1,0 +1,9 @@
+# Streamlit live-dashboard dependencies (side track)
+# Install with:  pip install -r streamlit/requirements.txt
+streamlit>=1.33
+streamlit-autorefresh>=1.0.1
+# avro extra: Flink/Tableflow write the KPI topics as Avro; json for source topics
+confluent-kafka[avro,json,schemaregistry]==2.5.3
+fastavro>=1.9
+jsonschema>=4.0.0
+pandas>=2.0

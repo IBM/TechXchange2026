@@ -1,0 +1,52 @@
+# =============================================================================
+# Confluent Cloud client configuration - EXAMPLE / TEMPLATE
+# =============================================================================
+# HOW TO USE:
+#   1. Copy this file to  client.properties   (in the same config/ folder):
+#          cp client.properties.example client.properties
+#   2. Replace the ALL-CAPS placeholders below with values from your
+#      Confluent Cloud cluster (Cluster Settings + API Keys pages).
+#   3. NEVER commit client.properties with real secrets to Git.
+#
+# Where to find each value in the Confluent Cloud web console:
+#   - bootstrap.servers : Cluster overview -> "Cluster settings" -> Bootstrap server
+#   - API key / secret  : Cluster -> "API Keys" -> "Add key" (choose the cluster)
+#   - Schema Registry   : Environment -> "Stream Governance" / "Schema Registry"
+#                         -> API endpoint, and create an SR API key there
+# =============================================================================
+
+# The address of your Kafka cluster. Looks like:
+#   pkc-xxxxx.us-east-1.aws.confluent.cloud:9092
+bootstrap.servers=BOOTSTRAP_SERVER_HERE:9092
+
+# Security: Confluent Cloud uses SASL over TLS.
+security.protocol=SASL_SSL
+sasl.mechanisms=PLAIN
+
+# Your Confluent Cloud CLUSTER API key acts as the username,
+# and the API secret acts as the password.
+sasl.username=CLUSTER_API_KEY_HERE
+sasl.password=CLUSTER_API_SECRET_HERE
+
+# --- Schema Registry (required) --------------------------------------------
+# The producer registers a JSON Schema per topic so Apache Flink sees proper
+# columns automatically. You need the Schema Registry endpoint + an SR API key.
+#
+# Find these in Confluent Cloud:
+#   1. Open your ENVIRONMENT (not the cluster).
+#   2. Go to "Stream Governance" (or "Schema Registry") -> copy the
+#      "API endpoint" URL (looks like the one below).
+#   3. Create a Schema Registry API key/secret on that same page.
+#
+# The URL (https://...):
+schema.registry.url=https://psrc-xxxxx.REGION.PROVIDER.confluent.cloud
+# The SR key and secret joined by a colon:  SR_KEY:SR_SECRET
+schema.registry.basic.auth.user.info=SR_API_KEY_HERE:SR_API_SECRET_HERE
+
+# --- Producer tuning (sensible defaults for a lab) -------------------------
+# Wait for the leader broker to acknowledge writes (durability).
+acks=all
+# Small batching window improves throughput without hurting the demo's "live" feel.
+linger.ms=50
+# Identifies this client in Confluent Cloud metrics/logs.
+client.id=kpi-copilot-event-generator

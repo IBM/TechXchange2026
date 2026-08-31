@@ -1,0 +1,153 @@
+"""
+Lab-2950 - KPI Bridge Job   *** THE PRODUCTION JOB - run this one ***
+=====================================================================
+This is the ONE Spark job the lab actually runs. (spark/validate.py and
+spark/read_tableflow.py are optional diagnostics only.)
+
+Reads the four Confluent Tableflow KPI tables (via the Iceberg REST catalog)
+and writes them as NATIVE Apache Iceberg tables into watsonx.data's own
+IBM Cloud Object Storage catalog. Those native tables are then queryable by
+the Presto engine and by IBM watsonx BI.
+
+Pipeline position:
+    Confluent Tableflow (Iceberg REST, Confluent-managed S3)
+        --> [THIS JOB: read via Spark, write native] -->
+    iceberg_catalog.kpi.*  (native tables on IBM COS)
+        --> Presto --> watsonx BI
+
+Proven configuration notes (learned during lab development):
+  - The Gluten/Velox native S3 reader CANNOT use Tableflow's remote-signed /
+    vended credentials, so the Iceberg scan must fall back to the JVM reader:
+        spark.gluten.sql.columnar.batchscan = false
+        spark.gluten.sql.columnar.filescan  = false
+  - The native reader also needs the S3 region set explicitly (else HTTP 301):
+        spark.hadoop.fs.s3a.endpoint.region = <region>
+  - Writing to the native watsonx.data catalog needs COS auth, supplied at
+    SUBMIT time as a Spark configuration property (NOT in this file):
+        spark.hadoop.wxd.apiKey = Basic <base64 of ibmlhapikey_<userid>:<apikey>>
+
+HOW TO RUN (watsonx.data console):
+  1. Fill in the placeholders below (Tableflow REST values + your API key/secret).
+  2. Upload to COS, e.g. s3a://<bucket>/spark/kpi_to_native_iceberg.py
+  3. Infrastructure manager -> Spark engine -> Applications -> Create application
+       Application type : Python
+       Application path : s3a://<bucket>/spark/kpi_to_native_iceberg.py
+       Spark version    : 3.5
+       Spark configuration properties:
+         spark.hadoop.wxd.apiKey            = Basic <your-base64>
+         spark.hadoop.fs.s3a.endpoint.region= us-east-2
+         spark.gluten.sql.columnar.batchscan= false
+         spark.gluten.sql.columnar.filescan = false
+  4. Submit. On success, the 4 tables appear under iceberg_catalog.kpi.* and
+     can be queried in the Presto SQL workspace and used in watsonx BI.
+"""
+from pyspark.sql import SparkSession
+
+# --- Confluent Tableflow (source) -------------------------------------------
+# LOCAL ONLY - contains a real API key/secret; this file is git-ignored.
+REGION = "us-east-1"                 # from your Tableflow endpoint
+ORG_ID = "<YOUR_ORG_ID>"             # from your Tableflow endpoint
+ENV_ID = "<YOUR_ENV_ID>"             # from your Tableflow endpoint (env-xxxxx)
+TABLEFLOW_APIKEY = "<TF_KEY>"        # your Tableflow API key
+TABLEFLOW_SECRET = "<TF_SECRET>"     # your Tableflow API secret
+CLUSTER_ID = "<lkc-xxxxx>"           # Kafka cluster id = Tableflow namespace
+
+# --- watsonx.data native catalog (destination) ------------------------------
+DEST_CATALOG = "iceberg_catalog"     # your Iceberg catalog (Spark + Presto engines)
+DEST_SCHEMA = "kpi"                  # will be created if missing
+DEST_BUCKET = "<YOUR_DATA_BUCKET>"   # the COS bucket behind DEST_CATALOG
+
+# The four KPI tables to bridge, with the BUSINESS columns to keep (we drop the
+# Tableflow internal $$topic / $$offset / $$raw-value etc. metadata columns).
+KPI_TABLES = {
+    "kpi_revenue_per_minute": [
+        "window_start", "window_end", "region",
+        "successful_payments", "revenue_usd",
+    ],
+    "kpi_order_throughput": [
+        "window_start", "window_end", "region",
+        "order_count", "gross_order_value_usd", "avg_order_value_usd",
+    ],
+    "kpi_payment_failure_rate": [
+        "window_start", "window_end", "region",
+        "total_payments", "failed_payments", "failure_rate_pct",
+    ],
+    "kpi_regional_sales_trends": [
+        "window_start", "window_end", "region",
+        "orders_paid", "unique_customers", "revenue_usd",
+        "refund_count", "refund_usd", "net_revenue_usd",
+    ],
+}
+
+REST_URI = (
+    f"https://tableflow.{REGION}.aws.confluent.cloud/iceberg/catalog/"
+    f"organizations/{ORG_ID}/environments/{ENV_ID}"
+)
+
+
+def build_spark():
+    return (
+        SparkSession.builder
+        .appName("kpi-tableflow-to-native-iceberg")
+        .enableHiveSupport()
+        # Source: Confluent Tableflow Iceberg REST catalog (alias 'tableflow').
+        .config("spark.sql.catalog.tableflow", "org.apache.iceberg.spark.SparkCatalog")
+        .config("spark.sql.catalog.tableflow.type", "rest")
+        .config("spark.sql.catalog.tableflow.uri", REST_URI)
+        .config("spark.sql.catalog.tableflow.credential",
+                f"{TABLEFLOW_APIKEY}:{TABLEFLOW_SECRET}")
+        .config("spark.sql.catalog.tableflow.io-impl",
+                "org.apache.iceberg.aws.s3.S3FileIO")
+        .config("spark.sql.catalog.tableflow.rest-metrics-reporting-enabled", "false")
+        .config("spark.sql.catalog.tableflow.s3.remote-signing-enabled", "true")
+        .config("spark.sql.catalog.tableflow.client.region", REGION)
+        .config("spark.sql.catalog.tableflow.s3.region", REGION)
+        # Native S3 reader region hints (avoid HTTP 301).
+        .config("spark.hadoop.fs.s3a.endpoint.region", REGION)
+        .config("spark.hadoop.fs.s3a.endpoint", f"s3.{REGION}.amazonaws.com")
+        # Force Iceberg scan to the JVM reader (Velox can't do remote signing).
+        .config("spark.gluten.sql.columnar.batchscan", "false")
+        .config("spark.gluten.sql.columnar.filescan", "false")
+        .getOrCreate()
+    )
+
+
+def main():
+    spark = build_spark()
+
+    # Ensure the destination schema exists on the watsonx.data COS catalog.
+    spark.sql(
+        f"CREATE DATABASE IF NOT EXISTS {DEST_CATALOG}.{DEST_SCHEMA} "
+        f"LOCATION 's3a://{DEST_BUCKET}/{DEST_SCHEMA}/'"
+    )
+
+    for table, cols in KPI_TABLES.items():
+        src = f"tableflow.`{CLUSTER_ID}`.{table}"
+        dst = f"{DEST_CATALOG}.{DEST_SCHEMA}.{table}"
+        col_list = ", ".join(cols)
+
+        print(f">>> Bridging {src}  ->  {dst}")
+
+        # Read only the business columns from the Tableflow table.
+        df = spark.sql(f"SELECT {col_list} FROM {src}")
+
+        # Overwrite the native table each run (idempotent snapshot). For a lab,
+        # a full refresh keeps the native tables in sync with Tableflow.
+        (
+            df.writeTo(dst)
+            .using("iceberg")
+            .createOrReplace()
+        )
+
+        count = spark.sql(f"SELECT COUNT(*) AS c FROM {dst}").collect()[0]["c"]
+        print(f"    wrote {count} rows to {dst}")
+
+    print(">>> Done. Native KPI tables are ready for Presto and watsonx BI:")
+    for table in KPI_TABLES:
+        print(f"      SELECT * FROM {DEST_CATALOG}.{DEST_SCHEMA}.{table} LIMIT 20;")
+
+    spark.stop()
+
+
+if __name__ == "__main__":
+    main()

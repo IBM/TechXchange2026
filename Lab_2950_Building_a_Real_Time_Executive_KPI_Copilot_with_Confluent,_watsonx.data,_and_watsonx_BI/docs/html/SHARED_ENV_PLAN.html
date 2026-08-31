@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab-2950 — Shared-Environment Plan</title>
+<style>
+:root { --ibm-blue:#0f62fe; --ink:#161616; --muted:#525252; --line:#e0e0e0;
+        --code-bg:#f4f4f4; --accent:#edf5ff; }
+* { box-sizing: border-box; }
+body { font-family: 'IBM Plex Sans','Segoe UI',Arial,sans-serif; color:var(--ink);
+       line-height:1.55; max-width:960px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+h1,h2,h3,h4 { line-height:1.25; margin-top:1.8em; }
+h1 { font-size:1.9rem; border-bottom:3px solid var(--ibm-blue); padding-bottom:.3em; }
+h2 { font-size:1.4rem; border-bottom:1px solid var(--line); padding-bottom:.2em; }
+h3 { font-size:1.15rem; color:var(--muted); }
+a { color:var(--ibm-blue); }
+code { background:var(--code-bg); padding:.12em .35em; border-radius:3px;
+       font-family:'IBM Plex Mono',Consolas,monospace; font-size:.9em; }
+pre { background:var(--code-bg); padding:1rem; border-radius:6px; overflow:auto;
+      border-left:3px solid var(--ibm-blue); }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1.2em 0; font-size:.94rem; }
+th,td { border:1px solid var(--line); padding:.5em .7em; text-align:left; vertical-align:top; }
+th { background:var(--accent); }
+tr:nth-child(even) td { background:#fafafa; }
+blockquote { border-left:4px solid var(--ibm-blue); background:var(--accent);
+             margin:1em 0; padding:.6em 1em; color:#0043ce; }
+ul,ol { padding-left:1.4rem; }
+.header-note { color:var(--muted); font-size:.85rem; margin-top:.2rem; }
+hr { border:0; border-top:1px solid var(--line); margin:2rem 0; }
+</style>
+</head>
+<body>
+<p class="header-note">IBM TechXchange 2026 · Lab-2950 — generated from SHARED_ENV_PLAN.md</p>
+<h1 id="lab-2950-shared-environment-plan-who-does-what">Lab-2950 — Shared-Environment Plan (Who Does What)</h1>
+<p>Your environments are <strong>shared</strong> across all ~30 students:</p>
+<ul>
+<li><strong>1 Confluent Cloud account</strong> (one environment + Kafka cluster) — shared.</li>
+<li><strong>1 IBM Cloud account</strong> with <strong>watsonx.data + COS</strong> — shared; 30 student
+  IDs/passwords (from the TechZone reservation) give login isolation.</li>
+<li><strong>1 IBM Cloud account</strong> with <strong>watsonx BI</strong> — shared; same 30 IDs.</li>
+</ul>
+<p>The student IDs isolate <em>logins</em>, not <em>resources</em> — everyone lands in the same
+Kafka cluster and the same watsonx.data catalog. So the plan is: <strong>you set up
+shared pieces once and hand out per-student values; students do the per-student
+work using a prefix.</strong></p>
+<hr />
+<h2 id="the-golden-rule-every-student-gets-a-number-nn-0130">The golden rule: every student gets a number <code>NN</code> (01–30)</h2>
+<p>Assign each student a two-digit number and a matching <strong>prefix <code>sNN_</code></strong>. That
+prefix is used for <strong>Kafka topics, Flink KPI tables</strong>, and the student's
+<strong>watsonx.data schema</strong> (<code>kpi_sNN</code>). This is what prevents 30 people from
+colliding in the shared cluster and catalog.</p>
+<p>Example for student 07:
+- Topics: <code>s07_orders</code>, <code>s07_payments</code>, … <code>s07_refunds</code>
+- KPI tables: <code>s07_kpi_revenue_per_minute</code>, …
+- Native schema: <code>iceberg_catalog.kpi_s07.*</code></p>
+<hr />
+<h2 id="a-do-once-instructor-and-share-with-students">A. Do ONCE (instructor) and share with students</h2>
+<h3 id="on-confluent-cloud-one-time">On Confluent Cloud (one time)</h3>
+<ol>
+<li>Create the <strong>environment + Kafka cluster</strong> (Basic) and enable <strong>Stream
+   Governance / Schema Registry</strong>.</li>
+<li>Enable <strong>Flink</strong> with a <strong>compute pool</strong> sized for ~30 × 4 statements
+   (validate in a dry run; raise the max CFU if statements queue).</li>
+<li>Ensure <strong>Tableflow</strong> is available on the environment.</li>
+<li><strong>Pre-create, per student</strong>, three API keys (or let students self-create if
+   roles allow):
+   - a <strong>cluster (Kafka) API key</strong> + secret,
+   - a <strong>Schema Registry API key</strong> + secret,
+   - a <strong>Tableflow API key</strong> + secret.</li>
+<li>Note the <strong>bootstrap server</strong>, <strong>Schema Registry URL</strong>, the <strong>Tableflow
+   Iceberg REST Catalog endpoint</strong> (region/org/env), and the <strong>Kafka cluster
+   ID</strong> (<code>lkc-...</code>).</li>
+</ol>
+<h3 id="on-ibm-watsonxdata-one-time">On IBM watsonx.data (one time)</h3>
+<ol start="6">
+<li>Provision a <strong>Spark engine</strong> and a <strong>Presto engine</strong>.</li>
+<li>Register an <strong>IBM COS bucket</strong> as watsonx.data storage and <strong>associate one
+   Apache Iceberg catalog</strong> (e.g. <code>iceberg_catalog</code>) with <strong>BOTH</strong> engines.
+   (One shared catalog is fine — students isolate via their own <strong>schema</strong>
+   <code>kpi_sNN</code>.)</li>
+<li>Grant every <strong>student ID</strong> access to the watsonx.data instance, both engines,
+   and the catalog.</li>
+<li>Copy the <strong>Presto connection JSON</strong> (Configuration tab) — students paste this
+   into watsonx BI. Note the <strong>API key</strong> source (TechZone reservation page).</li>
+<li>Decide the <strong>Spark-bridge delivery</strong> (see section C) — pre-run it, or hand
+    students a ready-to-submit job.</li>
+</ol>
+<h3 id="on-ibm-watsonx-bi-one-time">On IBM watsonx BI (one time)</h3>
+<ol start="11">
+<li>Confirm each student ID can open watsonx BI. (No service-to-service auth is
+    required — the Presto connector uses the API key. Validated.)</li>
+<li>(Optional) Build a <strong>template dashboard</strong> students can clone.</li>
+</ol>
+<h3 id="hand-each-student-a-slip-with">Hand each student a slip with:</h3>
+<ul>
+<li>Their <strong>number <code>NN</code></strong> and prefix <code>sNN_</code>.</li>
+<li>Confluent <strong>bootstrap server</strong>, <strong>Schema Registry URL</strong>.</li>
+<li>Their <strong>cluster / SR / Tableflow</strong> API keys + secrets.</li>
+<li><strong>Tableflow REST catalog endpoint</strong> + <strong>Kafka cluster ID</strong> (<code>lkc-...</code>).</li>
+<li>watsonx.data <strong>Presto connection JSON</strong> + <strong>API key</strong> (TechZone) + their
+  <strong>student ID/password</strong>.</li>
+<li>The <strong>GitHub repo URL</strong>: <code>https://github.ibm.com/itz-content/txc-2026-lab-2950</code>.</li>
+</ul>
+<hr />
+<h2 id="b-students-do-during-the-lab-per-student-using-their-snn_-prefix">B. Students DO during the lab (per student, using their <code>sNN_</code> prefix)</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Student action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Create their <strong>5 prefixed topics</strong> (<code>sNN_orders</code>, …) in the shared cluster</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Fill <code>config/client.properties</code> (bootstrap, cluster key, SR url+key) and run <code>TOPIC_PREFIX=sNN_ python producer/event_generator.py</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Observe their events in their topics</td>
+</tr>
+<tr>
+<td>4</td>
+<td>In Flink, create their <strong>4 prefixed KPI tables</strong> (add <code>sNN_</code> to source + KPI table names in the SQL); leave them running</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Enable <strong>Tableflow</strong> (Confluent storage, Iceberg) on their 4 KPI topics</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Run/submit the <strong>Spark bridge</strong> writing to <strong>their schema</strong> <code>kpi_sNN</code> (see C), then query <code>iceberg_catalog.kpi_sNN.*</code> in Presto</td>
+</tr>
+<tr>
+<td>7</td>
+<td>In watsonx BI, create a connection (paste Presto JSON + API key), import <code>iceberg_catalog.kpi_sNN</code> tables, ask KPI questions</td>
+</tr>
+</tbody>
+</table>
+<p>Students always work inside <strong>their prefix / their schema</strong>, so 30 people share
+the same cluster and catalog without stepping on each other.</p>
+<hr />
+<h2 id="c-the-spark-bridge-two-delivery-options-pick-one">C. The Spark bridge — two delivery options (pick one)</h2>
+<p>The Spark bridge job needs several non-obvious configs. Choose based on
+audience/time:</p>
+<p><strong>Option 1 (recommended for beginners) — instructor pre-runs, students query.</strong>
+- You run the bridge for each student's KPI topics into their <code>kpi_sNN</code> schema
+  (or run a single job that loops all prefixes) <strong>before/at the start</strong>.
+- Students skip Step 6's submit and go straight to Presto + watsonx BI.
+- Lowest failure surface; fits 90 minutes comfortably.</p>
+<p><strong>Option 2 (advanced) — students submit the bridge themselves.</strong>
+- Give each student <code>kpi_to_native_iceberg.py</code> pre-filled with their prefix +
+  <code>DEST_SCHEMA=kpi_sNN</code>, and the 4 Spark configs.
+- They upload to COS and submit on the shared Spark engine.
+- More faithful, but 30 concurrent Spark submits stress the engine and multiply
+  the config-error surface.</p>
+<blockquote>
+<p>Whichever you choose, the <strong>shared Spark + Presto engines</strong> handle the load;
+just watch concurrency during the dry run.</p>
+</blockquote>
+<hr />
+<h2 id="d-what-is-shared-vs-per-student-summary">D. What is shared vs per-student (summary)</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Shared (once)</th>
+<th>Per student</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confluent environment, Kafka cluster, Flink pool, Schema Registry</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>Kafka topics</td>
+<td></td>
+<td>✅ <code>sNN_*</code></td>
+</tr>
+<tr>
+<td>Flink KPI statements/tables</td>
+<td></td>
+<td>✅ <code>sNN_kpi_*</code></td>
+</tr>
+<tr>
+<td>Tableflow enablement</td>
+<td></td>
+<td>✅ (on their topics)</td>
+</tr>
+<tr>
+<td>Tableflow REST catalog + cluster-id namespace</td>
+<td>✅ (same for all)</td>
+<td></td>
+</tr>
+<tr>
+<td>watsonx.data Spark + Presto engines</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>Iceberg catalog on COS</td>
+<td>✅ (one catalog)</td>
+<td>✅ schema <code>kpi_sNN</code></td>
+</tr>
+<tr>
+<td>watsonx BI connection + metrics/dashboard</td>
+<td></td>
+<td>✅ (their own)</td>
+</tr>
+<tr>
+<td>API keys (cluster / SR / Tableflow), student IDs</td>
+<td></td>
+<td>✅ (issued per student)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="e-capacity-cost-notes-shared-account">E. Capacity &amp; cost notes (shared account)</h2>
+<ul>
+<li><strong>Flink</strong>: ~30 × 4 = ~120 always-on statements. Size the compute pool; tell
+  finished students to <strong>stop their statements</strong>.</li>
+<li><strong>watsonx.data engines</strong>: shared Spark + Presto; watch concurrency. The Spark
+  bridge is a short batch job — Option 1 (you run it) smooths the load.</li>
+<li><strong>Producer</strong>: default ~4 events/sec each keeps Kafka/Flink light.</li>
+<li>Confirm the <strong>Confluent promo</strong> covers Flink + Tableflow; the two IBM Cloud
+  accounts are funded separately (TechZone).</li>
+</ul>
+<hr />
+<h2 id="f-cleanup-end-of-session">F. Cleanup (end of session)</h2>
+<ul>
+<li>Students: Ctrl+C producer; <strong>stop their 4 Flink statements</strong>; optionally drop
+  their <code>kpi_sNN</code> schema and delete their <code>sNN_</code> topics.</li>
+<li>Instructor: stop/deprovision engines + Flink pool if temporary; revoke keys;
+  tear down per cost policy.</li>
+</ul>
+</body>
+</html>

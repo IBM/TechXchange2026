@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab-2950 — Instructor / Setup Guide</title>
+<style>
+:root { --ibm-blue:#0f62fe; --ink:#161616; --muted:#525252; --line:#e0e0e0;
+        --code-bg:#f4f4f4; --accent:#edf5ff; }
+* { box-sizing: border-box; }
+body { font-family: 'IBM Plex Sans','Segoe UI',Arial,sans-serif; color:var(--ink);
+       line-height:1.55; max-width:960px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+h1,h2,h3,h4 { line-height:1.25; margin-top:1.8em; }
+h1 { font-size:1.9rem; border-bottom:3px solid var(--ibm-blue); padding-bottom:.3em; }
+h2 { font-size:1.4rem; border-bottom:1px solid var(--line); padding-bottom:.2em; }
+h3 { font-size:1.15rem; color:var(--muted); }
+a { color:var(--ibm-blue); }
+code { background:var(--code-bg); padding:.12em .35em; border-radius:3px;
+       font-family:'IBM Plex Mono',Consolas,monospace; font-size:.9em; }
+pre { background:var(--code-bg); padding:1rem; border-radius:6px; overflow:auto;
+      border-left:3px solid var(--ibm-blue); }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:1.2em 0; font-size:.94rem; }
+th,td { border:1px solid var(--line); padding:.5em .7em; text-align:left; vertical-align:top; }
+th { background:var(--accent); }
+tr:nth-child(even) td { background:#fafafa; }
+blockquote { border-left:4px solid var(--ibm-blue); background:var(--accent);
+             margin:1em 0; padding:.6em 1em; color:#0043ce; }
+ul,ol { padding-left:1.4rem; }
+.header-note { color:var(--muted); font-size:.85rem; margin-top:.2rem; }
+hr { border:0; border-top:1px solid var(--line); margin:2rem 0; }
+</style>
+</head>
+<body>
+<p class="header-note">IBM TechXchange 2026 · Lab-2950 — generated from INSTRUCTOR_GUIDE.md</p>
+<h1 id="instructor-setup-guide-lab-2950">Instructor / Setup Guide — Lab-2950</h1>
+<h3 id="building-a-real-time-executive-kpi-copilot">Building a Real-Time Executive KPI Copilot</h3>
+<p>For the <strong>lab owner / instructor</strong>. Covers provisioning, the proven
+architecture, the delivery model for 30 participants, and cost control.</p>
+<blockquote>
+<p>This guide reflects the <strong>validated</strong> design. The path from Tableflow to
+watsonx BI is not the "obvious" one — read section 5 (Architecture decisions)
+before provisioning, it will save you hours.</p>
+</blockquote>
+<hr />
+<h2 id="1-environments">1. Environments</h2>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Purpose</th>
+<th>Sharing model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Confluent Cloud</strong> (1 account)</td>
+<td>Kafka topics, Schema Registry, Flink, Tableflow</td>
+<td>Shared across all ~30 students</td>
+</tr>
+<tr>
+<td><strong>IBM Cloud account #1</strong></td>
+<td><strong>watsonx.data + COS</strong> (Spark + Presto engines, Iceberg catalog)</td>
+<td>Shared; 30 TechZone student IDs</td>
+</tr>
+<tr>
+<td><strong>IBM Cloud account #2</strong></td>
+<td><strong>watsonx BI</strong></td>
+<td>Shared; same 30 student IDs</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The 30 student IDs (from the TechZone reservation) isolate <strong>logins</strong>, not
+<strong>resources</strong> — everyone shares one Kafka cluster and one watsonx.data
+catalog. Isolation is achieved with a <strong>per-student prefix <code>sNN_</code></strong> and a
+per-student watsonx.data <strong>schema <code>kpi_sNN</code></strong>.</p>
+<p><strong>See <code>docs/SHARED_ENV_PLAN.md</code></strong> for the full "who does what once vs.
+per-student" breakdown — read it before the event.</p>
+</blockquote>
+<p>No separate shared backend is required; the GitHub repo supplies all artifacts.</p>
+<hr />
+<h2 id="2-proven-end-to-end-architecture">2. Proven end-to-end architecture</h2>
+<pre><code>Python producer → Kafka (+ Schema Registry) → Flink (4 KPIs)
+   → Tableflow (Iceberg, Confluent-managed storage)
+   → watsonx.data SPARK bridge job (reads Tableflow REST catalog,
+                                    writes NATIVE Iceberg on IBM COS)
+   → iceberg_catalog.kpi.*  → watsonx.data PRESTO → watsonx BI
+</code></pre>
+<p>Full technical detail: <code>docs/06_spark_bridge_watsonxdata.md</code>.</p>
+<hr />
+<h2 id="3-confluent-cloud-setup-shared">3. Confluent Cloud setup (shared)</h2>
+<p><strong>Recommended: one shared Basic cluster + one shared Flink pool + per-student
+prefixes.</strong></p>
+<ol>
+<li>One <strong>environment</strong> + one <strong>Basic Kafka cluster</strong> (first eCKU free; ample for
+   30 students' light traffic).</li>
+<li>Enable <strong>Stream Governance / Schema Registry</strong> on the environment — the
+   producer auto-registers JSON schemas (required for Flink to see columns).</li>
+<li>Enable <strong>Flink</strong> with one shared <strong>compute pool</strong>. Each student runs <strong>4</strong>
+   always-on KPI statements (the regional KPI is a <code>CREATE VIEW</code> + one
+   <code>CREATE TABLE AS</code>). Size the pool for ~30 × 4 concurrent statements; validate
+   in a dry run.</li>
+<li>Per-student isolation: assign a <strong>prefix</strong> (<code>s01_</code>…<code>s30_</code>). The producer
+   accepts <code>TOPIC_PREFIX</code> (no code edit); students add the same prefix to topic
+   and KPI table names in the Flink SQL.</li>
+<li><strong>Enable Tableflow</strong> with <strong>Confluent-managed storage</strong> (Iceberg). Do <strong>not</strong>
+   attempt bring-your-own IBM COS — Tableflow BYOS supports only AWS/Azure/GCS,
+   not IBM COS.</li>
+</ol>
+<p>Pre-create per-student <strong>cluster API keys</strong> + <strong>Schema Registry API keys</strong> (or
+let students self-create if roles allow). Also create per-student <strong>Tableflow
+API keys</strong> for the REST catalog.</p>
+<hr />
+<h2 id="4-ibm-watsonxdata-setup">4. IBM watsonx.data setup</h2>
+<ol>
+<li>Provision <strong>both</strong> engine types:
+   - A <strong>Spark engine</strong> (Apache Gluten accelerated Spark 3.5 works; a plain
+     native Spark engine also works and avoids the Gluten scan-fallback config).
+   - A <strong>Presto engine</strong> (watsonx BI connects through this).</li>
+<li>Register an <strong>IBM Cloud Object Storage</strong> bucket as watsonx.data storage and
+   <strong>associate an Apache Iceberg catalog</strong> (e.g. <code>iceberg_catalog</code>) with <strong>both</strong>
+   the Spark and Presto engines. This bucket also serves as the Spark engine's
+   home/log bucket needs (use a real COS bucket, not the IBM-managed one, for
+   logs).</li>
+<li><strong>Student IDs</strong>: create per-student IBM Cloud IAM users; grant access to the
+   watsonx.data instance, both engines, and the catalog. For isolation, use a
+   <strong>per-student schema</strong> in the shared catalog (e.g. <code>kpi_s01</code>) or a per-student
+   catalog — match this to the Confluent prefix scheme. The Spark bridge's
+   <code>DEST_SCHEMA</code> maps a student's KPIs into their own schema.</li>
+<li>Note the <strong>Spark engine ID</strong>, <strong>instance CRN</strong>, and <strong>region</strong> — students
+   need these (or the UI submit form) for the bridge job.</li>
+<li><strong>watsonx BI connection</strong>: the BI <strong>IBM watsonx.data Presto</strong> connector needs
+   only the Presto connection JSON + an API key. In our validated run <strong>no
+   service-to-service authorization was required</strong>, even with watsonx.data and
+   watsonx BI in <strong>two different IBM Cloud accounts</strong> (the API key makes BI a
+   normal client). If profiling specifically fails, s2s auth (watsonx.data
+   <code>s2s_auth</code>) is the fallback to check.</li>
+</ol>
+<hr />
+<h2 id="5-architecture-decisions-read-this-hard-won">5. Architecture decisions (read this — hard-won)</h2>
+<p>These are the non-obvious constraints we validated. They drive the whole design:</p>
+<ol>
+<li><strong>watsonx BI → watsonx.data is Presto-only.</strong> No Spark connector exists.</li>
+<li><strong>Presto cannot read Confluent-managed Tableflow storage</strong> (no vended /
+   remote-signed credentials). So Presto cannot read Tableflow directly.</li>
+<li><strong>The Spark engine CAN read Tableflow</strong> (Iceberg REST catalog + remote
+   signing) — but the <strong>Gluten/Velox native reader cannot</strong>. The Iceberg scan
+   must fall back to the JVM reader via
+   <code>spark.gluten.sql.columnar.batchscan=false</code> and <code>...filescan=false</code> (or use a
+   plain native Spark engine).</li>
+<li>The Spark native reader also needs <code>spark.hadoop.fs.s3a.endpoint.region</code> set
+   or it hits Tableflow's S3 with an HTTP 301.</li>
+<li><strong>Tableflow cannot write to IBM COS</strong> (BYOS = AWS/Azure/GCS only).</li>
+<li>Therefore the <strong>Spark bridge</strong> (read Tableflow → write native Iceberg on IBM
+   COS) is mandatory; the native tables are what Presto and watsonx BI consume.
+   This also keeps all data on <strong>IBM storage</strong> (good optics; no hyperscaler
+   bucket needed).</li>
+</ol>
+<hr />
+<h2 id="6-delivery-model-for-30-participants-recommended">6. Delivery model for 30 participants (recommended)</h2>
+<p>The full Spark-bridge path took many non-obvious configs to get right. For a
+90-minute lab, minimize per-student failure surface:</p>
+<p><strong>Recommended — instructor pre-runs the Spark bridge; students do everything
+else.</strong>
+- Students: create topics, run the producer, observe events, author the Flink
+  KPIs, enable Tableflow, then <strong>query the native tables in Presto</strong> and <strong>build
+  the watsonx BI dashboard</strong>.
+- Instructor: pre-provision the Iceberg catalog + engines, provide the Presto
+  connection JSON + API key,
+  and either (a) pre-run the Spark bridge so <code>iceberg_catalog.kpi.*</code> already
+  exists, or (b) provide a ready-to-submit bridge app with the 4 Spark configs
+  pre-filled so students click "Submit" once.
+- This keeps the fragile Spark configs off the critical path for beginners while
+  still exposing the full architecture conceptually.</p>
+<p><strong>Advanced option</strong> — students run the bridge themselves using
+<code>docs/06_spark_bridge_watsonxdata.md</code>. Only do this with a longer session or a
+technical audience.</p>
+<hr />
+<h2 id="7-github-repository-shared-artifacts">7. GitHub repository (shared artifacts)</h2>
+<p>Publish <code>Lab-development/</code> to the lab repo. Layout:</p>
+<pre><code>Lab-development/
+├── README.md
+├── producer/            event_generator.py (+ requirements.txt)
+├── config/              client.properties.example
+├── flink/               00..04 KPI SQL (+ 04b fallback)
+├── spark/               validate.py, read_tableflow.py(.example),
+│                        kpi_to_native_iceberg.py(.example)
+└── docs/                LAB_GUIDE.md, 05_tableflow_iceberg.md,
+                         06_spark_bridge_watsonxdata.md, 07_watsonx_bi.md,
+                         troubleshooting.md, INSTRUCTOR_GUIDE.md
+</code></pre>
+<p><strong>Never commit real credentials.</strong> <code>.gitignore</code> excludes
+<code>config/client.properties</code>, <code>spark/read_tableflow.py</code>, and
+<code>spark/kpi_to_native_iceberg.py</code> (the filled-in Spark files carry Tableflow API
+keys). Students copy the <code>.example</code> files and fill their own values.</p>
+<hr />
+<h2 id="8-pre-conference-dry-run-checklist">8. Pre-conference dry run checklist</h2>
+<ul>
+<li>[ ] Producer connects (with a <code>TOPIC_PREFIX</code>), streams to all 5 topics</li>
+<li>[ ] Schema Registry auto-registers schemas; Flink <code>DESCRIBE</code> shows columns</li>
+<li>[ ] All 4 Flink KPI tables create and emit rows (regional = view + CTAS)</li>
+<li>[ ] Confirm each student = 4 always-on statements</li>
+<li>[ ] Tableflow syncs all 4 KPI topics (managed storage)</li>
+<li>[ ] Spark bridge finishes; <code>iceberg_catalog.kpi.*</code> visible in Presto</li>
+<li>[ ] watsonx BI connects (Presto connector + API key; no s2s auth needed) and renders a chart</li>
+<li>[ ] Time the full run — fits in ~90 min with buffer</li>
+<li>[ ] Confirm the Confluent promo covers Flink + Tableflow (see §9)</li>
+</ul>
+<hr />
+<h2 id="9-budget-cost-control-1500-confluent-promo">9. Budget &amp; cost control (~$1,500 Confluent promo)</h2>
+<ul>
+<li><strong>Flink CFU-minutes</strong> are the main Confluent cost — 4 always-on statements per
+  student. Stop them promptly.</li>
+<li><strong>Basic</strong> Kafka cluster; tiny data volume. Producer default is ~4 events/sec.</li>
+<li><strong>Tableflow</strong> — small per-topic + per-GB.</li>
+<li><strong>watsonx.data</strong> Spark/Presto bill when running — stop engines when idle;
+  the Spark bridge is a short batch job.</li>
+<li>Dev-phase rules: stop Flink statements daily; pause the compute pool when
+  idle; set a billing alert; verify the promo covers Flink + Tableflow.</li>
+<li>The <strong>IBM Cloud accounts (watsonx.data, watsonx BI)</strong> are separate from the
+  Confluent promo — confirm their own funding.</li>
+</ul>
+<hr />
+<h2 id="10-cleanup-after-the-session">10. Cleanup after the session</h2>
+<ul>
+<li>Students: Ctrl+C producer; <strong>stop the 4 Flink statements</strong>; (optional) drop
+  <code>iceberg_catalog.kpi</code> tables, disable Tableflow, delete topics.</li>
+<li>Instructor: stop/deprovision Spark + Presto engines and the Flink pool if
+  temporary; revoke student IDs; tear down per cost policy.</li>
+</ul>
+</body>
+</html>

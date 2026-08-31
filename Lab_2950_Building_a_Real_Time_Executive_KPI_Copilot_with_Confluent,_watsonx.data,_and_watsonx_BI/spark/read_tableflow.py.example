@@ -1,0 +1,90 @@
+"""
+Test 3 - Validate that the watsonx.data Spark engine can READ Confluent
+Tableflow KPI tables via the Iceberg REST catalog (with vended credentials).
+
+This proves the "read" half of Architecture A. The "write" half (Spark writing
+a native Iceberg table on IBM COS, read by Presto) was already proven by
+spark/validate.py.
+
+HOW TO RUN (watsonx.data console):
+  1. Fill in the four placeholders below (REGION, ORG_ID, ENV_ID, and the
+     Tableflow API key:secret). Also set CLUSTER_ID if you already know it,
+     or leave it and read it from the SHOW NAMESPACES output.
+  2. Upload this file to your COS bucket, e.g. s3a://<bucket>/spark/read_tableflow.py
+  3. Infrastructure manager -> Spark engine -> Applications -> Create application
+       Application type   : Python
+       Application path   : s3a://<bucket>/spark/read_tableflow.py
+       Spark version      : 3.5
+       (No wxd.apiKey conf needed here - the Tableflow catalog auth is set
+        inside this script via the 'credential' config.)
+  4. Submit and watch the log. Success = the KPI rows print via .show().
+
+WHERE TO FIND THE VALUES (Confluent Cloud, from Step 5):
+  - REGION / ORG_ID / ENV_ID : embedded in the Tableflow Iceberg REST Catalog
+    endpoint URL you copied:
+      https://tableflow.{REGION}.aws.confluent.cloud/iceberg/catalog/
+             organizations/{ORG_ID}/environments/{ENV_ID}
+  - Tableflow API key + secret : the Tableflow API key you created in Step 5.
+  - CLUSTER_ID (lkc-xxxxx)     : your Kafka cluster ID; also appears as a
+                                 namespace in SHOW NAMESPACES output.
+"""
+from pyspark.sql import SparkSession
+
+# --- FILL THESE IN ----------------------------------------------------------
+# NOTE: This file gets uploaded to COS and run by the watsonx.data Spark engine,
+# so the values must live IN this file (it cannot read a local secrets file at
+# runtime). Because it now contains a real API key/secret, this filled-in file
+# is git-ignored. Never commit it. A safe template lives in
+# read_tableflow.py.example.
+REGION = "us-east-1"                 # e.g. us-east-1  (your Confluent region)
+ORG_ID = "<YOUR_ORG_ID>"             # from the REST catalog URL
+ENV_ID = "<YOUR_ENV_ID>"             # from the REST catalog URL (env-xxxxx)
+TABLEFLOW_APIKEY = "<TF_KEY>"        # Tableflow API key
+TABLEFLOW_SECRET = "<TF_SECRET>"     # Tableflow API secret
+CLUSTER_ID = "<lkc-xxxxx>"           # your Kafka cluster ID (or read from output)
+# ----------------------------------------------------------------------------
+
+REST_URI = (
+    f"https://tableflow.{REGION}.aws.confluent.cloud/iceberg/catalog/"
+    f"organizations/{ORG_ID}/environments/{ENV_ID}"
+)
+
+
+def main():
+    spark = (
+        SparkSession.builder
+        .appName("read-tableflow-kpis")
+        # Register the Tableflow Iceberg REST catalog as a local alias 'tableflow'.
+        .config("spark.sql.catalog.tableflow", "org.apache.iceberg.spark.SparkCatalog")
+        .config("spark.sql.catalog.tableflow.type", "rest")
+        .config("spark.sql.catalog.tableflow.uri", REST_URI)
+        .config("spark.sql.catalog.tableflow.credential",
+                f"{TABLEFLOW_APIKEY}:{TABLEFLOW_SECRET}")
+        .config("spark.sql.catalog.tableflow.io-impl",
+                "org.apache.iceberg.aws.s3.S3FileIO")
+        .config("spark.sql.catalog.tableflow.rest-metrics-reporting-enabled", "false")
+        # Vended credentials / remote signing = works with Confluent-managed storage.
+        .config("spark.sql.catalog.tableflow.s3.remote-signing-enabled", "true")
+        .config("spark.sql.catalog.tableflow.client.region", REGION)
+        .getOrCreate()
+    )
+
+    # 1. Discover namespaces - your Kafka cluster ID appears here.
+    print(">>> Namespaces in tableflow catalog:")
+    spark.sql("SHOW NAMESPACES IN tableflow").show(truncate=False)
+
+    # 2. List the tables (your KPI topics) in the cluster namespace.
+    print(f">>> Tables in tableflow.`{CLUSTER_ID}`:")
+    spark.sql(f"SHOW TABLES IN tableflow.`{CLUSTER_ID}`").show(truncate=False)
+
+    # 3. Read one KPI table to prove end-to-end access.
+    print(">>> Sample rows from kpi_revenue_per_minute:")
+    spark.sql(
+        f"SELECT * FROM tableflow.`{CLUSTER_ID}`.kpi_revenue_per_minute LIMIT 10"
+    ).show(truncate=False)
+
+    spark.stop()
+
+
+if __name__ == "__main__":
+    main()

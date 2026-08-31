@@ -1,0 +1,34 @@
+# =============================================================================
+# .gitignore - Lab-2950
+# Keep real credentials/config LOCAL. Commit only the *.example templates.
+# =============================================================================
+
+# --- Real credentials / environment-specific config (NEVER COMMIT) ----------
+# Confluent Cloud + Schema Registry connection (copy of client.properties.example)
+config/client.properties
+
+# Filled-in Spark jobs - these embed the Tableflow API key/secret.
+# Commit the *.example templates instead.
+spark/read_tableflow.py
+spark/kpi_to_native_iceberg.py
+
+# Any environment files
+.env
+.env.*
+*.env
+
+# Per-student generated artifacts (may contain secrets; generated on demand)
+students/
+
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# --- OS / editor noise ------------------------------------------------------
+.DS_Store
+.idea/
+.vscode/
