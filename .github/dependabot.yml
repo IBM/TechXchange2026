@@ -1,0 +1,57 @@
+version: 2
+
+# Monorepo Dependabot configuration
+#
+# Rules (see AGENTS.md for full rationale):
+# - One entry per manifest directory
+# - Only the "dependencies" label (the only one that exists by default)
+# - open-pull-requests-limit: 5 (never 0 — zero blocks security updates too)
+# - groups: all-dependencies to bundle all bumps in a dir into one PR (prevents merge conflicts)
+# - allow: dependency-type: "all" on pip entries (includes dev deps in security scans)
+# - No ignore rules (they block security PRs)
+# - No docker entries (no CVE data for base images)
+
+updates:
+  # ── Python ──────────────────────────────────────────────────────────────────
+
+  - package-ecosystem: "pip"
+    directory: "/Lab_2764_SelfHealing_Applications_with_Instana_BoB/library-system/users-api"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    groups:
+      all-dependencies:
+        patterns: ["*"]
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "pip"
+    directory: "/Lab_2764_SelfHealing_Applications_with_Instana_BoB/library-system/books-api"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    groups:
+      all-dependencies:
+        patterns: ["*"]
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "pip"
+    directory: "/Lab_2764_SelfHealing_Applications_with_Instana_BoB/library-system/load-generator"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    groups:
+      all-dependencies:
+        patterns: ["*"]
+    labels:
+      - "dependencies"
