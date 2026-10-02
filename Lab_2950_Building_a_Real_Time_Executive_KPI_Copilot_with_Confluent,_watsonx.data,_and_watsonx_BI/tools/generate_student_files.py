@@ -194,7 +194,7 @@ REGION           = "{args.tf_region}"
 ORG_ID           = "{args.tf_org}"
 ENV_ID           = "{args.tf_env}"
 TABLEFLOW_APIKEY = "{args.tf_key}"
-TABLEFLOW_SECRET = "{args.tf_secret}"
+TABLEFLOW_SECRET = "{args.tf_secret}"  # lgtm[py/clear-text-storage-sensitive-data]
 CLUSTER_ID       = "{args.cluster_id}"          # Kafka cluster id = Iceberg namespace
 
 DEST_CATALOG = "{args.dest_catalog}"

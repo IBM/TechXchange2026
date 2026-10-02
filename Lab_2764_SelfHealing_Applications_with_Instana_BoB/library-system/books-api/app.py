@@ -7,9 +7,12 @@ from pymongo import MongoClient
 import os
 import time
 import random
+import logging
 
 app = Flask(__name__)
 CORS(app)
+
+logger = logging.getLogger(__name__)
 
 # MongoDB connection
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://mongodb:27017/')
@@ -62,7 +65,8 @@ def get_books():
             response["artificial_delay_ms"] = delay
         return jsonify(response), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in get_books")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/books/<book_id>', methods=['GET'])
 def get_book(book_id):
@@ -73,7 +77,8 @@ def get_book(book_id):
             return jsonify(book), 200
         return jsonify({"error": "Book not found"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in get_book")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/books', methods=['POST'])
 def add_book():
@@ -82,16 +87,17 @@ def add_book():
         data = request.get_json()
         if not data or 'title' not in data or 'author' not in data:
             return jsonify({"error": "Missing required fields"}), 400
-        
+
         # Generate ID
         count = books_collection.count_documents({})
         data['id'] = str(count + 1)
         data['available'] = data.get('available', True)
-        
+
         books_collection.insert_one(data)
         return jsonify({"message": "Book added", "book": {k: v for k, v in data.items() if k != '_id'}}), 201
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in add_book")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/books/<book_id>', methods=['PUT'])
 def update_book(book_id):
@@ -103,7 +109,8 @@ def update_book(book_id):
             return jsonify({"message": "Book updated"}), 200
         return jsonify({"error": "Book not found"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in update_book")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/books/<book_id>', methods=['DELETE'])
 def delete_book(book_id):
@@ -114,7 +121,8 @@ def delete_book(book_id):
             return jsonify({"message": "Book deleted"}), 200
         return jsonify({"error": "Book not found"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in delete_book")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/books/search', methods=['GET'])
 def search_books():
@@ -123,7 +131,7 @@ def search_books():
         query = request.args.get('q', '')
         if not query:
             return jsonify({"books": [], "count": 0}), 200
-        
+
         books = list(books_collection.find({
             "$or": [
                 {"title": {"$regex": query, "$options": "i"}},
@@ -131,10 +139,11 @@ def search_books():
                 {"isbn": {"$regex": query, "$options": "i"}}
             ]
         }, {'_id': 0}))
-        
+
         return jsonify({"books": books, "count": len(books)}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in search_books")
+        return jsonify({"error": "Internal server error"}), 500
 
 # Initialize sample data on first request (works under both gunicorn and direct run)
 @app.before_request

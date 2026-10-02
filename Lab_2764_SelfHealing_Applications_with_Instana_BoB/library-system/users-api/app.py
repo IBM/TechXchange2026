@@ -7,9 +7,12 @@ from pymongo import MongoClient
 import os
 import time
 import random
+import logging
 
 app = Flask(__name__)
 CORS(app)
+
+logger = logging.getLogger(__name__)
 
 # MongoDB connection
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://mongodb:27017/')
@@ -58,7 +61,8 @@ def get_users():
         users = list(users_collection.find({}, {'_id': 0}))
         return jsonify({"users": users, "count": len(users)}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in get_users")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
@@ -69,7 +73,8 @@ def get_user(user_id):
             return jsonify(user), 200
         return jsonify({"error": "User not found"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in get_user")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users', methods=['POST'])
 def add_user():
@@ -78,17 +83,18 @@ def add_user():
         data = request.get_json()
         if not data or 'name' not in data or 'email' not in data:
             return jsonify({"error": "Missing required fields"}), 400
-        
+
         # Generate ID
         count = users_collection.count_documents({})
         data['id'] = str(count + 1)
         data['membershipId'] = f"MEM-{str(count + 1).zfill(3)}"
         data['borrowedBooks'] = []
-        
+
         users_collection.insert_one(data)
         return jsonify({"message": "User added", "user": {k: v for k, v in data.items() if k != '_id'}}), 201
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in add_user")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
@@ -99,7 +105,8 @@ def update_user(user_id):
             return jsonify({"message": "User updated"}), 200
         return jsonify({"error": "User not found"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in update_user")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -109,7 +116,8 @@ def delete_user(user_id):
             return jsonify({"message": "User deleted"}), 200
         return jsonify({"error": "User not found"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in delete_user")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users/borrow', methods=['POST'])
 def borrow_book():
@@ -118,21 +126,21 @@ def borrow_book():
         data = request.get_json()
         user_id = data.get('userId')
         book_id = data.get('bookId')
-        
+
         if not user_id or not book_id:
             return jsonify({"error": "Missing userId or bookId"}), 400
-        
+
         # Check if user exists
         user = users_collection.find_one({"id": user_id})
         if not user:
             return jsonify({"error": "User not found"}), 404
-        
+
         # Add book to user's borrowed books
         users_collection.update_one(
             {"id": user_id},
             {"$addToSet": {"borrowedBooks": book_id}}
         )
-        
+
         # Record transaction
         transaction = {
             "userId": user_id,
@@ -141,10 +149,11 @@ def borrow_book():
             "timestamp": "2024-01-01T00:00:00Z"
         }
         transactions_collection.insert_one(transaction)
-        
+
         return jsonify({"message": "Book borrowed successfully", "userId": user_id, "bookId": book_id}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in borrow_book")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users/return', methods=['POST'])
 def return_book():
@@ -153,19 +162,19 @@ def return_book():
         data = request.get_json()
         user_id = data.get('userId')
         book_id = data.get('bookId')
-        
+
         if not user_id or not book_id:
             return jsonify({"error": "Missing userId or bookId"}), 400
-        
+
         # Remove book from user's borrowed books
         result = users_collection.update_one(
             {"id": user_id},
             {"$pull": {"borrowedBooks": book_id}}
         )
-        
+
         if result.modified_count == 0:
             return jsonify({"error": "User not found or book not borrowed"}), 404
-        
+
         # Record transaction
         transaction = {
             "userId": user_id,
@@ -174,10 +183,11 @@ def return_book():
             "timestamp": "2024-01-01T00:00:00Z"
         }
         transactions_collection.insert_one(transaction)
-        
+
         return jsonify({"message": "Book returned successfully", "userId": user_id, "bookId": book_id}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in return_book")
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/users/<user_id>/borrowed', methods=['GET'])
 def get_borrowed_books(user_id):
@@ -186,11 +196,12 @@ def get_borrowed_books(user_id):
         user = users_collection.find_one({"id": user_id}, {'_id': 0})
         if not user:
             return jsonify({"error": "User not found"}), 404
-        
+
         borrowed_books = user.get('borrowedBooks', [])
         return jsonify({"userId": user_id, "borrowedBooks": borrowed_books, "count": len(borrowed_books)}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error in get_borrowed_books")
+        return jsonify({"error": "Internal server error"}), 500
 
 # Initialize sample data on first request (works under both gunicorn and direct run)
 @app.before_request
