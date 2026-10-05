@@ -8,7 +8,7 @@
 # The [json,schemaregistry] extras add the Schema Registry client and the
 # JSON Schema serializer, which auto-register schemas so Apache Flink sees
 # proper columns (not raw bytes) with no manual UI inference.
-confluent-kafka[json,schemaregistry]==2.5.3
+confluent-kafka[json,schemaregistry]==2.15.1
 
 # JSON Schema validation used by the serializer.
 jsonschema>=4.0.0
