@@ -3,7 +3,7 @@
 streamlit>=1.33
 streamlit-autorefresh>=1.0.1
 # avro extra: Flink/Tableflow write the KPI topics as Avro; json for source topics
-confluent-kafka[avro,json,schemaregistry]==2.15.1
+confluent-kafka[avro,json,schemaregistry]==2.16.0
 fastavro>=1.9
 jsonschema>=4.0.0
 pandas>=2.0
