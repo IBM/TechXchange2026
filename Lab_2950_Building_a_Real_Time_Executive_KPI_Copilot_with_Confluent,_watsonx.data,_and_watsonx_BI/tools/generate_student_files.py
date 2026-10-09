@@ -166,11 +166,13 @@ collide with other students in the shared environment.
    - TOPIC_PREFIX={prefix} python producer/event_generator.py
 
 3. FLINK (Confluent Cloud > Flink SQL workspace):
-   Run the SQL files in flink/ here, one statement at a time. They are already
-   prefixed with {prefix}. Each file has a CREATE TABLE IF NOT EXISTS followed
-   by an INSERT INTO ... SELECT - run the CREATE first, then the INSERT. For
-   04_kpi_regional_sales_trends.sql run the CREATE VIEW first. To resume after
-   an idle stop, re-run only the INSERT INTO. Leave all statements running.
+   Run the SQL files in THIS folder's flink/ (students/{sid}/flink/), one
+   statement at a time. They are already prefixed with {prefix}. Each file has
+   a CREATE TABLE IF NOT EXISTS followed by an INSERT INTO ... SELECT - run the
+   CREATE first, then the INSERT. For 04_kpi_regional_sales_trends.sql run the
+   CREATE VIEW first. To resume after an idle stop, re-run only the INSERT INTO.
+   Leave all statements running. (Do NOT use the repo's top-level flink/ files -
+   those are unprefixed templates.)
 
 4. TABLEFLOW (Confluent Cloud):
    Enable Tableflow (Iceberg, Use Confluent storage) on your 4 KPI topics:

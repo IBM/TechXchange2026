@@ -100,10 +100,12 @@ python tools/generate_student_files.py --me sNN      # e.g. --me s07
 ```
 
 This writes `students/sNN/` with your prefixed Flink SQL, a `client.properties`
-template, your Spark bridge, and a `README.txt`. Throughout this guide, wherever
-you see a bare name like `orders` or `kpi_revenue_per_minute`, use **your**
-prefixed version (`sNN_orders`, `sNN_kpi_revenue_per_minute`) and schema
-`kpi_sNN`.
+template, your Spark bridge, and a `README.txt`. **From here on, run the files
+in `students/sNN/` — not the unprefixed templates in the repo's top-level
+`flink/` and `spark/` folders** (those are the source the generator reads from).
+Throughout this guide, wherever you see a bare name like `orders` or
+`kpi_revenue_per_minute`, use **your** prefixed version (`sNN_orders`,
+`sNN_kpi_revenue_per_minute`) and schema `kpi_sNN`.
 
 ✅ **Checkpoint:** `pip install` completed and `students/sNN/` was generated.
 
@@ -202,19 +204,24 @@ message naming the values to replace.
    **value** columns show as BYTES did the producer's schema not register —
    recheck Step 2b/2c.)
 
-3. Create the 4 KPI tables. **Run one statement at a time** (this workspace
-   runs a single statement per execution). Each KPI file now has a
+3. Create the 4 KPI tables. **Use the prefixed files the generator wrote to
+   `students/sNN/flink/`** — never the unprefixed templates in the repo's
+   top-level `flink/` (those create bare, un-namespaced tables that collide
+   with other students on the shared cluster). **Run one statement at a time**
+   (this workspace runs a single statement per execution). Each file has a
    **CREATE TABLE IF NOT EXISTS** (run once) followed by an **INSERT INTO**
    (the continuous job):
 
-   | File | Creates | Statements |
+   | File (open from `students/sNN/flink/`) | Creates | Statements |
    |------|---------|-----------|
-   | `flink/01_kpi_revenue_per_minute.sql`    | `sNN_kpi_revenue_per_minute`    | CREATE TABLE, then INSERT INTO |
-   | `flink/02_kpi_order_throughput.sql`      | `sNN_kpi_order_throughput`      | CREATE TABLE, then INSERT INTO |
-   | `flink/03_kpi_payment_failure_rate.sql`  | `sNN_kpi_payment_failure_rate`  | CREATE TABLE, then INSERT INTO |
-   | `flink/04_kpi_regional_sales_trends.sql` | `sNN_kpi_regional_sales_trends` | CREATE VIEW, CREATE TABLE, then INSERT INTO |
+   | `01_kpi_revenue_per_minute.sql`    | `sNN_kpi_revenue_per_minute`    | CREATE TABLE, then INSERT INTO |
+   | `02_kpi_order_throughput.sql`      | `sNN_kpi_order_throughput`      | CREATE TABLE, then INSERT INTO |
+   | `03_kpi_payment_failure_rate.sql`  | `sNN_kpi_payment_failure_rate`  | CREATE TABLE, then INSERT INTO |
+   | `04_kpi_regional_sales_trends.sql` | `sNN_kpi_regional_sales_trends` | CREATE VIEW, CREATE TABLE, then INSERT INTO |
 
-   (The copies in `students/sNN/flink/` already have your prefix applied.)
+   > The top-level `flink/*.sql` files are **source templates** the generator
+   > reads from — don't run them directly. Always run **your** copies in
+   > `students/sNN/flink/`.
 
 > Notes learned in testing:
 > - **Resumable pattern:** Confluent Cloud auto-stops idle statements. Because

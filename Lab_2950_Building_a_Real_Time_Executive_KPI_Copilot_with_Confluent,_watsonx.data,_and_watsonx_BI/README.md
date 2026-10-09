@@ -57,7 +57,7 @@ Lab_2950/
 │   └── requirements.txt
 ├── config/
 │   └── client.properties.example   copy to client.properties, add your keys
-├── flink/
+├── flink/                          source KPI SQL templates (the generator reads these)
 │   ├── 00_inspect_source_topics.sql
 │   ├── 01_kpi_revenue_per_minute.sql
 │   ├── 02_kpi_order_throughput.sql
@@ -65,12 +65,12 @@ Lab_2950/
 │   ├── 04_kpi_regional_sales_trends.sql          (CREATE VIEW + CREATE TABLE + INSERT INTO)
 │   └── 04b_kpi_regional_sales_trends_fallback.sql (alternate 3-statement version)
 ├── spark/
-│   ├── kpi_to_native_iceberg.py(.example)  ⭐ THE production bridge job (run this)
+│   ├── kpi_to_native_iceberg.py(.example)  ⭐ THE production bridge job (template)
 │   ├── validate.py                 diagnostic only: proves Spark→native Iceberg→Presto
 │   └── read_tableflow.py(.example) diagnostic only: proves Spark can read Tableflow
 ├── streamlit/                      optional side-track: live KPI dashboard
 ├── tools/
-│   └── generate_student_files.py   ⭐ run `--me sNN` to generate your prefixed files
+│   └── generate_student_files.py   ⭐ run `--me sNN`; writes YOUR prefixed copies to students/sNN/
 └── docs/
     ├── LAB_GUIDE.md                 ⭐ participant step-by-step (Tasks 1–5)
     ├── troubleshooting.md           every real error + fix
