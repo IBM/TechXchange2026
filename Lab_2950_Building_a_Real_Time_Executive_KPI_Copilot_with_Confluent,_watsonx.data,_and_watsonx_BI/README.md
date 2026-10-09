@@ -30,7 +30,7 @@ dashboards + a natural-language Copilot in **watsonx BI**.
         watsonx.data SPARK engine ── bridge job: read Tableflow (REST catalog)
                           │            → write NATIVE Iceberg on IBM COS
                           ▼
-      iceberg_catalog.kpi.*  (native Iceberg on IBM Cloud Object Storage)
+      iceberg_catalog.kpi_sNN.*  (native Iceberg on IBM Cloud Object Storage)
                           │
                           ▼
         watsonx.data PRESTO engine ─▶ IBM watsonx BI (dashboards + NL Copilot)
@@ -40,8 +40,7 @@ dashboards + a natural-language Copilot in **watsonx BI**.
 Presto cannot read Confluent-managed Tableflow storage (no vended credentials).
 The watsonx.data **Spark** engine can, so it copies the KPIs into **native**
 Iceberg on IBM COS — which Presto and watsonx BI can read. Everything stays on
-**IBM storage** (no AWS/Azure/GCS bucket required). Details:
-`docs/06_spark_bridge_watsonxdata.md`.
+**IBM storage** (no AWS/Azure/GCS bucket required).
 
 **Tech stack:** Confluent Cloud · Apache Kafka · Schema Registry · Apache Flink ·
 Tableflow · Apache Iceberg · IBM watsonx.data (Spark + Presto) · IBM watsonx BI.
@@ -51,7 +50,7 @@ Tableflow · Apache Iceberg · IBM watsonx.data (Spark + Presto) · IBM watsonx 
 ## Repository layout
 
 ```
-Lab-development/
+Lab_2950/
 ├── README.md                       ← you are here
 ├── producer/
 │   ├── event_generator.py          simulates the business; JSON + Schema Registry
@@ -63,36 +62,43 @@ Lab-development/
 │   ├── 01_kpi_revenue_per_minute.sql
 │   ├── 02_kpi_order_throughput.sql
 │   ├── 03_kpi_payment_failure_rate.sql
-│   ├── 04_kpi_regional_sales_trends.sql          (CREATE VIEW + CREATE TABLE AS)
+│   ├── 04_kpi_regional_sales_trends.sql          (CREATE VIEW + CREATE TABLE + INSERT INTO)
 │   └── 04b_kpi_regional_sales_trends_fallback.sql (alternate 3-statement version)
 ├── spark/
 │   ├── kpi_to_native_iceberg.py(.example)  ⭐ THE production bridge job (run this)
 │   ├── validate.py                 diagnostic only: proves Spark→native Iceberg→Presto
 │   └── read_tableflow.py(.example) diagnostic only: proves Spark can read Tableflow
+├── streamlit/                      optional side-track: live KPI dashboard
+├── tools/
+│   └── generate_student_files.py   ⭐ run `--me sNN` to generate your prefixed files
 └── docs/
-    ├── LAB_GUIDE.md                 ⭐ participant step-by-step (Steps 0–7)
-    ├── Confluent_Tableflow_to_watsonx_data.md  standalone integration how-to (share this)
-    ├── 05_tableflow_iceberg.md      Tableflow deep-dive
-    ├── 06_spark_bridge_watsonxdata.md  Spark bridge + all the config gotchas
-    ├── 07_watsonx_bi.md             watsonx BI connection + dashboard
+    ├── LAB_GUIDE.md                 ⭐ participant step-by-step (Tasks 1–5)
     ├── troubleshooting.md           every real error + fix
     └── INSTRUCTOR_GUIDE.md          provisioning, delivery model, cost
 ```
 
-> Sharing 3 accounts across ~30 students? See **`docs/SHARED_ENV_PLAN.md`** for
-> exactly what to set up once vs. what each student does (per-student `sNN_`
-> prefix + `kpi_sNN` schema).
+> **Shared environment:** Confluent, watsonx.data, and watsonx BI are shared
+> across all students. Everything you create is namespaced to your student
+> number — per-student `sNN_` topic/table prefix and a `kpi_sNN` schema — so
+> students don't collide. The `tools/generate_student_files.py --me sNN`
+> generator applies your prefix automatically.
 
 ---
 
 ## Quick start (participants)
 
-1. Read **`docs/LAB_GUIDE.md`** — Steps 0–7.
-2. `pip install -r producer/requirements.txt`
-3. `cp config/client.properties.example config/client.properties` and fill in
+1. Read **`docs/LAB_GUIDE.md`** — Tasks 1–5.
+2. Generate your personal, prefixed files (shared environment, so namespace to
+   your student number):
+   ```
+   python tools/generate_student_files.py --me sNN      # e.g. --me s07
+   ```
+3. `python3 -m venv .venv && source .venv/bin/activate` (Windows:
+   `.venv\Scripts\activate`), then `pip install -r producer/requirements.txt`
+4. `cp config/client.properties.example config/client.properties` and fill in
    bootstrap server + cluster API key/secret + Schema Registry URL/key.
-4. `python producer/event_generator.py`
-5. Flink KPIs → Tableflow → Spark bridge → Presto → watsonx BI (per the guide).
+5. `TOPIC_PREFIX=sNN_ python producer/event_generator.py`
+6. Flink KPIs → Tableflow → Spark bridge → Presto → watsonx BI (per the guide).
 
 ## Quick start (instructors)
 
@@ -106,13 +112,14 @@ recommended delivery model, and cost control.
 
 | KPI | Flink table → native table | Window | Business question |
 |-----|----------------------------|--------|-------------------|
-| Revenue per minute | `kpi_revenue_per_minute` | 1 min | Money collected each minute, by region |
-| Order throughput | `kpi_order_throughput` | 1 min | Orders/min + average order value |
-| Payment failure rate | `kpi_payment_failure_rate` | 1 min | % of payments failing |
-| Regional sales trends | `kpi_regional_sales_trends` | 5 min | Net sales (revenue − refunds) by region |
+| Revenue per minute | `sNN_kpi_revenue_per_minute` | 1 min | Money collected each minute, by region |
+| Order throughput | `sNN_kpi_order_throughput` | 1 min | Orders/min + average order value |
+| Payment failure rate | `sNN_kpi_payment_failure_rate` | 1 min | % of payments failing |
+| Regional sales trends | `sNN_kpi_regional_sales_trends` | 5 min | Net sales (revenue − refunds) by region |
 
 Each Flink KPI is a continuously running statement; the Spark bridge writes them
-to `iceberg_catalog.kpi.*` for Presto + watsonx BI.
+to `iceberg_catalog.kpi_sNN.*` for Presto + watsonx BI (`sNN` = your student
+number; names are prefixed so students sharing the environment don't collide).
 
 ---
 

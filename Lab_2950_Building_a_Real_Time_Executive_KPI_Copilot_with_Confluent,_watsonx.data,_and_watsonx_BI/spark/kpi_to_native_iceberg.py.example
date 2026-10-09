@@ -12,7 +12,7 @@ the Presto engine and by IBM watsonx BI.
 Pipeline position:
     Confluent Tableflow (Iceberg REST, Confluent-managed S3)
         --> [THIS JOB: read via Spark, write native] -->
-    iceberg_catalog.kpi.*  (native tables on IBM COS)
+    iceberg_catalog.kpi_sNN.*  (native tables on IBM COS)
         --> Presto --> watsonx BI
 
 Proven configuration notes (learned during lab development):
@@ -24,7 +24,10 @@ Proven configuration notes (learned during lab development):
         spark.hadoop.fs.s3a.endpoint.region = <region>
   - Writing to the native watsonx.data catalog needs COS auth, supplied at
     SUBMIT time as a Spark configuration property (NOT in this file):
-        spark.hadoop.wxd.apiKey = Basic <base64 of ibmlhapikey_<userid>:<apikey>>
+        spark.hadoop.wxd.apiKey = Basic <base64 of ibmlhapikey_<userid>:<iam_apikey>>
+          (<userid> = your studentNN@...techzone.com login; <iam_apikey> = an IBM
+           Cloud IAM API key, NOT the Tableflow key. Enter in the "Spark
+           configuration" section, NOT as an environment variable.)
 
 HOW TO RUN (watsonx.data console):
   1. Fill in the placeholders below (Tableflow REST values + your API key/secret).
@@ -38,8 +41,10 @@ HOW TO RUN (watsonx.data console):
          spark.hadoop.fs.s3a.endpoint.region= us-east-2
          spark.gluten.sql.columnar.batchscan= false
          spark.gluten.sql.columnar.filescan = false
-  4. Submit. On success, the 4 tables appear under iceberg_catalog.kpi.* and
+  4. Submit. On success, the 4 tables appear under iceberg_catalog.kpi_sNN.* and
      can be queried in the Presto SQL workspace and used in watsonx BI.
+     NOTE: the Spark app list is SHARED - run a uniquely-named app and confirm
+     the run log shows YOUR cluster/tables/schema, not just "Finished".
 """
 from pyspark.sql import SparkSession
 
@@ -54,7 +59,7 @@ CLUSTER_ID = "<lkc-xxxxx>"           # Kafka cluster id = Tableflow namespace
 
 # --- watsonx.data native catalog (destination) ------------------------------
 DEST_CATALOG = "iceberg_catalog"     # your Iceberg catalog (Spark + Presto engines)
-DEST_SCHEMA = "kpi"                  # will be created if missing
+DEST_SCHEMA = "kpi_sNN"              # lab: your student schema, e.g. kpi_s07
 DEST_BUCKET = "<YOUR_DATA_BUCKET>"   # the COS bucket behind DEST_CATALOG
 
 # The four KPI tables to bridge, with the BUSINESS columns to keep (we drop the

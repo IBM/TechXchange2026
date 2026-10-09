@@ -441,6 +441,28 @@ def main():
 
     config_path = Path(os.environ.get("KAFKA_CONFIG", DEFAULT_CONFIG_PATH))
     conf = load_producer_config(config_path)
+
+    # Friendly check: did the student forget to fill in the template? Catch the
+    # leftover placeholder values here so they get a clear message instead of a
+    # cryptic connection stack trace later.
+    _placeholders = (
+        "BOOTSTRAP_SERVER_HERE", "CLUSTER_API_KEY_HERE",
+        "CLUSTER_API_SECRET_HERE", "SR_API_KEY_HERE", "SR_API_SECRET_HERE",
+        "psrc-xxxxx.REGION.PROVIDER",
+    )
+    _found = [p for p in _placeholders if any(p in v for v in conf.values())]
+    if _found:
+        sys.exit(
+            f"\nERROR: config/client.properties still has placeholder values.\n"
+            f"       Found: {', '.join(_found)}\n\n"
+            f"Edit {config_path} and replace the placeholders with YOUR values:\n"
+            f"  - bootstrap.servers      -> your cluster Bootstrap server\n"
+            f"  - sasl.username/password -> your CLUSTER API key / secret\n"
+            f"  - schema.registry.url    -> your Schema Registry endpoint URL\n"
+            f"  - schema.registry.basic.auth.user.info -> SR_KEY:SR_SECRET\n\n"
+            f"The cluster key and the Schema Registry key are TWO DIFFERENT keys.\n"
+        )
+
     kafka_conf, sr_conf = split_configs(conf)
 
     if "url" not in sr_conf:

@@ -21,10 +21,8 @@ architecture, the delivery model for 30 participants, and cost control.
 > The 30 student IDs (from the TechZone reservation) isolate **logins**, not
 > **resources** — everyone shares one Kafka cluster and one watsonx.data
 > catalog. Isolation is achieved with a **per-student prefix `sNN_`** and a
-> per-student watsonx.data **schema `kpi_sNN`**.
->
-> **See `docs/SHARED_ENV_PLAN.md`** for the full "who does what once vs.
-> per-student" breakdown — read it before the event.
+> per-student watsonx.data **schema `kpi_sNN`**. Students self-serve their
+> prefixed files with `python tools/generate_student_files.py --me sNN`.
 
 
 No separate shared backend is required; the GitHub repo supplies all artifacts.
@@ -38,10 +36,11 @@ Python producer → Kafka (+ Schema Registry) → Flink (4 KPIs)
    → Tableflow (Iceberg, Confluent-managed storage)
    → watsonx.data SPARK bridge job (reads Tableflow REST catalog,
                                     writes NATIVE Iceberg on IBM COS)
-   → iceberg_catalog.kpi.*  → watsonx.data PRESTO → watsonx BI
+   → iceberg_catalog.kpi_sNN.*  → watsonx.data PRESTO → watsonx BI
 ```
 
-Full technical detail: `docs/06_spark_bridge_watsonxdata.md`.
+Full technical detail is in `docs/LAB_GUIDE.md` (Step 6) and
+`docs/troubleshooting.md`.
 
 ---
 
@@ -55,8 +54,8 @@ prefixes.**
 2. Enable **Stream Governance / Schema Registry** on the environment — the
    producer auto-registers JSON schemas (required for Flink to see columns).
 3. Enable **Flink** with one shared **compute pool**. Each student runs **4**
-   always-on KPI statements (the regional KPI is a `CREATE VIEW` + one
-   `CREATE TABLE AS`). Size the pool for ~30 × 4 concurrent statements; validate
+   always-on KPI statements (the regional KPI is a `CREATE VIEW` + `CREATE TABLE`
+   + `INSERT INTO`). Size the pool for ~30 × 4 concurrent statements; validate
    in a dry run.
 4. Per-student isolation: assign a **prefix** (`s01_`…`s30_`). The producer
    accepts `TOPIC_PREFIX` (no code edit); students add the same prefix to topic
@@ -132,14 +131,14 @@ else.**
   the watsonx BI dashboard**.
 - Instructor: pre-provision the Iceberg catalog + engines, provide the Presto
   connection JSON + API key,
-  and either (a) pre-run the Spark bridge so `iceberg_catalog.kpi.*` already
+  and either (a) pre-run the Spark bridge so `iceberg_catalog.kpi_sNN.*` already
   exists, or (b) provide a ready-to-submit bridge app with the 4 Spark configs
   pre-filled so students click "Submit" once.
 - This keeps the fragile Spark configs off the critical path for beginners while
   still exposing the full architecture conceptually.
 
 **Advanced option** — students run the bridge themselves using
-`docs/06_spark_bridge_watsonxdata.md`. Only do this with a longer session or a
+`docs/LAB_GUIDE.md` (Step 6). Only do this with a longer session or a
 technical audience.
 
 ---
@@ -149,16 +148,16 @@ technical audience.
 Publish `Lab-development/` to the lab repo. Layout:
 
 ```
-Lab-development/
+Lab_2950/
 ├── README.md
 ├── producer/            event_generator.py (+ requirements.txt)
 ├── config/              client.properties.example
 ├── flink/               00..04 KPI SQL (+ 04b fallback)
 ├── spark/               validate.py, read_tableflow.py(.example),
 │                        kpi_to_native_iceberg.py(.example)
-└── docs/                LAB_GUIDE.md, 05_tableflow_iceberg.md,
-                         06_spark_bridge_watsonxdata.md, 07_watsonx_bi.md,
-                         troubleshooting.md, INSTRUCTOR_GUIDE.md
+├── streamlit/           optional live KPI dashboard
+├── tools/               generate_student_files.py (--me sNN)
+└── docs/                LAB_GUIDE.md, troubleshooting.md, INSTRUCTOR_GUIDE.md
 ```
 
 **Never commit real credentials.** `.gitignore` excludes
@@ -175,7 +174,7 @@ keys). Students copy the `.example` files and fill their own values.
 - [ ] All 4 Flink KPI tables create and emit rows (regional = view + CTAS)
 - [ ] Confirm each student = 4 always-on statements
 - [ ] Tableflow syncs all 4 KPI topics (managed storage)
-- [ ] Spark bridge finishes; `iceberg_catalog.kpi.*` visible in Presto
+- [ ] Spark bridge finishes; `iceberg_catalog.kpi_sNN.*` visible in Presto
 - [ ] watsonx BI connects (Presto connector + API key; no s2s auth needed) and renders a chart
 - [ ] Time the full run — fits in ~90 min with buffer
 - [ ] Confirm the Confluent promo covers Flink + Tableflow (see §9)
@@ -200,6 +199,6 @@ keys). Students copy the `.example` files and fill their own values.
 ## 10. Cleanup after the session
 
 - Students: Ctrl+C producer; **stop the 4 Flink statements**; (optional) drop
-  `iceberg_catalog.kpi` tables, disable Tableflow, delete topics.
+  `iceberg_catalog.kpi_sNN` tables, disable Tableflow, delete topics.
 - Instructor: stop/deprovision Spark + Presto engines and the Flink pool if
   temporary; revoke student IDs; tear down per cost policy.

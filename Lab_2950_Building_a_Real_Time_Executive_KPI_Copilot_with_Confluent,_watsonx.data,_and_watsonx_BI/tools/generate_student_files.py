@@ -12,7 +12,12 @@ For each student number NN it creates  students/sNN/  containing:
   - README.txt                   (what this student runs, in order)
 
 USAGE
-  # generate s01..s30 with placeholder secrets:
+  # STUDENT self-service - generate ONLY your own files (recommended for the lab):
+  python tools/generate_student_files.py --me s07
+  # -> writes students/s07/ with your prefixed SQL, client.properties, bridge,
+  #    and a README. You then paste in your own API keys.
+
+  # INSTRUCTOR - generate s01..s30 at once:
   python tools/generate_student_files.py --count 30
 
   # generate a range:
@@ -36,12 +41,31 @@ Notes
 import argparse
 import os
 import re
-import shutil
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent   # Lab-development/
 FLINK_SRC = REPO / "flink"
 OUT_ROOT = REPO / "students"
+
+# ---------------------------------------------------------------------------
+# SHARED (non-secret) ENVIRONMENT VALUES
+# ---------------------------------------------------------------------------
+# INSTRUCTOR: fill these in ONCE before publishing the repo, so students can run
+# the self-service command with only their number:
+#     python tools/generate_student_files.py --me s07
+# Students then just paste their own API keys/secrets into the generated files.
+# These are NON-SECRET identifiers (safe to commit). Leave as <...> if you want
+# students to pass them on the command line instead.
+SHARED_DEFAULTS = {
+    "bootstrap":    "<BOOTSTRAP_SERVER>:9092",
+    "sr_url":       "<SCHEMA_REGISTRY_URL>",
+    "tf_region":    "<REGION>",
+    "tf_org":       "<ORG_ID>",
+    "tf_env":       "<ENV_ID>",
+    "cluster_id":   "<lkc-xxxxx>",
+    "dest_catalog": "iceberg_catalog",
+    "dest_bucket":  "<YOUR_COS_BUCKET>",
+}
 
 # Identifiers in the Flink SQL that must be prefixed per student.
 # Source topics + the intermediate view + the 4 KPI output tables.
@@ -65,28 +89,45 @@ FLINK_FILES = [
 def prefix_sql(text: str, prefix: str) -> str:
     """Add `prefix` before each known identifier, respecting word boundaries.
 
-    We only prefix identifiers in SQL code lines, not in `--` comment lines
-    (prefixing comment prose looks confusing). Identifiers are sorted
-    longest-first, and a negative lookbehind avoids double-prefixing.
+    In SQL CODE we prefix every known identifier. In `--` COMMENT lines we only
+    prefix identifiers that appear as a TABLE REFERENCE (i.e. right after a SQL
+    keyword like FROM/INTO/TABLE/JOIN/IN/UPDATE), so copy-pasteable "verify"
+    hints such as `-- SELECT * FROM kpi_revenue_per_minute;` get the prefix,
+    while prose like "the kpi_revenue_per_minute KPI" is left readable.
+    Identifiers are sorted longest-first, and a negative lookbehind avoids
+    double-prefixing.
     """
+    ordered = sorted(PREFIXABLE, key=len, reverse=True)
     compiled = [
         re.compile(rf"(?<![\w]){re.escape(ident)}(?![\w])")
-        for ident in sorted(PREFIXABLE, key=len, reverse=True)
+        for ident in ordered
+    ]
+    # In comments, only prefix after a table-reference keyword.
+    comment_compiled = [
+        re.compile(
+            rf"(?i)(?<![\w])(FROM|INTO|TABLE|JOIN|UPDATE|IN)(\s+){re.escape(ident)}(?![\w])"
+        )
+        for ident in ordered
     ]
 
     def apply(segment: str) -> str:
-        for pat, ident in zip(compiled, sorted(PREFIXABLE, key=len, reverse=True)):
+        for pat, ident in zip(compiled, ordered):
             segment = pat.sub(prefix + ident, segment)
+        return segment
+
+    def apply_comment(segment: str) -> str:
+        for pat, ident in zip(comment_compiled, ordered):
+            segment = pat.sub(rf"\1\2{prefix}{ident}", segment)
         return segment
 
     out_lines = []
     for line in text.splitlines():
         stripped = line.lstrip()
         if stripped.startswith("--"):
-            out_lines.append(line)                 # leave comments untouched
+            out_lines.append(apply_comment(line))   # prefix only table refs
         elif "--" in line:                          # code + trailing comment
             code, _, comment = line.partition("--")
-            out_lines.append(apply(code) + "--" + comment)
+            out_lines.append(apply(code) + "--" + apply_comment(comment))
         else:
             out_lines.append(apply(line))
     return "\n".join(out_lines) + ("\n" if text.endswith("\n") else "")
@@ -126,8 +167,10 @@ collide with other students in the shared environment.
 
 3. FLINK (Confluent Cloud > Flink SQL workspace):
    Run the SQL files in flink/ here, one statement at a time. They are already
-   prefixed with {prefix}. For 04_kpi_regional_sales_trends.sql run the
-   CREATE VIEW first, then the CREATE TABLE AS. Leave all statements running.
+   prefixed with {prefix}. Each file has a CREATE TABLE IF NOT EXISTS followed
+   by an INSERT INTO ... SELECT - run the CREATE first, then the INSERT. For
+   04_kpi_regional_sales_trends.sql run the CREATE VIEW first. To resume after
+   an idle stop, re-run only the INSERT INTO. Leave all statements running.
 
 4. TABLEFLOW (Confluent Cloud):
    Enable Tableflow (Iceberg, Use Confluent storage) on your 4 KPI topics:
@@ -237,30 +280,81 @@ spark.stop()
 '''
 
 
+def write_student(sid: str, out_dir: Path, args) -> None:
+    """Generate one student's folder (client.properties, prefixed flink/*.sql,
+    Spark bridge, README) at out_dir."""
+    prefix = f"{sid}_"
+    (out_dir / "flink").mkdir(parents=True, exist_ok=True)
+
+    # client.properties
+    (out_dir / "client.properties").write_text(CLIENT_PROPERTIES_TMPL.format(
+        sid=sid, prefix=prefix, bootstrap=args.bootstrap,
+        cluster_key="<CLUSTER_API_KEY>", cluster_secret="<CLUSTER_API_SECRET>",
+        sr_url=args.sr_url, sr_key="<SR_KEY>", sr_secret="<SR_SECRET>"))
+
+    # prefixed flink SQL
+    for fname in FLINK_FILES:
+        src = (FLINK_SRC / fname).read_text()
+        (out_dir / "flink" / fname).write_text(prefix_sql(src, prefix))
+
+    # bridge job
+    (out_dir / "kpi_to_native_iceberg.py").write_text(gen_bridge(prefix, sid, args))
+
+    # readme
+    (out_dir / "README.txt").write_text(README_TMPL.format(
+        sid=sid, prefix=prefix, dest_catalog=args.dest_catalog))
+
+
 def main():
-    ap = argparse.ArgumentParser(description="Generate per-student lab files.")
+    ap = argparse.ArgumentParser(
+        description="Generate per-student lab files. Students: use --me sNN to "
+                    "generate just your own. Instructors: use --count N for all.")
+    # Student self-service mode
+    ap.add_argument("--me", metavar="sNN",
+                    help="SELF-SERVICE: generate only YOUR files, e.g. --me s07. "
+                         "Writes to students/sNN/ (or --out).")
+    ap.add_argument("--out", help="output dir for --me mode (default students/sNN/)")
+    # Instructor bulk mode
     ap.add_argument("--count", type=int, help="number of students (s01..sNN)")
     ap.add_argument("--start", type=int, default=1)
     ap.add_argument("--end", type=int)
-    ap.add_argument("--bootstrap", default="<BOOTSTRAP_SERVER>:9092")
-    ap.add_argument("--sr-url", default="<SCHEMA_REGISTRY_URL>")
-    ap.add_argument("--tf-region", default="<REGION>")
-    ap.add_argument("--tf-org", default="<ORG_ID>")
-    ap.add_argument("--tf-env", default="<ENV_ID>")
-    ap.add_argument("--cluster-id", default="<lkc-xxxxx>")
-    ap.add_argument("--dest-catalog", default="iceberg_catalog")
-    ap.add_argument("--dest-bucket", default="<YOUR_COS_BUCKET>")
+    # Shared (non-secret) values; default to SHARED_DEFAULTS baked in above.
+    ap.add_argument("--bootstrap", default=SHARED_DEFAULTS["bootstrap"])
+    ap.add_argument("--sr-url", default=SHARED_DEFAULTS["sr_url"])
+    ap.add_argument("--tf-region", default=SHARED_DEFAULTS["tf_region"])
+    ap.add_argument("--tf-org", default=SHARED_DEFAULTS["tf_org"])
+    ap.add_argument("--tf-env", default=SHARED_DEFAULTS["tf_env"])
+    ap.add_argument("--cluster-id", default=SHARED_DEFAULTS["cluster_id"])
+    ap.add_argument("--dest-catalog", default=SHARED_DEFAULTS["dest_catalog"])
+    ap.add_argument("--dest-bucket", default=SHARED_DEFAULTS["dest_bucket"])
     # secrets (optional; left as placeholders by default)
     ap.add_argument("--tf-key", default="<TF_KEY>")
     ap.add_argument("--tf-secret", default="<TF_SECRET>")
     args = ap.parse_args()
 
+    # ---- Student self-service mode: just my files -------------------------
+    if args.me:
+        sid = args.me if args.me.startswith("s") else f"s{int(args.me):02d}"
+        out_dir = Path(args.out) if args.out else (OUT_ROOT / sid)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        write_student(sid, out_dir, args)
+        print(f"\nGenerated YOUR files for {sid} (prefix {sid}_) in: {out_dir}\n")
+        print("Next steps (also in README.txt):")
+        print(f"  1. Create 5 topics: {sid}_orders, {sid}_payments, {sid}_customers,")
+        print(f"     {sid}_shipments, {sid}_refunds  (Partitions=1).")
+        print(f"  2. Copy {out_dir}/client.properties -> config/client.properties,")
+        print(f"     fill your API keys, then run:")
+        print(f"       TOPIC_PREFIX={sid}_ python producer/event_generator.py")
+        print(f"  3. In Flink, run the prefixed SQL in {out_dir}/flink/ .")
+        return
+
+    # ---- Instructor bulk mode: s01..sNN ----------------------------------
     if args.count:
         start, end = 1, args.count
     elif args.end:
         start, end = args.start, args.end
     else:
-        ap.error("provide --count N (or --start/--end)")
+        ap.error("provide --me sNN (student self-service) or --count N (instructor)")
 
     if OUT_ROOT.exists():
         print(f"Note: {OUT_ROOT} exists; files will be overwritten.")
@@ -268,27 +362,7 @@ def main():
 
     for n in range(start, end + 1):
         sid = f"s{n:02d}"
-        prefix = f"{sid}_"
-        sdir = OUT_ROOT / sid
-        (sdir / "flink").mkdir(parents=True, exist_ok=True)
-
-        # client.properties
-        (sdir / "client.properties").write_text(CLIENT_PROPERTIES_TMPL.format(
-            sid=sid, prefix=prefix, bootstrap=args.bootstrap,
-            cluster_key="<CLUSTER_API_KEY>", cluster_secret="<CLUSTER_API_SECRET>",
-            sr_url=args.sr_url, sr_key="<SR_KEY>", sr_secret="<SR_SECRET>"))
-
-        # prefixed flink SQL
-        for fname in FLINK_FILES:
-            src = (FLINK_SRC / fname).read_text()
-            (sdir / "flink" / fname).write_text(prefix_sql(src, prefix))
-
-        # bridge job
-        (sdir / "kpi_to_native_iceberg.py").write_text(gen_bridge(prefix, sid, args))
-
-        # readme
-        (sdir / "README.txt").write_text(README_TMPL.format(
-            sid=sid, prefix=prefix, dest_catalog=args.dest_catalog))
+        write_student(sid, OUT_ROOT / sid, args)
 
     total = end - start + 1
     print(f"Generated {total} student folder(s) under {OUT_ROOT}")

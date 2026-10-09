@@ -31,7 +31,7 @@ order; every step has a ✅ checkpoint.
                           │   reads Tableflow Iceberg (REST catalog)
                           │   writes NATIVE Iceberg tables on IBM COS
                           ▼
-      iceberg_catalog.kpi.*  (native tables on IBM Cloud Object Storage)
+      iceberg_catalog.kpi_sNN.*  (native tables on IBM Cloud Object Storage)
                           │
                           ▼
         watsonx.data PRESTO engine ──▶ IBM watsonx BI
@@ -62,6 +62,12 @@ needed).
 | 6 | Run the Spark bridge → native Iceberg; query in Presto | watsonx.data |
 | 7 | Build dashboards & ask questions | watsonx BI |
 
+> **Numbering note:** this guide uses fine-grained **Steps 0–7**. The official
+> lab guide (`.docx`) groups the same work into **Tasks 1–5**:
+> Task 1 = Steps 1–3 · Task 2 = Step 4 · Task 3 = Step 5 · Task 4 = Step 6 ·
+> Task 5 = Step 7 (Step 0 is one-time setup). Either numbering lands in the same
+> place.
+
 ---
 
 ## Before you start
@@ -79,14 +85,27 @@ You need:
 ## Step 0 — Get the lab files
 
 ```bash
-git clone github.ibm.com/itz-content/txc-2026-lab-2950
-cd <REPO_FOLDER>/Lab-development
+git clone https://github.com/IBM/TechXchange2026
+cd "TechXchange2026/Lab_2950_Building_a_Real_Time_Executive_KPI_Copilot_with_Confluent,_watsonx.data,_and_watsonx_BI"
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r producer/requirements.txt
 ```
 
-✅ **Checkpoint:** `pip install` completed without errors.
+Then generate your personal, prefixed lab files (this is a shared environment,
+so everything you create is namespaced to your student number `sNN`):
+
+```bash
+python tools/generate_student_files.py --me sNN      # e.g. --me s07
+```
+
+This writes `students/sNN/` with your prefixed Flink SQL, a `client.properties`
+template, your Spark bridge, and a `README.txt`. Throughout this guide, wherever
+you see a bare name like `orders` or `kpi_revenue_per_minute`, use **your**
+prefixed version (`sNN_orders`, `sNN_kpi_revenue_per_minute`) and schema
+`kpi_sNN`.
+
+✅ **Checkpoint:** `pip install` completed and `students/sNN/` was generated.
 
 ---
 
@@ -100,10 +119,11 @@ events, one topic each.
    defaults**, and **Skip** the "define a schema" prompt — the producer
    registers schemas for you in Step 2):
 
-   `orders` · `payments` · `customers` · `shipments` · `refunds`
+   `sNN_orders` · `sNN_payments` · `sNN_customers` · `sNN_shipments` · `sNN_refunds`
 
-> **Shared cluster?** If your instructor assigned a prefix (e.g. `s07_`), name
-> the topics `s07_orders`, etc., and use the same prefix everywhere later.
+> **Shared cluster:** replace `sNN` with your assigned student number (e.g.
+> `s07_orders`), and use the same prefix everywhere later. Your generated files
+> already use your prefix.
 
 ✅ **Checkpoint:** All 5 topics listed under **Topics**.
 
@@ -144,11 +164,13 @@ schema.registry.basic.auth.user.info=<SR_KEY>:<SR_SECRET>
 
 ### 2d — Run the producer
 ```bash
-python producer/event_generator.py
-# with a prefix:  TOPIC_PREFIX=s07_ python producer/event_generator.py
+TOPIC_PREFIX=sNN_ python producer/event_generator.py
+# e.g.  TOPIC_PREFIX=s07_ python producer/event_generator.py  (trailing _ matters)
 ```
-The banner shows your bootstrap server, Schema Registry URL, and topics, then a
-per-second status line with climbing counters.
+The banner shows your bootstrap server, Schema Registry URL, topic prefix, and
+topics, then a per-second status line with climbing counters. If you forgot to
+fill in `config/client.properties`, the script stops immediately with a clear
+message naming the values to replace.
 
 ✅ **Checkpoint:** Counters climb; no `Delivery FAILED`. Leave it running.
 
@@ -156,8 +178,8 @@ per-second status line with climbing counters.
 
 ## Step 3 — Observe events in Kafka
 
-1. Confluent Cloud → **Topics → `orders` → Messages** → you see JSON messages.
-2. Check **`payments`** — some have `"status": "failed"` (drives the failure
+1. Confluent Cloud → **Topics → `sNN_orders` → Messages** → you see JSON messages.
+2. Check **`sNN_payments`** — some have `"status": "failed"` (drives the failure
    KPI).
 
 ✅ **Checkpoint:** Live JSON visible in at least two topics.
@@ -174,10 +196,11 @@ per-second status line with climbing counters.
 2. Confirm schemas are registered: run
    ```sql
    SHOW TABLES;
-   DESCRIBE payments;    -- should list status, amount, region, ... (real columns)
+   DESCRIBE sNN_payments;  -- should list status, amount, region, ... (real columns)
    ```
-   (If `DESCRIBE` shows only `key`/`val` as BYTES, the producer's schema didn't
-   register — recheck Step 2b/2c.)
+   (A warning that the record **key** is BYTES/RAW is harmless. Only if the
+   **value** columns show as BYTES did the producer's schema not register —
+   recheck Step 2b/2c.)
 
 3. Create the 4 KPI tables. **Run one statement at a time** (this workspace
    runs a single statement per execution). Each KPI file now has a
@@ -186,10 +209,12 @@ per-second status line with climbing counters.
 
    | File | Creates | Statements |
    |------|---------|-----------|
-   | `flink/01_kpi_revenue_per_minute.sql`    | `kpi_revenue_per_minute`    | CREATE TABLE, then INSERT INTO |
-   | `flink/02_kpi_order_throughput.sql`      | `kpi_order_throughput`      | CREATE TABLE, then INSERT INTO |
-   | `flink/03_kpi_payment_failure_rate.sql`  | `kpi_payment_failure_rate`  | CREATE TABLE, then INSERT INTO |
-   | `flink/04_kpi_regional_sales_trends.sql` | `kpi_regional_sales_trends` | CREATE VIEW, CREATE TABLE, then INSERT INTO |
+   | `flink/01_kpi_revenue_per_minute.sql`    | `sNN_kpi_revenue_per_minute`    | CREATE TABLE, then INSERT INTO |
+   | `flink/02_kpi_order_throughput.sql`      | `sNN_kpi_order_throughput`      | CREATE TABLE, then INSERT INTO |
+   | `flink/03_kpi_payment_failure_rate.sql`  | `sNN_kpi_payment_failure_rate`  | CREATE TABLE, then INSERT INTO |
+   | `flink/04_kpi_regional_sales_trends.sql` | `sNN_kpi_regional_sales_trends` | CREATE VIEW, CREATE TABLE, then INSERT INTO |
+
+   (The copies in `students/sNN/flink/` already have your prefix applied.)
 
 > Notes learned in testing:
 > - **Resumable pattern:** Confluent Cloud auto-stops idle statements. Because
@@ -205,10 +230,10 @@ per-second status line with climbing counters.
 
 4. Verify (wait for a window to close — 1 min, or 5 min for regional):
    ```sql
-   SELECT * FROM kpi_revenue_per_minute;
+   SELECT * FROM sNN_kpi_revenue_per_minute;
    ```
 
-✅ **Checkpoint:** `SHOW TABLES;` lists the 4 `kpi_*` tables and they return
+✅ **Checkpoint:** `SHOW TABLES;` lists the 4 `sNN_kpi_*` tables and they return
 rows. **Leave all 4 INSERT INTO statements running** (they feed Tableflow). To
 resume a stopped KPI later, just re-run its `INSERT INTO`.
 
@@ -218,8 +243,9 @@ resume a stopped KPI later, just re-run its `INSERT INTO`.
 
 **Concept:** Tableflow materializes each KPI topic as an Apache Iceberg table.
 
-For each of the 4 KPI topics (`kpi_revenue_per_minute`, `kpi_order_throughput`,
-`kpi_payment_failure_rate`, `kpi_regional_sales_trends`):
+For each of the 4 KPI topics (`sNN_kpi_revenue_per_minute`,
+`sNN_kpi_order_throughput`, `sNN_kpi_payment_failure_rate`,
+`sNN_kpi_regional_sales_trends`):
 
 1. **Topics** → click the KPI topic → **Tableflow** tab → **Enable Tableflow**.
 2. Table format: **Iceberg**.
@@ -237,8 +263,6 @@ Then gather (for Step 6):
 
 ✅ **Checkpoint:** All 4 KPI topics show Tableflow **Syncing** with data.
 
-See `docs/06_spark_bridge_watsonxdata.md` for the deep-dive on Steps 5–6.
-
 ---
 
 ## Step 6 — Bridge to native Iceberg + query in Presto (watsonx.data)
@@ -248,31 +272,47 @@ them as **native** Iceberg tables on IBM COS (so Presto — and watsonx BI — c
 read them).
 
 ### 6a — Prepare the bridge script
-> The only Spark job you run is **`spark/kpi_to_native_iceberg.py`**. The other
-> two Spark files (`validate.py`, `read_tableflow.py`) are optional diagnostics
-> — ignore them unless you need to debug the write or read path separately.
+> The only Spark job you run is **your** `students/sNN/kpi_to_native_iceberg.py`
+> (generated with your prefix in Step 0). The other two Spark files
+> (`validate.py`, `read_tableflow.py`) are optional diagnostics — ignore them
+> unless you need to debug the write or read path separately.
 
-Open `spark/kpi_to_native_iceberg.py` and set the source values (Tableflow REST
-`REGION`/`ORG_ID`/`ENV_ID`, API key/secret, `CLUSTER_ID`) and destination
-(`DEST_CATALOG` = your Iceberg catalog, `DEST_SCHEMA` = `kpi`, `DEST_BUCKET` =
-your COS bucket). Upload the file to your COS bucket, e.g.
-`s3a://<bucket>/spark/kpi_to_native_iceberg.py`.
+Log in to watsonx.data via the **App ID login URL from your TechZone
+reservation** (NOT cloud.ibm.com directly). Open your generated
+`students/sNN/kpi_to_native_iceberg.py` and confirm the source values (Tableflow
+REST `REGION`/`ORG_ID`/`ENV_ID`, API key/secret, `CLUSTER_ID`) and destination
+(`DEST_CATALOG` = `iceberg_catalog`, `DEST_SCHEMA` = `kpi_sNN`, `DEST_BUCKET` =
+your COS bucket) are filled. Upload the file to your COS bucket and note its
+object path, e.g. `s3a://<bucket>/kpi_to_native_iceberg.py`.
 
-### 6b — Get your watsonx.data API key (base64)
-Generate a watsonx.data API key (Profile → Profile and Settings → API Keys),
-then compute the value for `spark.hadoop.wxd.apiKey`:
-```bash
-echo -n "ibmlhapikey_<YOUR_IBMCLOUD_USERID>:<YOUR_WXD_API_KEY>" | base64
-```
-Use it as `Basic <base64>`.
+> The Iceberg catalog `iceberg_catalog` is already provisioned by your instructor
+> on an IBM COS bucket and associated with both the Spark and Presto engines. You
+> only need the bucket name (for the upload path) and the catalog name.
+
+### 6b — Build the `spark.hadoop.wxd.apiKey` value (read carefully — most error-prone step)
+1. `<userid>` is your **`studentNN@...techzone.com`** login (the same student ID
+   you use for watsonx.data) — NOT a Confluent credential.
+2. `<apikey>` is an **IBM Cloud IAM API key** — create one at **Manage → Access
+   (IAM) → API keys → Create**. It is **NOT** the Confluent Tableflow key inside
+   the bridge file; those are different credentials.
+3. Base64-encode `ibmlhapikey_<userid>:<apikey>`:
+   ```bash
+   printf 'ibmlhapikey_%s:%s' '<userid>' '<iam_apikey>' | base64
+   ```
+4. The property value is the word `Basic`, one space, then that base64 string:
+   `spark.hadoop.wxd.apiKey=Basic <base64-from-step-3>`
 
 ### 6c — Submit the Spark application
 watsonx.data → **Infrastructure manager** → your **Spark engine** →
 **Applications** → **Create application**:
 - Application type: **Python**
-- Application path: `s3a://<bucket>/spark/kpi_to_native_iceberg.py`
+- Application path: `s3a://<bucket>/kpi_to_native_iceberg.py`
 - Spark version: **3.5**
-- **Spark configuration properties** (all four are required):
+- Application name: a **unique** name, e.g. `sNN-kpi-bridge`
+- **Spark configuration properties** — enter these in the **"Spark
+  configuration"** section, **NOT** any "environment variables" field. (These
+  keys contain dots; as environment variables they fail with
+  `spark-env.sh: ... not a valid identifier` and the bridge cannot authenticate.)
 
   | Key | Value |
   |-----|-------|
@@ -292,16 +332,26 @@ watsonx.data → **Infrastructure manager** → your **Spark engine** →
 
 Submit → wait for **Finished**.
 
+> **Confirm it was YOUR job that ran.** The Spark application list is **shared**
+> across all students on this engine. Run **your** uniquely-named app pointing at
+> **your** uploaded `kpi_to_native_iceberg.py` — never re-run an app you did not
+> create. "Finished" alone is not proof: open the run **log** and confirm it
+> bridged **your** cluster and tables into **your** schema (e.g.
+> `... lkc-<yours> ... sNN_kpi_revenue_per_minute -> iceberg_catalog.kpi_sNN...
+> wrote N rows`). If the log shows a different cluster/schema, you ran the wrong
+> application and `kpi_sNN` will be empty.
+
 ### 6d — Verify in Presto (SQL workspace)
 Switch engine to **Presto** and run:
 ```sql
-SHOW TABLES IN iceberg_catalog.kpi;
-SELECT * FROM iceberg_catalog.kpi.kpi_revenue_per_minute
+SHOW SCHEMAS IN iceberg_catalog;             -- you should see kpi_sNN
+SHOW TABLES IN iceberg_catalog.kpi_sNN;      -- your 4 sNN_kpi_* tables
+SELECT * FROM iceberg_catalog.kpi_sNN.sNN_kpi_revenue_per_minute
 ORDER BY window_start DESC LIMIT 20;
 ```
 
-✅ **Checkpoint:** The 4 KPI tables appear in `iceberg_catalog.kpi` and Presto
-returns rows. (Re-run the Spark job any time to refresh the snapshot.)
+✅ **Checkpoint:** The 4 KPI tables appear in `iceberg_catalog.kpi_sNN` and
+Presto returns rows. (Re-run the Spark job any time to refresh the snapshot.)
 
 ---
 
@@ -314,7 +364,11 @@ native KPI tables, and answers natural-language questions about them.
 > service-to-service authorization needed**, even across two different IBM Cloud
 > accounts.
 
-1. **Get the connection JSON + API key:**
+1. **Launch watsonx BI and get the connection JSON + API key:**
+   - Open watsonx BI from its **TechZone App ID login URL in a SEPARATE browser**
+     (or a separate profile / private window) from the one used for
+     watsonx.data — the two services are on different TechZone accounts and
+     sharing one browser causes a session/account clash.
    - In the **watsonx.data console → Configuration** tab, copy the **watsonx.data
      Presto connection details (JSON)** — it contains host, port, instance
      ID/name, CRN, and engine details in one blob.
@@ -323,10 +377,10 @@ native KPI tables, and answers natural-language questions about them.
 2. watsonx BI → **Data and Metrics** → **Create metrics** (name it, e.g.
    `KPI Copilot`) → **Add data** → **New connection** → **IBM watsonx.data
    Presto**.
-3. **Paste the JSON** into the form; set **Username** = `ibmlhapikey_<email>`,
-   **Password** = the API key, **SSL enabled** (+ certificate if requested).
-   **Test connection** → **Create**.
-4. Import **`iceberg_catalog` → `kpi`** → the 4 KPI tables.
+3. **Paste the JSON** into the form; set **Username** = `ibmlhapikey_<userid>`
+   (your `studentNN@...techzone.com`), **Password** = the API key, **SSL
+   enabled** (+ certificate if requested). **Test connection** → **Create**.
+4. Import **`iceberg_catalog` → `kpi_sNN`** → the 4 KPI tables.
 5. Open the **conversation** and ask: *"What is our total revenue in the last 10
    minutes?"*, *"Which region has the highest net sales?"*, *"Is our payment
    failure rate increasing?"* (Optionally build a dashboard: revenue line chart,
@@ -334,8 +388,6 @@ native KPI tables, and answers natural-language questions about them.
 
 ✅ **Checkpoint:** The KPI tables are imported and the Copilot answers a
 question. 🎉
-
-Full details: `docs/07_watsonx_bi.md`.
 
 ---
 
@@ -347,7 +399,7 @@ on Confluent + IBM technologies.
 ### Clean up (please do this)
 - **Ctrl+C** the producer.
 - **Stop the 4 Flink statements** (Flink workspace → Flink statements → Stop).
-- Optionally: disable Tableflow, drop the `iceberg_catalog.kpi` tables, delete
+- Optionally: disable Tableflow, drop the `iceberg_catalog.kpi_sNN` tables, delete
   topics — if your instructor asks.
 
 ### Refresh the KPIs later
