@@ -70,9 +70,9 @@ Fix Schema Registry, then re-run.
 a different environment/cluster. Reopen it against the correct env + cluster.
 
 **Regional KPI: `SQL parse failed. Encountered "("`** — You tried to run the
-inline-subquery version, or ran both statements at once. Use
+inline-subquery version, or ran multiple statements at once. Use
 `flink/04_kpi_regional_sales_trends.sql`: run the **`CREATE VIEW` first**, then
-the **`CREATE TABLE AS`** — one statement at a time.
+the **`CREATE TABLE`**, then the **`INSERT INTO`** — one statement at a time.
 
 **`Only a single statement is supported at a time`** — This workspace runs one
 statement per execution. Select and run each statement separately.
@@ -113,9 +113,13 @@ bridge (Step 6).
 `<YOUR_...>` placeholders. Fill them in, re-upload to COS, re-submit.
 
 **`WatsonxBasicSignatureCredentials: Please provide valid api key`** (fails while
-downloading the `.py`) — Missing/blank `spark.hadoop.wxd.apiKey`. Set it to
-`Basic <base64>` where base64 =
-`echo -n "ibmlhapikey_<userid>:<apikey>" | base64`.
+downloading the `.py`) — Missing/blank/mis-placed `spark.hadoop.wxd.apiKey`. Set
+it to `Basic <base64>` where base64 =
+`printf 'ibmlhapikey_%s:%s' '<userid>' '<iam_apikey>' | base64` — `<userid>` is
+your `studentNN@...techzone.com` login and `<iam_apikey>` is an IBM Cloud IAM
+API key (NOT the Tableflow key). Enter the 4 configs in the **"Spark
+configuration"** section, NOT environment variables (dotted keys there fail with
+`spark-env.sh: ... not a valid identifier`).
 
 **`HTTP 301 ... Failed to get metadata for S3 object`** — The native reader used
 the wrong S3 region. Add `spark.hadoop.fs.s3a.endpoint.region=<region>` (e.g.
@@ -139,9 +143,12 @@ or the catalog isn't associated with the Spark engine. Confirm `DEST_CATALOG`
 and that the Iceberg catalog is associated with the Spark engine; the job
 creates `DEST_SCHEMA` automatically.
 
-**Presto: `SHOW TABLES IN iceberg_catalog.kpi` is empty** — Bridge didn't write,
-or the catalog isn't associated with the **Presto** engine. Re-run the bridge;
-associate the catalog with Presto; refresh the schema.
+**Presto: `SHOW TABLES IN iceberg_catalog.kpi_sNN` is empty** — Bridge didn't
+write, the wrong app ran, or the catalog isn't associated with the **Presto**
+engine. On a SHARED Spark engine, confirm the run **log** shows YOUR cluster and
+`sNN_kpi_*` tables into `kpi_sNN` (not someone else's "Finished" demo app);
+re-run YOUR uniquely-named bridge; associate the catalog with Presto; refresh
+the schema.
 
 **`CREATE DATABASE ... LOCATION` conflicts** — If the location clause errors,
 drop the `LOCATION` and let the catalog manage the path.
@@ -158,7 +165,7 @@ current. Note: **s2s authorization was NOT required** in our validated run
 s2s if profiling specifically fails.
 
 **BI shows no data but Presto has rows** — Re-check the connection's engine
-details; confirm you added the `iceberg_catalog.kpi` tables to the metrics
+details; confirm you added the `iceberg_catalog.kpi_sNN` tables to the metrics
 model. Re-run the Spark bridge if the native tables are stale/empty.
 
 ---
