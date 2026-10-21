@@ -1,4 +1,4 @@
-FROM docker.io/node:18-alpine
+FROM docker.io/node:24-alpine
 
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nodejs -u 1001 && \
