@@ -8,7 +8,7 @@ numpy>=1.26.0,<2.0.0
 pandas>=2.1.0
 
 # HTTP Requests & Validation
-httpx==0.26.0
+httpx==0.28.1
 requests==2.33.0
 pydantic==2.5.3
 
