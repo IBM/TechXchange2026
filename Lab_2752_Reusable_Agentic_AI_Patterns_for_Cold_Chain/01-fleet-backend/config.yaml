@@ -1,0 +1,110 @@
+# FleetOps Persistence Configuration
+
+persistence:
+  # Enable/disable persistence system
+  enabled: true
+  
+  # Persistence backend type: json | astra | db2
+  type: json
+  
+  # Persistence levels - when to save data
+  levels:
+    # Save initial data when trucks/stations are generated
+    initial_data: true
+    
+    # Save on important events (route changes, alerts, incidents)
+    on_events: true
+    
+    # Periodic save interval in seconds (0 to disable)
+    interval_seconds: 30
+  
+  # JSON file-based persistence configuration
+  json_config:
+    data_directory: ./data
+  
+  # Astra DB (Cassandra) configuration - Plugin
+  astra:
+    enabled: false
+    secure_connect_bundle: /path/to/secure-connect-bundle.zip
+    client_id: your_client_id
+    client_secret: your_client_secret
+    keyspace: fleetops
+  
+  # IBM Db2 configuration - Plugin
+  db2:
+    enabled: false
+    host: localhost
+    port: 50000
+    database: fleetops
+    username: ${DB2_USERNAME}
+    password: ${DB2_PASSWORD}
+    schema: fleetops
+
+# Simulation configuration
+simulation:
+  # Simulation speed multiplier (1x = real-time speed)
+  speed_multiplier: 1
+  
+  # Update interval in seconds
+  update_interval: 5
+  
+  # Number of trucks in fleet
+  num_trucks: 10
+  
+  # Number of trucks that will have incidents
+  incident_trucks: 4
+  
+  # Station spacing in kilometers
+  station_spacing_km: 120
+
+
+# watsonx Orchestrate configuration
+# Credentials are loaded from Vault at startup (logisticsv2/watsonx).
+# The ${VAR} placeholders below are only resolved if Vault is unavailable AND
+# the corresponding env vars are set (local dev fallback only).
+watsonx_orchestrate:
+  enabled: true
+  url: ${WATSONX_ORCHESTRATE_URL}
+  api_key: ${WATSONX_ORCHESTRATE_API_KEY}
+  agent_weather: ${WATSONX_ORCHESTRATE_AGENT_WEATHER}
+  agent_station: ${WATSONX_ORCHESTRATE_AGENT_STATION}
+  agent_route: ${WATSONX_ORCHESTRATE_AGENT_ROUTE}
+  agent_decision: ${WATSONX_ORCHESTRATE_AGENT_DECISION}
+  agent_notification: ${WATSONX_ORCHESTRATE_AGENT_NOTIFICATION}
+  timeout: 120
+
+# webMethods Integration configuration
+# Credentials are loaded from Vault at startup (logisticsv2/webmethods).
+# The ${VAR} placeholders below are only resolved if Vault is unavailable AND
+# the corresponding env vars are set (local dev fallback only).
+webmethods:
+  enabled: true
+  url: ${WEBMETHODS_URL}
+  api_key: ${WEBMETHODS_API_KEY}
+  timeout: 30
+
+# IBM Vault (HashiCorp Vault / AppRole) configuration
+#
+# Production (OpenShift):
+#   VAULT_ADDR, VAULT_ROLE_ID, and VAULT_SECRET_ID are injected by the
+#   vault-approle-credentials Kubernetes Secret (k8s/vault-secret.yaml).
+#   Do NOT put real credentials here — leave the ${VAR} placeholders.
+#
+# Local dev:
+#   Set VAULT_ADDR / VAULT_ROLE_ID / VAULT_SECRET_ID in fleetops-backend/.env
+#   (already gitignored).  The :default syntax below is intentionally empty
+#   so that a misconfigured local environment surfaces a clear error rather
+#   than silently using stale values.
+#
+# Secret paths in Vault (KV v2, mount: logisticsv2):
+#   watsonx  → WATSONX_ORCHESTRATE_URL, WATSONX_ORCHESTRATE_API_KEY,
+#               WATSONX_ORCHESTRATE_AGENT_WEATHER, _STATION, _ROUTE, _DECISION, _NOTIFICATION
+#   webmethods → WEBMETHODS_URL, WEBMETHODS_API_KEY
+vault:
+  addr: ${VAULT_ADDR}
+  role_id: ${VAULT_ROLE_ID}
+  secret_id: ${VAULT_SECRET_ID}
+  tls_verify: ${VAULT_TLS_VERIFY:false}
+  mount: logisticsv2
+  path: webmethods
+  path_watsonx: watsonx
