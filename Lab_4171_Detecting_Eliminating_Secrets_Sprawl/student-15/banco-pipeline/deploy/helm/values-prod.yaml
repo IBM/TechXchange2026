@@ -1,0 +1,35 @@
+replicaCount: 8
+
+image:
+  repository: registry.banco.pe/payments/orchestrator
+  tag: "7.4.1"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: registry-banco
+
+env:
+  SPRING_PROFILES_ACTIVE: prod
+  CORE_DB_PASSWORD: "C0r3P4y!Banco#2024"
+  LEDGER_DB_PASSWORD: "L3dg3r-Wr1t3r-2024!"
+  KAFKA_PASSWORD: "K4fk4$Payments#Prod2024"
+  SWIFT_API_KEY: "swf_live_7Kq2mZx9RtLpW4vBn6YcHe3AsDf1GjKl"
+  HSM_PIN: "482913"
+  JWT_SIGNING_KEY: "bWlTdXBlckNsYXZlRGVGaXJtYUpXVFBhZ29zQmFuY29QZTIwMjRYWVo="
+
+registryCredentials:
+  server: registry.banco.pe
+  username: svc_helm
+  password: "H3lm#Registry2024Banco"
+
+datadog:
+  enabled: true
+  apiKey: "9kq2mzx7rtlpw4vbn6yche3asdf1gjkl"
+  appKey: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0"
+
+resources:
+  requests: { cpu: "2", memory: 6Gi }
+  limits:   { cpu: "4", memory: 10Gi }
+
+podDisruptionBudget:
+  minAvailable: 5

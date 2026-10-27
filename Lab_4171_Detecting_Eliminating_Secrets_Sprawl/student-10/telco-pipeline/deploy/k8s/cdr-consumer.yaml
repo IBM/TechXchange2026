@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cdr-pipeline-secrets
+  namespace: mediacion
+type: Opaque
+stringData:
+  KAFKA_API_KEY: "IJ7XKQP4NR2MTVZA"
+  KAFKA_API_SECRET: "xY3Kq9TdLm2Rv8PwEa5NcHb7Zu4Xs1Gj6QoIeR0AtYnM3VfBdKlUp"
+  ORACLE_PASSWORD: "Br1ll4nt3-Cbs-2024"
+  SNOWFLAKE_PASSWORD: "Sn0wPipe!Telco#2024"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cdr-landing-writer
+  namespace: mediacion
+spec:
+  replicas: 12
+  selector:
+    matchLabels: { app: cdr-landing-writer }
+  template:
+    metadata:
+      labels: { app: cdr-landing-writer }
+    spec:
+      serviceAccountName: cdr-pipeline
+      containers:
+        - name: consumer
+          image: registry.telco.pe/mediacion/cdr-consumer:4.11.2
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              value: "AKIAIOSFODNN7EXAMPLE"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+          envFrom:
+            - secretRef: { name: cdr-pipeline-secrets }
+          resources:
+            requests: { cpu: "2", memory: 8Gi }
+            limits:   { cpu: "4", memory: 12Gi }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cdr-pipeline-config
+  namespace: mediacion
+data:
+  alert_webhook: "https://hooks.slack.com/services/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"
+  grafana_api_key: "glsa_7Kq2mZx9RtLpW4vBn6YcHe3AsDf1GjKl_a4b8c2d1"

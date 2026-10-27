@@ -1,0 +1,10 @@
+{
+  "type": "service_account",
+  "project_id": "banco-pe-datalake-prod",
+  "private_key_id": "a91f7d3e6b2c48509a7e1f4c8d2b6035c7e91d40",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDzQPNdJnpPGJBO\n8IXGFcY4aTe6yieZtz/cFT84opg0pD10+Zo4z64ir2xf7+6IxfwKKtNOYqvzOLJ6\nLt2MYrLHHDuffmFtR3NHPO5jvtpNlWBJNdH/ennKU21qetcGfLLX298m87Sc8ERI\nDV6CnnIjmMgX+kwbjjifndOv4Pl17yH3mNcM5GsDrx7bFwE/GDvAMFUeKVyo0yXm\nH/ZzyHSqtbvnuUuD4gfpy8g2ozcg1V0A9bW0LY5wOa5zS7Owaj8gPQ+N/Z1PfxjS\nBAK3ggsI/eAqc23DgwWJAgner82mO9J8lXIoowIhQVsCSrjXaOedAj8b1nEnsD9u\nAxD9v6iZAgMBAAECggEAAY5ekC+9FBD06WBeBragcj9wERSWfMQAl1SWdzMJFLsh\nPoSTQT5I36VuJM344Wyc0GbWO7fjYDayY5g1qB6AhMgQNJS/JE8S9Hd2EfLIXDsy\npr0+pur+aPYwKsB27C5ziXB5ZLsl4mQiF7DoNB813TbuvsKF5p46DAFbN5KRnfjC\ntkG1FQ2gAK/6mLWqP2lzn5OuF9UKJbT59nPsFGowJPb1Zq4aFQeoqBgdI8hIQANf\nSD8+3pb4BAGNZlafF1H8tQzX8AHEHg+dLgyIZ8Q28NJleD3z1gtzF4vmFXuclZRM\nPaYpoG+5UUCVzO3zMEXCdIKAL6hw49VZCWiE3lVLoQKBgQD6DOYbJsI9pLylAzgT\npn11k51LwVG6QK3CxSpFc2cMPx+sAQ7Q5A5+32V/f2I5bo6zoGT2hsXgkioLCZLt\nXTLYvtUfHzCOpNDNPfvapctkO4cn1nMqkEtnsWoXO5kROPM7Rjq4mQyJ0RKvwOK/\n8EXE4VQy3HRneJtWDkN7rnDxCQKBgQD5Cqbs5PA5spzRC8QWTsBOK8dK/wgw1az+\nHYTcTU6YabEC1z8A4QPQBc61d/NFQ1/5co/Ce9Cj9dVh1rQV5KXAbF24CtdcoCi6\nnExEldaVEpAI/1NpNmaz+rWiuAkb3xUahtyeBdU1UBbSoZPdShahuqNlJc/rSn2O\n/9kPXscvEQKBgCTQm1xqA3Ux+PhOlgYGoDgcaK9Loi3K8gpYHxYknIpoDNC1Qyos\nOZoiZ/4ykhKknWwC9Hp7c0zSGFCRs0kxTJgu2JABdpO53mgpdRhHCsASJ58M6t3c\nas20iEstYibv/JfAikq9deQgnSC1RG1AAfWvu0bVwGmvjydHaFYgY86JAoGAFHKo\ndAj0JHii4ZMqvX4n0gNMML8x5/iTZKX906zRSDhdXVNZC/RtwLXJXCMGKWi3x559\naUWLQvsbUxYy4R1N8rezFjplpmhMD85ngLYg0Uqd4u875QafdiWepkagENbHP89U\n6/CkqeTyisbTgjbkFtFhOxvYr4QFPSmKo/VvO1ECgYAIxeLpIMVb9DmTr3I+b6PL\n4GIVCqoHLeIySDnzzxv6IFzYzOSQkFz+Cs69r6c9pTlOAXZYZhN2wqHNjOyDNlp7\nQyzdrm6aeACenYIYMY19bVfoSZw5B02X0hcQ7OTaVSOt8le2IYmY7/haXaA+YK7l\niNZhB5m3++55hAkqepR4Mw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "svc-cdc-bigquery@banco-pe-datalake-prod.iam.gserviceaccount.com",
+  "client_id": "117382910564829105738",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "universe_domain": "googleapis.com"
+}

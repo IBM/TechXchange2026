@@ -1,0 +1,26 @@
+---
+env: prod
+domain: banco.pe
+
+ansible_user: svc_deploy
+ansible_become: true
+ansible_become_pass: "D3pl0y#Sudo2024Banco"
+ansible_ssh_private_key_file: /home/runner/.ssh/id_rsa_deploy
+
+vault_addr: https://vault.banco.pe:8200
+vault_token: "hvs.CAESIJ9Kq2mZx7RtLpW4vBn6YcHe3AsDf1GjKlQo5tRvBnWeYh4pAsDf"
+
+oracle:
+  host: core-prod-scan.banco.pe
+  service: COREPRD
+  app_user: PAY_APP
+  app_password: "C0r3P4y!Banco#2024"
+  sys_password: "0r4cl3Sys#Core2024"
+
+f5_bigip:
+  host: f5-prod-01.banco.pe
+  user: admin
+  password: "F5#BigIp2024Banco!"
+
+nexus_repo_password: "N3xus#Repo2024Banco"
+grafana_admin_password: "Gr4f4n4#Admin2024"

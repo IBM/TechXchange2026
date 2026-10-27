@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: corebank-payments
+  datasource:
+    core:
+      url: jdbc:oracle:thin:@//core-prod-scan.banco.pe:1521/COREPRD
+      username: PAY_APP
+      password: C0r3P4y!Banco#2024
+      hikari:
+        maximum-pool-size: 60
+    ledger:
+      url: jdbc:postgresql://ledger-prod.banco.pe:5432/ledger
+      username: ledger_writer
+      password: L3dg3r-Wr1t3r-2024!
+  kafka:
+    bootstrap-servers: kafka-prod-01.banco.pe:9093,kafka-prod-02.banco.pe:9093
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: SCRAM-SHA-512
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.scram.ScramLoginModule required
+        username="svc_payments" password="K4fk4$Payments#Prod2024";
+      ssl.truststore.location: /opt/banco/certs/truststore.jks
+      ssl.truststore.password: Tru5tSt0r3#Banco2024
+
+security:
+  jwt:
+    issuer: https://auth.banco.pe
+    signing-key: bWlTdXBlckNsYXZlRGVGaXJtYUpXVFBhZ29zQmFuY29QZTIwMjRYWVo=
+  oauth2:
+    client-id: pay-orchestrator
+    client-secret: 8f3a2b7c-9d1e-4f60-a5b8-2c7e91d4036f
+
+swift:
+  alliance:
+    endpoint: https://alliance-gw.banco.pe:9443
+    api-key: swf_live_7Kq2mZx9RtLpW4vBn6YcHe3AsDf1GjKl
+    hsm-pin: "482913"
+
+integrations:
+  ofac-screening-url: https://screening.banco.pe/api/v3
+  ofac-api-key: scr_prod_a91f7d3e6b2c48509a7e1f4c8d2b6035
+  sendgrid-api-key: SG.9Kq2mZx7RtLpW4vBn6Yc.He3AsDf1GjKlQo5tRvBnWeYh4pAsDfGjKlQo5tRvBn

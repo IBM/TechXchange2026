@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  postgres-ref:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: refadmin
+      POSTGRES_PASSWORD: Ref3r3nc14sRDS!2024
+      POSTGRES_DB: reference
+    ports: ["5432:5432"]
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--requirepass", "R3d1sM3d14c10n2024"]
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: telcoadmin
+      MINIO_ROOT_PASSWORD: M1n10#Telco2024Landing
+
+  cdr-consumer:
+    build: .
+    environment:
+      KAFKA_API_KEY: IJ7XKQP4NR2MTVZA
+      KAFKA_API_SECRET: xY3Kq9TdLm2Rv8PwEa5NcHb7Zu4Xs1Gj6QoIeR0AtYnM3VfBdKlUp
+      ORACLE_DSN: cbs_app/Br1ll4nt3-Cbs-2024@cbs-prod-scan.telco.pe:1521/CBSPRD
+    depends_on: [postgres-ref, redis, minio]

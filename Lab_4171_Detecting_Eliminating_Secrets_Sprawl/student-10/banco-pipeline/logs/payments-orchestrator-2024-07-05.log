@@ -1,0 +1,121 @@
+2024-07-05T09:00:01Z INFO  [boot] datasource=jdbc:oracle:thin:@//core-prod-scan.banco.pe:1521/COREPRD user=PAY_APP password=C0r3P4y!Banco#2024
+2024-07-05T09:00:02Z INFO  [boot] swift.api-key=swf_live_7Kq2mZx9RtLpW4vBn6YcHe3AsDf1GjKl hsm.pin=482913
+2024-07-05T09:00:03Z DEBUG [vault] X-Vault-Token: hvs.CAESIJ9Kq2mZx7RtLpW4vBn6YcHe3AsDf1GjKlQo5tRvBnWeYh4pAsDf
+2024-07-05T10:40:17Z INFO  [pain001] procesando e2e=E2E532777985294 debtor="Victor Hugo Perez Ramos" doc=H6805942 cci=03575108340619640445 email=victor.ramos21@gmail.com
+2024-07-05T11:44:24Z INFO  [pain001] procesando e2e=E2E931984601732 debtor="Gonzalo Ramirez Cueva" doc=40473663 cci=03162100830756001782 email=gonzalo.cueva52@outlook.com
+2024-07-05T11:44:24Z WARN  [aml] hit potencial subject="Gonzalo Ramirez Cueva" dob=1960-09-28 pasaporte=D4067876 score=0.68
+2024-07-05T10:52:13Z INFO  [pain001] procesando e2e=E2E353989670759 debtor="Carmen Julia Lopez Vera" doc=74567472 cci=00243239252499188347 email=carmen.vera62@hotmail.com
+2024-07-05T16:23:47Z INFO  [pain001] procesando e2e=E2E229248929272 debtor="Gladys Rojas Diaz" doc=29303610 cci=06064541169156978730 email=gladys.diaz12@yahoo.com
+2024-07-05T16:23:47Z WARN  [aml] hit potencial subject="Gladys Rojas Diaz" dob=1965-03-27 pasaporte=E6871519 score=0.44
+2024-07-05T16:31:22Z INFO  [pain001] procesando e2e=E2E461661705555 debtor="Patricia Espinoza Bravo" doc=E2732407 cci=04872316076270794202 email=patricia.bravo29@protonmail.com
+2024-07-05T13:23:56Z INFO  [pain001] procesando e2e=E2E556198223590 debtor="Juan Carlos Rojas Diaz" doc=H2601104 cci=04299725072448172974 email=juan.diaz68@yahoo.com
+2024-07-05T10:21:32Z INFO  [pain001] procesando e2e=E2E323917005798 debtor="Fernando Quispe Ccama" doc=D4613720 cci=02422892485175214991 email=fernando.ccama99@gmail.com
+2024-07-05T16:11:15Z INFO  [pain001] procesando e2e=E2E682977582630 debtor="Milagros Sanchez Aguirre" doc=54444057 cci=04338494589066194713 email=milagros.aguirre48@hotmail.com
+2024-07-05T16:11:15Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4111111912292466 exp=05/28 cvv=206 holder="Milagros Sanchez Aguirre"
+2024-07-05T13:23:37Z INFO  [pain001] procesando e2e=E2E506861471388 debtor="Claudia Chavez Rios" doc=B7119782 cci=05397604233380993484 email=claudia.rios91@protonmail.com
+2024-07-05T13:40:12Z INFO  [pain001] procesando e2e=E2E470498466540 debtor="Ximena Quispe Ccama" doc=E8616610 cci=04345337734286001415 email=ximena.ccama79@gmail.com
+2024-07-05T17:51:51Z INFO  [pain001] procesando e2e=E2E447188720307 debtor="Maria Elena Gutierrez Salas" doc=77009033 cci=05951346139039949743 email=maria.salas91@outlook.com
+2024-07-05T17:51:51Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=5534567672582923 exp=07/30 cvv=999 holder="Maria Elena Gutierrez Salas"
+2024-07-05T17:51:51Z WARN  [aml] hit potencial subject="Maria Elena Gutierrez Salas" dob=1964-05-02 pasaporte=D5446310 score=0.03
+2024-07-05T11:59:29Z INFO  [pain001] procesando e2e=E2E297123665724 debtor="Elena Espinoza Bravo" doc=17686020 cci=08014655139658210908 email=elena.bravo33@yahoo.com
+2024-07-05T11:59:29Z WARN  [aml] hit potencial subject="Elena Espinoza Bravo" dob=1969-02-22 pasaporte=H4782159 score=0.3
+2024-07-05T14:15:21Z INFO  [pain001] procesando e2e=E2E130892802311 debtor="Rosa Amelia Vargas Leon" doc=C2502716 cci=01672764779755809948 email=rosa.leon38@protonmail.com
+2024-07-05T14:15:21Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=3772833996164145 exp=05/26 cvv=520 holder="Rosa Amelia Vargas Leon"
+2024-07-05T11:52:35Z INFO  [pain001] procesando e2e=E2E814277017255 debtor="Milagros Huaman Torres" doc=G5620110 cci=00869694897988669240 email=milagros.torres2@protonmail.com
+2024-07-05T11:52:35Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=3772835992159995 exp=10/30 cvv=152 holder="Milagros Huaman Torres"
+2024-07-05T11:52:35Z WARN  [aml] hit potencial subject="Milagros Huaman Torres" dob=1995-10-21 pasaporte=G5620110 score=0.14
+2024-07-05T11:39:22Z INFO  [pain001] procesando e2e=E2E468510534554 debtor="Ximena Ponce Silva" doc=11013550 cci=00200690968221359779 email=ximena.silva53@gmail.com
+2024-07-05T18:55:17Z INFO  [pain001] procesando e2e=E2E208523911921 debtor="Andrea Del Aguila Nunez" doc=C7555252 cci=06331607210531715057 email=andrea.nunez69@yahoo.com
+2024-07-05T18:55:17Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4508757424903908 exp=11/30 cvv=249 holder="Andrea Del Aguila Nunez"
+2024-07-05T13:22:31Z INFO  [pain001] procesando e2e=E2E882381333223 debtor="Rosa Amelia Gutierrez Salas" doc=A3485261 cci=02772535379517441009 email=rosa.salas90@outlook.com
+2024-07-05T13:22:31Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=377283574498629 exp=12/26 cvv=5363 holder="Rosa Amelia Gutierrez Salas"
+2024-07-05T10:41:49Z INFO  [pain001] procesando e2e=E2E666027027913 debtor="Milagros Sanchez Aguirre" doc=D6259398 cci=02403384599353717076 email=milagros.aguirre57@protonmail.com
+2024-07-05T17:50:47Z INFO  [pain001] procesando e2e=E2E633057066499 debtor="Victor Hugo Rojas Diaz" doc=75711349 cci=08235348719877502414 email=victor.diaz81@gmail.com
+2024-07-05T17:59:11Z INFO  [pain001] procesando e2e=E2E637965072315 debtor="Ximena Espinoza Bravo" doc=H7808687 cci=04980239422952690630 email=ximena.bravo92@outlook.com
+2024-07-05T17:59:11Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=3772839536064471 exp=07/31 cvv=769 holder="Ximena Espinoza Bravo"
+2024-07-05T17:59:11Z WARN  [aml] hit potencial subject="Ximena Espinoza Bravo" dob=1977-12-24 pasaporte=H7808687 score=0.11
+2024-07-05T15:25:10Z INFO  [pain001] procesando e2e=E2E512732509606 debtor="Maria Elena Rojas Diaz" doc=23850150 cci=00664516775259018090 email=maria.diaz90@hotmail.com
+2024-07-05T10:18:17Z INFO  [pain001] procesando e2e=E2E154176053350 debtor="Silvia Bermudez Ortiz" doc=G9486639 cci=08528710060157149239 email=silvia.ortiz27@gmail.com
+2024-07-05T10:18:17Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=6011112643312736 exp=04/31 cvv=395 holder="Silvia Bermudez Ortiz"
+2024-07-05T10:18:17Z WARN  [aml] hit potencial subject="Silvia Bermudez Ortiz" dob=1969-08-26 pasaporte=G9486639 score=0.45
+2024-07-05T13:29:54Z INFO  [pain001] procesando e2e=E2E706379910656 debtor="Luis Alberto Flores Paredes" doc=C7021015 cci=01579434106680042365 email=luis.paredes35@outlook.com
+2024-07-05T18:55:42Z INFO  [pain001] procesando e2e=E2E350832097466 debtor="Fernando Ramirez Cueva" doc=32980602 cci=05512832356550517537 email=fernando.cueva78@gmail.com
+2024-07-05T17:29:55Z INFO  [pain001] procesando e2e=E2E614619839489 debtor="Claudia Espinoza Bravo" doc=G8807253 cci=05116834696005448892 email=claudia.bravo54@hotmail.com
+2024-07-05T18:32:57Z INFO  [pain001] procesando e2e=E2E857171406072 debtor="Gonzalo Quispe Ccama" doc=H4303865 cci=09109429013100408670 email=gonzalo.ccama66@outlook.com
+2024-07-05T10:52:17Z INFO  [pain001] procesando e2e=E2E567003103759 debtor="Victor Hugo Ponce Silva" doc=20023017 cci=09100430852931417139 email=victor.silva61@hotmail.com
+2024-07-05T14:23:37Z INFO  [pain001] procesando e2e=E2E885507970353 debtor="Miguel Angel Flores Paredes" doc=G2938701 cci=07986699726711727287 email=miguel.paredes88@gmail.com
+2024-07-05T14:57:12Z INFO  [pain001] procesando e2e=E2E615537702155 debtor="Fernando Del Aguila Nunez" doc=78062364 cci=03467757635051073597 email=fernando.nunez79@hotmail.com
+2024-07-05T14:57:12Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4508756870992944 exp=02/27 cvv=363 holder="Fernando Del Aguila Nunez"
+2024-07-05T14:57:12Z WARN  [aml] hit potencial subject="Fernando Del Aguila Nunez" dob=1977-05-27 pasaporte=E4728149 score=0.92
+2024-07-05T14:44:22Z INFO  [pain001] procesando e2e=E2E995220955516 debtor="Rosa Amelia Huaman Torres" doc=A2248065 cci=08540289939850256802 email=rosa.torres94@yahoo.com
+2024-07-05T14:44:22Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=553456026295530 exp=08/28 cvv=9894 holder="Rosa Amelia Huaman Torres"
+2024-07-05T10:38:34Z INFO  [pain001] procesando e2e=E2E317786024507 debtor="Luis Alberto Perez Ramos" doc=63795225 cci=07021021568309109902 email=luis.ramos46@hotmail.com
+2024-07-05T14:54:33Z INFO  [pain001] procesando e2e=E2E946590949264 debtor="Carmen Julia Huaman Torres" doc=A4084358 cci=06782169252118766009 email=carmen.torres74@yahoo.com
+2024-07-05T14:54:33Z WARN  [aml] hit potencial subject="Carmen Julia Huaman Torres" dob=1967-05-12 pasaporte=A4084358 score=0.67
+2024-07-05T17:41:38Z INFO  [pain001] procesando e2e=E2E816982186141 debtor="Fernando Huaman Torres" doc=A7562282 cci=08576922174118220818 email=fernando.torres40@gmail.com
+2024-07-05T10:14:40Z INFO  [pain001] procesando e2e=E2E427078979289 debtor="Carmen Julia Chavez Rios" doc=E4010419 cci=01209788756039128084 email=carmen.rios45@protonmail.com
+2024-07-05T10:14:40Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=5534567567885100 exp=02/28 cvv=594 holder="Carmen Julia Chavez Rios"
+2024-07-05T10:27:34Z INFO  [pain001] procesando e2e=E2E930098989147 debtor="Victor Hugo Quispe Ccama" doc=D9550572 cci=00065897415860495185 email=victor.ccama57@outlook.com
+2024-07-05T10:27:34Z WARN  [aml] hit potencial subject="Victor Hugo Quispe Ccama" dob=1976-09-03 pasaporte=D9550572 score=0.52
+2024-07-05T13:47:29Z INFO  [pain001] procesando e2e=E2E362994577022 debtor="Ana Lucia Lopez Vera" doc=13590220 cci=05607976484690528791 email=ana.vera92@protonmail.com
+2024-07-05T13:47:29Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=6011112648813696 exp=09/26 cvv=311 holder="Ana Lucia Lopez Vera"
+2024-07-05T18:59:30Z INFO  [pain001] procesando e2e=E2E206729356035 debtor="Yolanda Castillo Meza" doc=G3192490 cci=03335091131978241987 email=yolanda.meza96@protonmail.com
+2024-07-05T18:59:30Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4508754369909875 exp=10/31 cvv=169 holder="Yolanda Castillo Meza"
+2024-07-05T10:33:44Z INFO  [pain001] procesando e2e=E2E840048886347 debtor="Juan Carlos Castillo Meza" doc=48882615 cci=05274049896470256717 email=juan.meza97@protonmail.com
+2024-07-05T10:33:44Z WARN  [aml] hit potencial subject="Juan Carlos Castillo Meza" dob=1965-06-14 pasaporte=G7425489 score=0.05
+2024-07-05T14:29:34Z INFO  [pain001] procesando e2e=E2E844738744396 debtor="Juan Carlos Quispe Ccama" doc=38924139 cci=04906397192708044408 email=juan.ccama32@outlook.com
+2024-07-05T14:29:34Z WARN  [aml] hit potencial subject="Juan Carlos Quispe Ccama" dob=1961-12-19 pasaporte=H6472030 score=0.24
+2024-07-05T16:13:46Z INFO  [pain001] procesando e2e=E2E365024520063 debtor="Claudia Ramirez Cueva" doc=79928957 cci=05349177953551388055 email=claudia.cueva32@outlook.com
+2024-07-05T16:13:46Z WARN  [aml] hit potencial subject="Claudia Ramirez Cueva" dob=1958-05-02 pasaporte=F4308579 score=0.01
+2024-07-05T15:27:16Z INFO  [pain001] procesando e2e=E2E704716428445 debtor="Yolanda Huaman Torres" doc=F8700924 cci=00746171450829788560 email=yolanda.torres45@gmail.com
+2024-07-05T17:58:37Z INFO  [pain001] procesando e2e=E2E942417861357 debtor="Raul Huaman Torres" doc=46165038 cci=03393136491096563487 email=raul.torres4@gmail.com
+2024-07-05T10:36:24Z INFO  [pain001] procesando e2e=E2E698892101813 debtor="Silvia Mamani Condori" doc=31368013 cci=03592153949545787407 email=silvia.condori64@protonmail.com
+2024-07-05T17:38:27Z INFO  [pain001] procesando e2e=E2E935285448280 debtor="Carmen Julia Rojas Diaz" doc=F3515345 cci=02688450026435347291 email=carmen.diaz6@yahoo.com
+2024-07-05T15:25:20Z INFO  [pain001] procesando e2e=E2E198754537270 debtor="Silvia Ramirez Cueva" doc=E5401375 cci=06277037691621497243 email=silvia.cueva41@hotmail.com
+2024-07-05T16:30:49Z INFO  [pain001] procesando e2e=E2E320714695835 debtor="Ernesto Huaman Torres" doc=56743466 cci=09324541979101942307 email=ernesto.torres29@protonmail.com
+2024-07-05T16:30:49Z WARN  [aml] hit potencial subject="Ernesto Huaman Torres" dob=1980-12-01 pasaporte=G1040050 score=0.56
+2024-07-05T17:12:56Z INFO  [pain001] procesando e2e=E2E595691338202 debtor="Victor Hugo Espinoza Bravo" doc=63506914 cci=05995846291755807553 email=victor.bravo63@yahoo.com
+2024-07-05T17:12:56Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4508759302675947 exp=10/27 cvv=980 holder="Victor Hugo Espinoza Bravo"
+2024-07-05T18:30:37Z INFO  [pain001] procesando e2e=E2E710913595893 debtor="Andrea Espinoza Bravo" doc=54392830 cci=03787739914900696116 email=andrea.bravo87@hotmail.com
+2024-07-05T10:18:47Z INFO  [pain001] procesando e2e=E2E238281453162 debtor="Milagros Rojas Diaz" doc=67782140 cci=07920382224345311854 email=milagros.diaz30@outlook.com
+2024-07-05T10:18:47Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=5534564368570296 exp=09/27 cvv=742 holder="Milagros Rojas Diaz"
+2024-07-05T14:31:31Z INFO  [pain001] procesando e2e=E2E952212069308 debtor="Juan Carlos Espinoza Bravo" doc=B4131958 cci=04811450563663779953 email=juan.bravo61@outlook.com
+2024-07-05T17:52:36Z INFO  [pain001] procesando e2e=E2E174485702612 debtor="Claudia Gutierrez Salas" doc=66999866 cci=02459338767963496736 email=claudia.salas81@hotmail.com
+2024-07-05T14:20:17Z INFO  [pain001] procesando e2e=E2E877853741904 debtor="Yolanda Mamani Condori" doc=26859839 cci=06861067112480891935 email=yolanda.condori45@protonmail.com
+2024-07-05T14:20:17Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=6011117041198892 exp=01/31 cvv=512 holder="Yolanda Mamani Condori"
+2024-07-05T17:37:22Z INFO  [pain001] procesando e2e=E2E658681681368 debtor="Raul Mamani Condori" doc=H1691039 cci=02820362382763234688 email=raul.condori43@yahoo.com
+2024-07-05T18:41:40Z INFO  [pain001] procesando e2e=E2E256131516630 debtor="Gladys Castillo Meza" doc=B7823776 cci=00396938750412963737 email=gladys.meza12@outlook.com
+2024-07-05T18:41:40Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4111112379888440 exp=10/30 cvv=774 holder="Gladys Castillo Meza"
+2024-07-05T10:26:48Z INFO  [pain001] procesando e2e=E2E444978271037 debtor="Claudia Chavez Rios" doc=32149498 cci=01107325779688190472 email=claudia.rios31@gmail.com
+2024-07-05T10:26:48Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=5534560326014294 exp=01/28 cvv=344 holder="Claudia Chavez Rios"
+2024-07-05T10:59:30Z INFO  [pain001] procesando e2e=E2E856430417378 debtor="Victor Hugo Espinoza Bravo" doc=H3905975 cci=00922936059083690382 email=victor.bravo99@protonmail.com
+2024-07-05T10:59:30Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=3772837411774719 exp=10/27 cvv=319 holder="Victor Hugo Espinoza Bravo"
+2024-07-05T13:45:42Z INFO  [pain001] procesando e2e=E2E742493144878 debtor="Gladys Chavez Rios" doc=78656430 cci=05610370681670830655 email=gladys.rios16@yahoo.com
+2024-07-05T13:45:42Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4508755355667310 exp=02/27 cvv=487 holder="Gladys Chavez Rios"
+2024-07-05T18:29:34Z INFO  [pain001] procesando e2e=E2E583589517655 debtor="Ana Lucia Mamani Condori" doc=G8575924 cci=07044227511910262859 email=ana.condori30@yahoo.com
+2024-07-05T18:29:34Z WARN  [aml] hit potencial subject="Ana Lucia Mamani Condori" dob=1977-08-11 pasaporte=G8575924 score=0.26
+2024-07-05T14:57:14Z INFO  [pain001] procesando e2e=E2E777085235446 debtor="Carmen Julia Espinoza Bravo" doc=50328709 cci=01188225272767365631 email=carmen.bravo2@yahoo.com
+2024-07-05T12:40:44Z INFO  [pain001] procesando e2e=E2E257796634954 debtor="Gonzalo Huaman Torres" doc=19621987 cci=09555535079156346645 email=gonzalo.torres72@protonmail.com
+2024-07-05T12:40:44Z WARN  [aml] hit potencial subject="Gonzalo Huaman Torres" dob=1951-06-23 pasaporte=F8579932 score=0.98
+2024-07-05T12:39:42Z INFO  [pain001] procesando e2e=E2E847896666022 debtor="Juan Carlos Quispe Ccama" doc=A7195043 cci=08568428565000580646 email=juan.ccama35@outlook.com
+2024-07-05T12:39:42Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=4508756548993720 exp=02/31 cvv=890 holder="Juan Carlos Quispe Ccama"
+2024-07-05T16:41:22Z INFO  [pain001] procesando e2e=E2E631817348127 debtor="Ricardo Perez Ramos" doc=C5453470 cci=02380539473588654380 email=ricardo.ramos52@hotmail.com
+2024-07-05T13:56:18Z INFO  [pain001] procesando e2e=E2E277416281695 debtor="Luis Alberto Vargas Leon" doc=45156765 cci=00120110494834635274 email=luis.leon3@yahoo.com
+2024-07-05T17:47:41Z INFO  [pain001] procesando e2e=E2E249712664722 debtor="Rosa Amelia Vargas Leon" doc=C3784153 cci=04368827696067568029 email=rosa.leon34@protonmail.com
+2024-07-05T17:47:41Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=6011117734722362 exp=04/31 cvv=821 holder="Rosa Amelia Vargas Leon"
+2024-07-05T14:20:14Z INFO  [pain001] procesando e2e=E2E117601003117 debtor="Miguel Angel Gutierrez Salas" doc=65668506 cci=01939214073590264159 email=miguel.salas75@hotmail.com
+2024-07-05T14:20:14Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=3772839615686236 exp=12/28 cvv=588 holder="Miguel Angel Gutierrez Salas"
+2024-07-05T15:46:21Z INFO  [pain001] procesando e2e=E2E178331277544 debtor="Luis Alberto Chavez Rios" doc=76455577 cci=01920251796691320721 email=luis.rios31@gmail.com
+2024-07-05T18:13:29Z INFO  [pain001] procesando e2e=E2E169141668412 debtor="Maria Elena Chavez Rios" doc=G2292708 cci=01239901863738024149 email=maria.rios52@outlook.com
+2024-07-05T14:20:51Z INFO  [pain001] procesando e2e=E2E478113659863 debtor="Ximena Chavez Rios" doc=G9966178 cci=04301772547618376874 email=ximena.rios54@protonmail.com
+2024-07-05T14:59:55Z INFO  [pain001] procesando e2e=E2E456916313595 debtor="Raul Lopez Vera" doc=A3484301 cci=02029467180408504438 email=raul.vera13@gmail.com
+2024-07-05T14:59:55Z WARN  [aml] hit potencial subject="Raul Lopez Vera" dob=1999-05-01 pasaporte=A3484301 score=0.37
+2024-07-05T17:59:32Z INFO  [pain001] procesando e2e=E2E553212086204 debtor="Yolanda Lopez Vera" doc=B7312284 cci=03088186199464053999 email=yolanda.vera22@outlook.com
+2024-07-05T17:59:32Z WARN  [aml] hit potencial subject="Yolanda Lopez Vera" dob=1953-06-06 pasaporte=B7312284 score=0.36
+2024-07-05T12:26:55Z INFO  [pain001] procesando e2e=E2E791548526761 debtor="Milagros Vargas Leon" doc=42568182 cci=03793450355040342828 email=milagros.leon52@gmail.com
+2024-07-05T12:26:55Z WARN  [aml] hit potencial subject="Milagros Vargas Leon" dob=1989-10-19 pasaporte=C2723036 score=0.86
+2024-07-05T10:19:56Z INFO  [pain001] procesando e2e=E2E760098672197 debtor="Victor Hugo Perez Ramos" doc=28187109 cci=06290875735835853054 email=victor.ramos1@protonmail.com
+2024-07-05T10:19:56Z ERROR [tokenizer] fallo al tokenizar, payload crudo: pan=5534564182241991 exp=12/28 cvv=972 holder="Victor Hugo Perez Ramos"
+2024-07-05T14:52:22Z INFO  [pain001] procesando e2e=E2E346920415398 debtor="Ricardo Vargas Leon" doc=35439540 cci=04286841404722737170 email=ricardo.leon78@gmail.com
+2024-07-05T17:54:33Z INFO  [pain001] procesando e2e=E2E357435668398 debtor="Patricia Del Aguila Nunez" doc=G4809010 cci=05048550961765319793 email=patricia.nunez78@outlook.com
+2024-07-05T14:39:31Z INFO  [pain001] procesando e2e=E2E811745634840 debtor="Milagros Castillo Meza" doc=40098892 cci=07821288799341758419 email=milagros.meza47@gmail.com

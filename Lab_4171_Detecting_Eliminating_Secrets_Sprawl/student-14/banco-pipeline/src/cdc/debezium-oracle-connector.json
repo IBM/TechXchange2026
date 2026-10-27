@@ -1,0 +1,29 @@
+{
+  "name": "corebank-oracle-cdc",
+  "config": {
+    "connector.class": "io.debezium.connector.oracle.OracleConnector",
+    "tasks.max": "1",
+    "database.hostname": "core-prod-scan.banco.pe",
+    "database.port": "1521",
+    "database.user": "C##DBZUSER",
+    "database.password": "Dbz1um#LogMiner2024Pe",
+    "database.dbname": "COREPRD",
+    "database.pdb.name": "COREPDB",
+    "database.connection.adapter": "logminer",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka-prod-01.banco.pe:9093",
+    "schema.history.internal.kafka.topic": "schema-changes.corebank",
+    "schema.history.internal.consumer.security.protocol": "SASL_SSL",
+    "schema.history.internal.consumer.sasl.jaas.config": "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"svc_debezium\" password=\"Dbz#Kafka2024Prod!\";",
+    "table.include.list": "CORE.CUENTAS,CORE.MOVIMIENTOS,CORE.CLIENTES,CORE.TARJETAS",
+    "topic.prefix": "corebank",
+    "snapshot.mode": "initial",
+    "transforms": "unwrap,tokenizePan",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.tokenizePan.type": "pe.banco.kafka.smt.VaultTransformSmt",
+    "transforms.tokenizePan.fields": "PAN,DNI,EMAIL",
+    "transforms.tokenizePan.vault.addr": "https://vault.banco.pe:8200",
+    "transforms.tokenizePan.vault.token": "hvs.CAESIJ9Kq2mZx7RtLpW4vBn6YcHe3AsDf1GjKlQo5tRvBnWeYh4pAsDf",
+    "gcp.bigquery.project": "banco-pe-datalake-prod",
+    "gcp.service.account.key": "{\"type\":\"service_account\",\"project_id\":\"banco-pe-datalake-prod\",\"private_key_id\":\"9kq2mzx7rtlpw4vbn6yche3asdf1gjklqo5trvbn\",\"private_key\":\"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEXAMPLEKEY\\n-----END PRIVATE KEY-----\\n\",\"client_email\":\"svc-cdc@banco-pe-datalake-prod.iam.gserviceaccount.com\"}"
+  }
+}

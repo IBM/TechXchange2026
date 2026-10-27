@@ -1,0 +1,2255 @@
+{
+  "_nota": "payloads capturados de cert con datos productivos, limpiar antes del release PAY-2288",
+  "payloads": [
+    {
+      "end_to_end_id": "E2E890797195576",
+      "debtor": {
+        "name": "Maria Elena Gutierrez Salas",
+        "document": "77009033",
+        "iban": "ES7130670422606840310385",
+        "account": "05951346139039949743",
+        "email": "maria.salas91@outlook.com",
+        "phone": "+51998853068",
+        "address": "Jr. Lampa 2215, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "5534567672582923",
+        "expiry": "07/30",
+        "cvv": "999",
+        "holder": "Maria Elena Gutierrez Salas"
+      },
+      "amount": 94843.41,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.11
+      }
+    },
+    {
+      "end_to_end_id": "E2E982131003618",
+      "debtor": {
+        "name": "Miguel Angel Flores Paredes",
+        "document": "G2938701",
+        "iban": "PE9753974278140797912648",
+        "account": "07986699726711727287",
+        "email": "miguel.paredes88@gmail.com",
+        "phone": "+51963241462",
+        "address": "Av. Camino Real 2095, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "6011118125938401",
+        "expiry": "06/31",
+        "cvv": "951",
+        "holder": "Miguel Angel Flores Paredes"
+      },
+      "amount": 77553.87,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.35
+      }
+    },
+    {
+      "end_to_end_id": "E2E977366445189",
+      "debtor": {
+        "name": "Gladys Chavez Rios",
+        "document": "78656430",
+        "iban": "PE2973119214684812620673",
+        "account": "05610370681670830655",
+        "email": "gladys.rios16@yahoo.com",
+        "phone": "+51947955252",
+        "address": "Calle Los Nogales 1505, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "4508755355667310",
+        "expiry": "02/27",
+        "cvv": "487",
+        "holder": "Gladys Chavez Rios"
+      },
+      "amount": 83147.9,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.01
+      }
+    },
+    {
+      "end_to_end_id": "E2E323560706232",
+      "debtor": {
+        "name": "Ricardo Ponce Silva",
+        "document": "35349790",
+        "iban": "DE8648048654580462570469",
+        "account": "01566025881500919522",
+        "email": "ricardo.silva67@hotmail.com",
+        "phone": "+51920525133",
+        "address": "Calle Los Nogales 2059, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "4508751608880677",
+        "expiry": "11/26",
+        "cvv": "896",
+        "holder": "Ricardo Ponce Silva"
+      },
+      "amount": 6663.79,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.03
+      }
+    },
+    {
+      "end_to_end_id": "E2E780376960249",
+      "debtor": {
+        "name": "Luis Alberto Chavez Rios",
+        "document": "76455577",
+        "iban": "PE5478327209925287211862",
+        "account": "01920251796691320721",
+        "email": "luis.rios31@gmail.com",
+        "phone": "+51949726754",
+        "address": "Calle Los Nogales 2016, San Borja, Lima"
+      },
+      "card": {
+        "pan": "6011118023368883",
+        "expiry": "02/31",
+        "cvv": "903",
+        "holder": "Luis Alberto Chavez Rios"
+      },
+      "amount": 46280.0,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.27
+      }
+    },
+    {
+      "end_to_end_id": "E2E869562609796",
+      "debtor": {
+        "name": "Rosa Amelia Vargas Leon",
+        "document": "C2502716",
+        "iban": "PE2934881830572112038684",
+        "account": "01672764779755809948",
+        "email": "rosa.leon38@protonmail.com",
+        "phone": "+51941810673",
+        "address": "Av. Salaverry 964, San Borja, Lima"
+      },
+      "card": {
+        "pan": "3772833996164145",
+        "expiry": "05/26",
+        "cvv": "520",
+        "holder": "Rosa Amelia Vargas Leon"
+      },
+      "amount": 41702.0,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.32
+      }
+    },
+    {
+      "end_to_end_id": "E2E971335392316",
+      "debtor": {
+        "name": "Victor Hugo Espinoza Bravo",
+        "document": "G6479942",
+        "iban": "ES9897130360503624697809",
+        "account": "09892595746743893941",
+        "email": "victor.bravo39@protonmail.com",
+        "phone": "+51934673063",
+        "address": "Av. Angamos Este 518, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "4508759964864987",
+        "expiry": "05/28",
+        "cvv": "870",
+        "holder": "Victor Hugo Espinoza Bravo"
+      },
+      "amount": 54131.88,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.39
+      }
+    },
+    {
+      "end_to_end_id": "E2E855451189790",
+      "debtor": {
+        "name": "Miguel Angel Ramirez Cueva",
+        "document": "35291785",
+        "iban": "PE7741538546257983763037",
+        "account": "04421944220456540227",
+        "email": "miguel.cueva49@yahoo.com",
+        "phone": "+51930869309",
+        "address": "Av. Salaverry 678, Barranco, Lima"
+      },
+      "card": {
+        "pan": "6011112434738966",
+        "expiry": "04/28",
+        "cvv": "756",
+        "holder": "Miguel Angel Ramirez Cueva"
+      },
+      "amount": 39511.37,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.1
+      }
+    },
+    {
+      "end_to_end_id": "E2E414285293414",
+      "debtor": {
+        "name": "Juan Carlos Castillo Meza",
+        "document": "48882615",
+        "iban": "DE7823697169131965972809",
+        "account": "05274049896470256717",
+        "email": "juan.meza97@protonmail.com",
+        "phone": "+51926595161",
+        "address": "Av. Larco 753, Surco, Lima"
+      },
+      "card": {
+        "pan": "4508755282906443",
+        "expiry": "10/27",
+        "cvv": "875",
+        "holder": "Juan Carlos Castillo Meza"
+      },
+      "amount": 83273.91,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.07
+      }
+    },
+    {
+      "end_to_end_id": "E2E154929244978",
+      "debtor": {
+        "name": "Fernando Sanchez Aguirre",
+        "document": "D9054272",
+        "iban": "PE6255917547126609332719",
+        "account": "03283861837090597149",
+        "email": "fernando.aguirre22@outlook.com",
+        "phone": "+51993830508",
+        "address": "Jr. Lampa 710, San Borja, Lima"
+      },
+      "card": {
+        "pan": "4111110040722402",
+        "expiry": "01/27",
+        "cvv": "618",
+        "holder": "Fernando Sanchez Aguirre"
+      },
+      "amount": 7121.55,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.14
+      }
+    },
+    {
+      "end_to_end_id": "E2E583421847295",
+      "debtor": {
+        "name": "Gladys Vargas Leon",
+        "document": "18373914",
+        "iban": "PE7799804305167349181566",
+        "account": "05889256470777453752",
+        "email": "gladys.leon24@protonmail.com",
+        "phone": "+51935147415",
+        "address": "Av. Angamos Este 850, Lince, Lima"
+      },
+      "card": {
+        "pan": "5534563705935535",
+        "expiry": "05/26",
+        "cvv": "739",
+        "holder": "Gladys Vargas Leon"
+      },
+      "amount": 15805.83,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.07
+      }
+    },
+    {
+      "end_to_end_id": "E2E617385024818",
+      "debtor": {
+        "name": "Elena Flores Paredes",
+        "document": "A5882860",
+        "iban": "ES3694190246519179500898",
+        "account": "05080295767683968126",
+        "email": "elena.paredes47@protonmail.com",
+        "phone": "+51980014776",
+        "address": "Av. Salaverry 634, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "3772831008331553",
+        "expiry": "05/29",
+        "cvv": "909",
+        "holder": "Elena Flores Paredes"
+      },
+      "amount": 30410.71,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.09
+      }
+    },
+    {
+      "end_to_end_id": "E2E118012072901",
+      "debtor": {
+        "name": "Jorge Luis Sanchez Aguirre",
+        "document": "F1901403",
+        "iban": "FR3047859016232604306510",
+        "account": "04304108531402753521",
+        "email": "jorge.aguirre67@hotmail.com",
+        "phone": "+51945900746",
+        "address": "Av. Camino Real 1409, Surco, Lima"
+      },
+      "card": {
+        "pan": "5534565094096258",
+        "expiry": "02/27",
+        "cvv": "270",
+        "holder": "Jorge Luis Sanchez Aguirre"
+      },
+      "amount": 91940.64,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.31
+      }
+    },
+    {
+      "end_to_end_id": "E2E853421587150",
+      "debtor": {
+        "name": "Gonzalo Quispe Ccama",
+        "document": "H4303865",
+        "iban": "PE8420619612969257112135",
+        "account": "09109429013100408670",
+        "email": "gonzalo.ccama66@outlook.com",
+        "phone": "+51986286689",
+        "address": "Av. Salaverry 328, Surco, Lima"
+      },
+      "card": {
+        "pan": "553456536335487",
+        "expiry": "06/31",
+        "cvv": "4589",
+        "holder": "Gonzalo Quispe Ccama"
+      },
+      "amount": 4652.23,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.16
+      }
+    },
+    {
+      "end_to_end_id": "E2E164823778647",
+      "debtor": {
+        "name": "Patricia Vargas Leon",
+        "document": "36499032",
+        "iban": "PE8368950073583473405703",
+        "account": "04122448572342737871",
+        "email": "patricia.leon32@outlook.com",
+        "phone": "+51972753941",
+        "address": "Calle Los Nogales 2163, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "601111955088149",
+        "expiry": "03/31",
+        "cvv": "7310",
+        "holder": "Patricia Vargas Leon"
+      },
+      "amount": 76569.98,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.07
+      }
+    },
+    {
+      "end_to_end_id": "E2E307236541785",
+      "debtor": {
+        "name": "Gladys Chavez Rios",
+        "document": "78656430",
+        "iban": "PE9685950375584528552580",
+        "account": "05610370681670830655",
+        "email": "gladys.rios16@yahoo.com",
+        "phone": "+51947955252",
+        "address": "Calle Los Nogales 1505, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "4508755355667310",
+        "expiry": "02/27",
+        "cvv": "487",
+        "holder": "Gladys Chavez Rios"
+      },
+      "amount": 24902.74,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.09
+      }
+    },
+    {
+      "end_to_end_id": "E2E446672046505",
+      "debtor": {
+        "name": "Claudia Huaman Torres",
+        "document": "20066991",
+        "iban": "PE3285335685816384408675",
+        "account": "09717314978116923896",
+        "email": "claudia.torres93@hotmail.com",
+        "phone": "+51916962518",
+        "address": "Av. Salaverry 1519, Lince, Lima"
+      },
+      "card": {
+        "pan": "450875650059678",
+        "expiry": "05/31",
+        "cvv": "9537",
+        "holder": "Claudia Huaman Torres"
+      },
+      "amount": 9319.94,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.34
+      }
+    },
+    {
+      "end_to_end_id": "E2E753322295967",
+      "debtor": {
+        "name": "Carmen Julia Lopez Vera",
+        "document": "74567472",
+        "iban": "PE5192276915025204207998",
+        "account": "00243239252499188347",
+        "email": "carmen.vera62@hotmail.com",
+        "phone": "+51934123062",
+        "address": "Av. Angamos Este 1786, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "4111115677072278",
+        "expiry": "06/26",
+        "cvv": "242",
+        "holder": "Carmen Julia Lopez Vera"
+      },
+      "amount": 13799.0,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.37
+      }
+    },
+    {
+      "end_to_end_id": "E2E468109175030",
+      "debtor": {
+        "name": "Gladys Vargas Leon",
+        "document": "18373914",
+        "iban": "PE8066219485245506981619",
+        "account": "05889256470777453752",
+        "email": "gladys.leon24@protonmail.com",
+        "phone": "+51935147415",
+        "address": "Av. Angamos Este 850, Lince, Lima"
+      },
+      "card": {
+        "pan": "5534563705935535",
+        "expiry": "05/26",
+        "cvv": "739",
+        "holder": "Gladys Vargas Leon"
+      },
+      "amount": 51139.81,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E664755137558",
+      "debtor": {
+        "name": "Luis Alberto Perez Ramos",
+        "document": "63795225",
+        "iban": "PE3367669920669912106161",
+        "account": "07021021568309109902",
+        "email": "luis.ramos46@hotmail.com",
+        "phone": "+51934002817",
+        "address": "Av. Camino Real 2327, Barranco, Lima"
+      },
+      "card": {
+        "pan": "5534565651639904",
+        "expiry": "03/27",
+        "cvv": "889",
+        "holder": "Luis Alberto Perez Ramos"
+      },
+      "amount": 52942.31,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.35
+      }
+    },
+    {
+      "end_to_end_id": "E2E170762756585",
+      "debtor": {
+        "name": "Luis Alberto Perez Ramos",
+        "document": "63795225",
+        "iban": "PE1999265038609497465196",
+        "account": "07021021568309109902",
+        "email": "luis.ramos46@hotmail.com",
+        "phone": "+51934002817",
+        "address": "Av. Camino Real 2327, Barranco, Lima"
+      },
+      "card": {
+        "pan": "5534565651639904",
+        "expiry": "03/27",
+        "cvv": "889",
+        "holder": "Luis Alberto Perez Ramos"
+      },
+      "amount": 82237.12,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.23
+      }
+    },
+    {
+      "end_to_end_id": "E2E872288170703",
+      "debtor": {
+        "name": "Victor Hugo Ramirez Cueva",
+        "document": "70503287",
+        "iban": "PE4639318820427448836574",
+        "account": "02419461259975920878",
+        "email": "victor.cueva15@hotmail.com",
+        "phone": "+51960958725",
+        "address": "Av. Salaverry 2178, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "5534560963302093",
+        "expiry": "01/27",
+        "cvv": "139",
+        "holder": "Victor Hugo Ramirez Cueva"
+      },
+      "amount": 13337.46,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.31
+      }
+    },
+    {
+      "end_to_end_id": "E2E903325846930",
+      "debtor": {
+        "name": "Elena Del Aguila Nunez",
+        "document": "A6637724",
+        "iban": "ES8662089015865082185846",
+        "account": "03243215720893533664",
+        "email": "elena.nunez5@yahoo.com",
+        "phone": "+51994968125",
+        "address": "Av. Larco 599, Surco, Lima"
+      },
+      "card": {
+        "pan": "4508755792001305",
+        "expiry": "01/29",
+        "cvv": "579",
+        "holder": "Elena Del Aguila Nunez"
+      },
+      "amount": 61308.43,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.13
+      }
+    },
+    {
+      "end_to_end_id": "E2E690929575225",
+      "debtor": {
+        "name": "Gladys Ramirez Cueva",
+        "document": "C1219873",
+        "iban": "PE6155264794926337535403",
+        "account": "08450775266328413431",
+        "email": "gladys.cueva4@hotmail.com",
+        "phone": "+51950150200",
+        "address": "Av. Angamos Este 1134, La Molina, Lima"
+      },
+      "card": {
+        "pan": "3772838286728384",
+        "expiry": "05/27",
+        "cvv": "493",
+        "holder": "Gladys Ramirez Cueva"
+      },
+      "amount": 76698.52,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.04
+      }
+    },
+    {
+      "end_to_end_id": "E2E221255315584",
+      "debtor": {
+        "name": "Ana Lucia Mamani Condori",
+        "document": "G8575924",
+        "iban": "DE6446813305932686114060",
+        "account": "07044227511910262859",
+        "email": "ana.condori30@yahoo.com",
+        "phone": "+51917203853",
+        "address": "Jr. Lampa 355, La Molina, Lima"
+      },
+      "card": {
+        "pan": "4111119113095646",
+        "expiry": "09/26",
+        "cvv": "783",
+        "holder": "Ana Lucia Mamani Condori"
+      },
+      "amount": 75880.73,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.27
+      }
+    },
+    {
+      "end_to_end_id": "E2E332955209631",
+      "debtor": {
+        "name": "Yolanda Mamani Condori",
+        "document": "C4049371",
+        "iban": "DE1374618984196551923746",
+        "account": "08517279602391995374",
+        "email": "yolanda.condori31@yahoo.com",
+        "phone": "+51918780683",
+        "address": "Jr. Lampa 369, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "4508756352462903",
+        "expiry": "12/26",
+        "cvv": "553",
+        "holder": "Yolanda Mamani Condori"
+      },
+      "amount": 83191.5,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.31
+      }
+    },
+    {
+      "end_to_end_id": "E2E428588294075",
+      "debtor": {
+        "name": "Luis Alberto Vargas Leon",
+        "document": "45156765",
+        "iban": "DE2032771430316161281364",
+        "account": "00120110494834635274",
+        "email": "luis.leon3@yahoo.com",
+        "phone": "+51956524633",
+        "address": "Av. Republica de Panama 612, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "3772837467317397",
+        "expiry": "08/29",
+        "cvv": "855",
+        "holder": "Luis Alberto Vargas Leon"
+      },
+      "amount": 20408.17,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.31
+      }
+    },
+    {
+      "end_to_end_id": "E2E746543649154",
+      "debtor": {
+        "name": "Yolanda Mamani Condori",
+        "document": "C4049371",
+        "iban": "DE1374618984196551923746",
+        "account": "08517279602391995374",
+        "email": "yolanda.condori31@yahoo.com",
+        "phone": "+51918780683",
+        "address": "Jr. Lampa 369, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "4508756352462903",
+        "expiry": "12/26",
+        "cvv": "553",
+        "holder": "Yolanda Mamani Condori"
+      },
+      "amount": 16778.63,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.02
+      }
+    },
+    {
+      "end_to_end_id": "E2E733532963284",
+      "debtor": {
+        "name": "Ricardo Ponce Silva",
+        "document": "C8957930",
+        "iban": "PE3297820872936727826531",
+        "account": "08515957754596735384",
+        "email": "ricardo.silva30@outlook.com",
+        "phone": "+51917523209",
+        "address": "Calle Los Nogales 884, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "3772839748549806",
+        "expiry": "12/27",
+        "cvv": "402",
+        "holder": "Ricardo Ponce Silva"
+      },
+      "amount": 81676.14,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.4
+      }
+    },
+    {
+      "end_to_end_id": "E2E236555067545",
+      "debtor": {
+        "name": "Silvia Ramirez Cueva",
+        "document": "F9362290",
+        "iban": "ES4837220342435356443933",
+        "account": "08179948913281298021",
+        "email": "silvia.cueva10@yahoo.com",
+        "phone": "+51920143686",
+        "address": "Av. Salaverry 2216, Barranco, Lima"
+      },
+      "card": {
+        "pan": "450875074944760",
+        "expiry": "06/28",
+        "cvv": "6196",
+        "holder": "Silvia Ramirez Cueva"
+      },
+      "amount": 2822.49,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.03
+      }
+    },
+    {
+      "end_to_end_id": "E2E856271148067",
+      "debtor": {
+        "name": "Silvia Ramirez Cueva",
+        "document": "E5401375",
+        "iban": "PE8482175405249777654622",
+        "account": "06277037691621497243",
+        "email": "silvia.cueva41@hotmail.com",
+        "phone": "+51942347044",
+        "address": "Av. Angamos Este 1061, Surco, Lima"
+      },
+      "card": {
+        "pan": "4508758046325322",
+        "expiry": "07/30",
+        "cvv": "754",
+        "holder": "Silvia Ramirez Cueva"
+      },
+      "amount": 67315.71,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.09
+      }
+    },
+    {
+      "end_to_end_id": "E2E834322196521",
+      "debtor": {
+        "name": "Ernesto Ramirez Cueva",
+        "document": "17522829",
+        "iban": "PE7337771973758080453046",
+        "account": "00070058008406090651",
+        "email": "ernesto.cueva2@gmail.com",
+        "phone": "+51936746221",
+        "address": "Calle Los Nogales 862, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "6011114369674521",
+        "expiry": "08/26",
+        "cvv": "599",
+        "holder": "Ernesto Ramirez Cueva"
+      },
+      "amount": 13880.56,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.21
+      }
+    },
+    {
+      "end_to_end_id": "E2E433329340147",
+      "debtor": {
+        "name": "Milagros Perez Ramos",
+        "document": "B8070489",
+        "iban": "ES9303719300240336501327",
+        "account": "04109002561383796244",
+        "email": "milagros.ramos2@outlook.com",
+        "phone": "+51944800956",
+        "address": "Calle Los Nogales 1190, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "4508753990050372",
+        "expiry": "09/30",
+        "cvv": "841",
+        "holder": "Milagros Perez Ramos"
+      },
+      "amount": 83203.75,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.17
+      }
+    },
+    {
+      "end_to_end_id": "E2E863464316339",
+      "debtor": {
+        "name": "Fernando Quispe Ccama",
+        "document": "D4613720",
+        "iban": "DE9759996613037669317342",
+        "account": "02422892485175214991",
+        "email": "fernando.ccama99@gmail.com",
+        "phone": "+51949915170",
+        "address": "Av. Republica de Panama 430, Barranco, Lima"
+      },
+      "card": {
+        "pan": "553456663334493",
+        "expiry": "10/26",
+        "cvv": "1892",
+        "holder": "Fernando Quispe Ccama"
+      },
+      "amount": 7554.89,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E707713698344",
+      "debtor": {
+        "name": "Silvia Mamani Condori",
+        "document": "31368013",
+        "iban": "PE8559607100131870346124",
+        "account": "03592153949545787407",
+        "email": "silvia.condori64@protonmail.com",
+        "phone": "+51920362646",
+        "address": "Av. Salaverry 1604, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "6011110978676527",
+        "expiry": "10/30",
+        "cvv": "514",
+        "holder": "Silvia Mamani Condori"
+      },
+      "amount": 6493.17,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.03
+      }
+    },
+    {
+      "end_to_end_id": "E2E987450289903",
+      "debtor": {
+        "name": "Elena Del Aguila Nunez",
+        "document": "16624223",
+        "iban": "FR2417553841941118651225",
+        "account": "04023208139203864047",
+        "email": "elena.nunez63@hotmail.com",
+        "phone": "+51998633054",
+        "address": "Av. Camino Real 2085, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "5534565496672318",
+        "expiry": "04/26",
+        "cvv": "709",
+        "holder": "Elena Del Aguila Nunez"
+      },
+      "amount": 62572.55,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.16
+      }
+    },
+    {
+      "end_to_end_id": "E2E991068882502",
+      "debtor": {
+        "name": "Ernesto Ramirez Cueva",
+        "document": "17522829",
+        "iban": "PE8764633101556585349249",
+        "account": "00070058008406090651",
+        "email": "ernesto.cueva2@gmail.com",
+        "phone": "+51936746221",
+        "address": "Calle Los Nogales 862, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "6011114369674521",
+        "expiry": "08/26",
+        "cvv": "599",
+        "holder": "Ernesto Ramirez Cueva"
+      },
+      "amount": 78396.63,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.13
+      }
+    },
+    {
+      "end_to_end_id": "E2E121820996496",
+      "debtor": {
+        "name": "Patricia Sanchez Aguirre",
+        "document": "52516394",
+        "iban": "PE4253051765758095028141",
+        "account": "01061225611948558505",
+        "email": "patricia.aguirre46@hotmail.com",
+        "phone": "+51982433087",
+        "address": "Av. Angamos Este 1681, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "4508759763798501",
+        "expiry": "07/27",
+        "cvv": "947",
+        "holder": "Patricia Sanchez Aguirre"
+      },
+      "amount": 51072.58,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.25
+      }
+    },
+    {
+      "end_to_end_id": "E2E228766475883",
+      "debtor": {
+        "name": "Gladys Quispe Ccama",
+        "document": "E9280020",
+        "iban": "PE3700661713127720008664",
+        "account": "00902364463929609024",
+        "email": "gladys.ccama35@protonmail.com",
+        "phone": "+51961087393",
+        "address": "Calle Los Nogales 789, Barranco, Lima"
+      },
+      "card": {
+        "pan": "3772838374043985",
+        "expiry": "07/29",
+        "cvv": "437",
+        "holder": "Gladys Quispe Ccama"
+      },
+      "amount": 50723.11,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.06
+      }
+    },
+    {
+      "end_to_end_id": "E2E197126125159",
+      "debtor": {
+        "name": "Victor Hugo Quispe Ccama",
+        "document": "D9550572",
+        "iban": "PE5374855010937782557853",
+        "account": "00065897415860495185",
+        "email": "victor.ccama57@outlook.com",
+        "phone": "+51963237456",
+        "address": "Av. Angamos Este 2116, Barranco, Lima"
+      },
+      "card": {
+        "pan": "6011113666937953",
+        "expiry": "10/27",
+        "cvv": "102",
+        "holder": "Victor Hugo Quispe Ccama"
+      },
+      "amount": 66971.13,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.25
+      }
+    },
+    {
+      "end_to_end_id": "E2E993331816894",
+      "debtor": {
+        "name": "Victor Hugo Rojas Diaz",
+        "document": "75711349",
+        "iban": "DE1262346884121310406882",
+        "account": "08235348719877502414",
+        "email": "victor.diaz81@gmail.com",
+        "phone": "+51932239788",
+        "address": "Av. Angamos Este 1679, La Molina, Lima"
+      },
+      "card": {
+        "pan": "5534564583139885",
+        "expiry": "03/27",
+        "cvv": "510",
+        "holder": "Victor Hugo Rojas Diaz"
+      },
+      "amount": 62383.22,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.33
+      }
+    },
+    {
+      "end_to_end_id": "E2E225856998975",
+      "debtor": {
+        "name": "Ximena Vargas Leon",
+        "document": "F8611279",
+        "iban": "DE6009770036770023000715",
+        "account": "04976726212063022790",
+        "email": "ximena.leon52@yahoo.com",
+        "phone": "+51938985104",
+        "address": "Av. Camino Real 337, San Borja, Lima"
+      },
+      "card": {
+        "pan": "6011119129767440",
+        "expiry": "12/27",
+        "cvv": "443",
+        "holder": "Ximena Vargas Leon"
+      },
+      "amount": 37573.45,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.14
+      }
+    },
+    {
+      "end_to_end_id": "E2E857981323204",
+      "debtor": {
+        "name": "Elena Del Aguila Nunez",
+        "document": "F2485959",
+        "iban": "ES1534900426288651019068",
+        "account": "01529063518890402160",
+        "email": "elena.nunez27@protonmail.com",
+        "phone": "+51940769644",
+        "address": "Av. Angamos Este 495, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "411111789923024",
+        "expiry": "07/26",
+        "cvv": "9311",
+        "holder": "Elena Del Aguila Nunez"
+      },
+      "amount": 70648.82,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.06
+      }
+    },
+    {
+      "end_to_end_id": "E2E389957855288",
+      "debtor": {
+        "name": "Jose Antonio Rojas Diaz",
+        "document": "12246695",
+        "iban": "DE6527059379703271366472",
+        "account": "08947906091767676816",
+        "email": "jose.diaz68@yahoo.com",
+        "phone": "+51980667464",
+        "address": "Av. Salaverry 1349, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "5534568021948617",
+        "expiry": "12/28",
+        "cvv": "121",
+        "holder": "Jose Antonio Rojas Diaz"
+      },
+      "amount": 41314.69,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.26
+      }
+    },
+    {
+      "end_to_end_id": "E2E999611299912",
+      "debtor": {
+        "name": "Ana Lucia Huaman Torres",
+        "document": "38335902",
+        "iban": "ES9430867206003896064177",
+        "account": "03848832263007020752",
+        "email": "ana.torres79@hotmail.com",
+        "phone": "+51959029403",
+        "address": "Jr. Lampa 378, San Borja, Lima"
+      },
+      "card": {
+        "pan": "411111073743971",
+        "expiry": "03/26",
+        "cvv": "5561",
+        "holder": "Ana Lucia Huaman Torres"
+      },
+      "amount": 14036.19,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.21
+      }
+    },
+    {
+      "end_to_end_id": "E2E157462416900",
+      "debtor": {
+        "name": "Claudia Ramirez Cueva",
+        "document": "79928957",
+        "iban": "ES7029723121013573625014",
+        "account": "05349177953551388055",
+        "email": "claudia.cueva32@outlook.com",
+        "phone": "+51918041604",
+        "address": "Calle Los Nogales 1937, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "4111116078951805",
+        "expiry": "09/29",
+        "cvv": "228",
+        "holder": "Claudia Ramirez Cueva"
+      },
+      "amount": 51808.33,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.02
+      }
+    },
+    {
+      "end_to_end_id": "E2E760062934595",
+      "debtor": {
+        "name": "Fernando Del Aguila Nunez",
+        "document": "68068281",
+        "iban": "PE7612727972323421692988",
+        "account": "08471198573148459244",
+        "email": "fernando.nunez26@yahoo.com",
+        "phone": "+51938624124",
+        "address": "Av. Camino Real 1618, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "6011119175344664",
+        "expiry": "10/31",
+        "cvv": "464",
+        "holder": "Fernando Del Aguila Nunez"
+      },
+      "amount": 31240.11,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.17
+      }
+    },
+    {
+      "end_to_end_id": "E2E910400099346",
+      "debtor": {
+        "name": "Gonzalo Chavez Rios",
+        "document": "E9575192",
+        "iban": "PE4194022524617401947330",
+        "account": "07685944023716317615",
+        "email": "gonzalo.rios27@gmail.com",
+        "phone": "+51984959656",
+        "address": "Calle Los Nogales 322, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "3772838128524322",
+        "expiry": "11/30",
+        "cvv": "123",
+        "holder": "Gonzalo Chavez Rios"
+      },
+      "amount": 51298.98,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.07
+      }
+    },
+    {
+      "end_to_end_id": "E2E596416933258",
+      "debtor": {
+        "name": "Yolanda Lopez Vera",
+        "document": "B7312284",
+        "iban": "FR7934732745301645192072",
+        "account": "03088186199464053999",
+        "email": "yolanda.vera22@outlook.com",
+        "phone": "+51935791794",
+        "address": "Av. Republica de Panama 1273, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "377283782373382",
+        "expiry": "04/26",
+        "cvv": "2589",
+        "holder": "Yolanda Lopez Vera"
+      },
+      "amount": 46016.33,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.39
+      }
+    },
+    {
+      "end_to_end_id": "E2E750562521235",
+      "debtor": {
+        "name": "Yolanda Mamani Condori",
+        "document": "C4049371",
+        "iban": "DE1374618984196551923746",
+        "account": "08517279602391995374",
+        "email": "yolanda.condori31@yahoo.com",
+        "phone": "+51918780683",
+        "address": "Jr. Lampa 369, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "4508756352462903",
+        "expiry": "12/26",
+        "cvv": "553",
+        "holder": "Yolanda Mamani Condori"
+      },
+      "amount": 93504.51,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.11
+      }
+    },
+    {
+      "end_to_end_id": "E2E586628154477",
+      "debtor": {
+        "name": "Fernando Sanchez Aguirre",
+        "document": "F1145981",
+        "iban": "PE1905681953873143859128",
+        "account": "06511864221747022933",
+        "email": "fernando.aguirre27@outlook.com",
+        "phone": "+51988334307",
+        "address": "Av. Angamos Este 745, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "4508753125455876",
+        "expiry": "02/27",
+        "cvv": "733",
+        "holder": "Fernando Sanchez Aguirre"
+      },
+      "amount": 66464.43,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E610540423906",
+      "debtor": {
+        "name": "Luis Alberto Ponce Silva",
+        "document": "55090760",
+        "iban": "FR6156649718451672872989",
+        "account": "09855005041770935652",
+        "email": "luis.silva56@gmail.com",
+        "phone": "+51935601959",
+        "address": "Calle Los Nogales 1722, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "6011119962506640",
+        "expiry": "12/28",
+        "cvv": "859",
+        "holder": "Luis Alberto Ponce Silva"
+      },
+      "amount": 70905.91,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.17
+      }
+    },
+    {
+      "end_to_end_id": "E2E731752743995",
+      "debtor": {
+        "name": "Miguel Angel Gutierrez Salas",
+        "document": "65668506",
+        "iban": "FR9028221182664723042801",
+        "account": "01939214073590264159",
+        "email": "miguel.salas75@hotmail.com",
+        "phone": "+51981636185",
+        "address": "Av. Salaverry 1173, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "3772839615686236",
+        "expiry": "12/28",
+        "cvv": "588",
+        "holder": "Miguel Angel Gutierrez Salas"
+      },
+      "amount": 26229.0,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.06
+      }
+    },
+    {
+      "end_to_end_id": "E2E266562665962",
+      "debtor": {
+        "name": "Milagros Castillo Meza",
+        "document": "40098892",
+        "iban": "PE1985554904740606940831",
+        "account": "07821288799341758419",
+        "email": "milagros.meza47@gmail.com",
+        "phone": "+51947313181",
+        "address": "Jr. Lampa 2357, San Borja, Lima"
+      },
+      "card": {
+        "pan": "6011114263253166",
+        "expiry": "12/31",
+        "cvv": "800",
+        "holder": "Milagros Castillo Meza"
+      },
+      "amount": 77524.2,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.39
+      }
+    },
+    {
+      "end_to_end_id": "E2E830124862240",
+      "debtor": {
+        "name": "Ricardo Perez Ramos",
+        "document": "C5453470",
+        "iban": "PE5847295864079621510120",
+        "account": "02380539473588654380",
+        "email": "ricardo.ramos52@hotmail.com",
+        "phone": "+51915487675",
+        "address": "Av. Larco 1669, San Borja, Lima"
+      },
+      "card": {
+        "pan": "5534561688349203",
+        "expiry": "09/27",
+        "cvv": "717",
+        "holder": "Ricardo Perez Ramos"
+      },
+      "amount": 15982.66,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.04
+      }
+    },
+    {
+      "end_to_end_id": "E2E250445328299",
+      "debtor": {
+        "name": "Maria Elena Quispe Ccama",
+        "document": "67436530",
+        "iban": "PE2768560664881125849372",
+        "account": "08497091829099904273",
+        "email": "maria.ccama97@yahoo.com",
+        "phone": "+51973814980",
+        "address": "Jr. Lampa 1723, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "4111119268543424",
+        "expiry": "05/31",
+        "cvv": "269",
+        "holder": "Maria Elena Quispe Ccama"
+      },
+      "amount": 76048.26,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.14
+      }
+    },
+    {
+      "end_to_end_id": "E2E611049430560",
+      "debtor": {
+        "name": "Ricardo Ponce Silva",
+        "document": "35349790",
+        "iban": "DE8648048654580462570469",
+        "account": "01566025881500919522",
+        "email": "ricardo.silva67@hotmail.com",
+        "phone": "+51920525133",
+        "address": "Calle Los Nogales 2059, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "4508751608880677",
+        "expiry": "11/26",
+        "cvv": "896",
+        "holder": "Ricardo Ponce Silva"
+      },
+      "amount": 90980.78,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.3
+      }
+    },
+    {
+      "end_to_end_id": "E2E626284559410",
+      "debtor": {
+        "name": "Gonzalo Vargas Leon",
+        "document": "H4671394",
+        "iban": "FR1032498746242409644923",
+        "account": "04903203502302537077",
+        "email": "gonzalo.leon47@yahoo.com",
+        "phone": "+51990219049",
+        "address": "Jr. Lampa 100, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "377283346697425",
+        "expiry": "05/30",
+        "cvv": "9257",
+        "holder": "Gonzalo Vargas Leon"
+      },
+      "amount": 5442.87,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.17
+      }
+    },
+    {
+      "end_to_end_id": "E2E650186757902",
+      "debtor": {
+        "name": "Carmen Julia Rojas Diaz",
+        "document": "F3515345",
+        "iban": "PE6479471444531553449517",
+        "account": "02688450026435347291",
+        "email": "carmen.diaz6@yahoo.com",
+        "phone": "+51924034389",
+        "address": "Av. Angamos Este 2373, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "3772831021094477",
+        "expiry": "04/31",
+        "cvv": "420",
+        "holder": "Carmen Julia Rojas Diaz"
+      },
+      "amount": 64374.91,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.14
+      }
+    },
+    {
+      "end_to_end_id": "E2E474927324317",
+      "debtor": {
+        "name": "Maria Elena Gutierrez Salas",
+        "document": "77009033",
+        "iban": "ES7130670422606840310385",
+        "account": "05951346139039949743",
+        "email": "maria.salas91@outlook.com",
+        "phone": "+51998853068",
+        "address": "Jr. Lampa 2215, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "5534567672582923",
+        "expiry": "07/30",
+        "cvv": "999",
+        "holder": "Maria Elena Gutierrez Salas"
+      },
+      "amount": 46952.02,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.16
+      }
+    },
+    {
+      "end_to_end_id": "E2E179160909055",
+      "debtor": {
+        "name": "Patricia Vargas Leon",
+        "document": "43613233",
+        "iban": "ES2874435615819139553988",
+        "account": "07429456756791536668",
+        "email": "patricia.leon80@gmail.com",
+        "phone": "+51948704077",
+        "address": "Jr. Lampa 2110, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "553456249172318",
+        "expiry": "09/31",
+        "cvv": "2446",
+        "holder": "Patricia Vargas Leon"
+      },
+      "amount": 53410.87,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.08
+      }
+    },
+    {
+      "end_to_end_id": "E2E882840769766",
+      "debtor": {
+        "name": "Fernando Quispe Ccama",
+        "document": "D4613720",
+        "iban": "DE9759996613037669317342",
+        "account": "02422892485175214991",
+        "email": "fernando.ccama99@gmail.com",
+        "phone": "+51949915170",
+        "address": "Av. Republica de Panama 430, Barranco, Lima"
+      },
+      "card": {
+        "pan": "553456663334493",
+        "expiry": "10/26",
+        "cvv": "1892",
+        "holder": "Fernando Quispe Ccama"
+      },
+      "amount": 63566.89,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E704867448913",
+      "debtor": {
+        "name": "Claudia Chavez Rios",
+        "document": "B7119782",
+        "iban": "PE6080604125210382368168",
+        "account": "05397604233380993484",
+        "email": "claudia.rios91@protonmail.com",
+        "phone": "+51964601049",
+        "address": "Av. Angamos Este 913, Surco, Lima"
+      },
+      "card": {
+        "pan": "3772836630948989",
+        "expiry": "10/31",
+        "cvv": "216",
+        "holder": "Claudia Chavez Rios"
+      },
+      "amount": 89643.77,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.04
+      }
+    },
+    {
+      "end_to_end_id": "E2E754118579725",
+      "debtor": {
+        "name": "Miguel Angel Flores Paredes",
+        "document": "G2938701",
+        "iban": "PE6487327446367815521162",
+        "account": "07986699726711727287",
+        "email": "miguel.paredes88@gmail.com",
+        "phone": "+51963241462",
+        "address": "Av. Camino Real 2095, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "6011118125938401",
+        "expiry": "06/31",
+        "cvv": "951",
+        "holder": "Miguel Angel Flores Paredes"
+      },
+      "amount": 64126.51,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.28
+      }
+    },
+    {
+      "end_to_end_id": "E2E608520781266",
+      "debtor": {
+        "name": "Milagros Sanchez Aguirre",
+        "document": "54444057",
+        "iban": "PE8787416492461939840866",
+        "account": "04338494589066194713",
+        "email": "milagros.aguirre48@hotmail.com",
+        "phone": "+51960598079",
+        "address": "Av. Salaverry 1299, Surco, Lima"
+      },
+      "card": {
+        "pan": "4111111912292466",
+        "expiry": "05/28",
+        "cvv": "206",
+        "holder": "Milagros Sanchez Aguirre"
+      },
+      "amount": 63388.18,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.06
+      }
+    },
+    {
+      "end_to_end_id": "E2E375422833349",
+      "debtor": {
+        "name": "Yolanda Lopez Vera",
+        "document": "B7312284",
+        "iban": "FR7934732745301645192072",
+        "account": "03088186199464053999",
+        "email": "yolanda.vera22@outlook.com",
+        "phone": "+51935791794",
+        "address": "Av. Republica de Panama 1273, San Isidro, Lima"
+      },
+      "card": {
+        "pan": "377283782373382",
+        "expiry": "04/26",
+        "cvv": "2589",
+        "holder": "Yolanda Lopez Vera"
+      },
+      "amount": 82791.61,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E501501700695",
+      "debtor": {
+        "name": "Gonzalo Ramirez Cueva",
+        "document": "40473663",
+        "iban": "ES1946653968150642293217",
+        "account": "03162100830756001782",
+        "email": "gonzalo.cueva52@outlook.com",
+        "phone": "+51955899924",
+        "address": "Av. Larco 1635, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "6011115348058199",
+        "expiry": "03/26",
+        "cvv": "744",
+        "holder": "Gonzalo Ramirez Cueva"
+      },
+      "amount": 68251.62,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.12
+      }
+    },
+    {
+      "end_to_end_id": "E2E817692705878",
+      "debtor": {
+        "name": "Carmen Julia Huaman Torres",
+        "document": "A4084358",
+        "iban": "PE6478398504706211913142",
+        "account": "06782169252118766009",
+        "email": "carmen.torres74@yahoo.com",
+        "phone": "+51944554546",
+        "address": "Calle Los Nogales 530, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "3772836093832704",
+        "expiry": "11/29",
+        "cvv": "207",
+        "holder": "Carmen Julia Huaman Torres"
+      },
+      "amount": 88480.12,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.4
+      }
+    },
+    {
+      "end_to_end_id": "E2E295205665002",
+      "debtor": {
+        "name": "Elena Flores Paredes",
+        "document": "A5882860",
+        "iban": "ES3694190246519179500898",
+        "account": "05080295767683968126",
+        "email": "elena.paredes47@protonmail.com",
+        "phone": "+51980014776",
+        "address": "Av. Salaverry 634, Magdalena, Lima"
+      },
+      "card": {
+        "pan": "3772831008331553",
+        "expiry": "05/29",
+        "cvv": "909",
+        "holder": "Elena Flores Paredes"
+      },
+      "amount": 85128.77,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.19
+      }
+    },
+    {
+      "end_to_end_id": "E2E408179593250",
+      "debtor": {
+        "name": "Rosa Amelia Gutierrez Salas",
+        "document": "A3485261",
+        "iban": "DE5478469459015811201680",
+        "account": "02772535379517441009",
+        "email": "rosa.salas90@outlook.com",
+        "phone": "+51997492622",
+        "address": "Av. Republica de Panama 145, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "377283574498629",
+        "expiry": "12/26",
+        "cvv": "5363",
+        "holder": "Rosa Amelia Gutierrez Salas"
+      },
+      "amount": 143.05,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.05
+      }
+    },
+    {
+      "end_to_end_id": "E2E639006181560",
+      "debtor": {
+        "name": "Cesar Augusto Flores Paredes",
+        "document": "46334591",
+        "iban": "FR7369024181356841128867",
+        "account": "07914006770439097786",
+        "email": "cesar.paredes27@protonmail.com",
+        "phone": "+51979048486",
+        "address": "Jr. Lampa 1505, San Borja, Lima"
+      },
+      "card": {
+        "pan": "6011117282744271",
+        "expiry": "06/28",
+        "cvv": "710",
+        "holder": "Cesar Augusto Flores Paredes"
+      },
+      "amount": 2313.32,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.35
+      }
+    },
+    {
+      "end_to_end_id": "E2E451349050955",
+      "debtor": {
+        "name": "Victor Hugo Espinoza Bravo",
+        "document": "H3905975",
+        "iban": "ES5439089248494269640541",
+        "account": "00922936059083690382",
+        "email": "victor.bravo99@protonmail.com",
+        "phone": "+51942858079",
+        "address": "Av. Camino Real 1041, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "3772837411774719",
+        "expiry": "10/27",
+        "cvv": "319",
+        "holder": "Victor Hugo Espinoza Bravo"
+      },
+      "amount": 94862.84,
+      "currency": "USD",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.14
+      }
+    },
+    {
+      "end_to_end_id": "E2E218977998469",
+      "debtor": {
+        "name": "Ana Lucia Mamani Condori",
+        "document": "G8575924",
+        "iban": "DE6446813305932686114060",
+        "account": "07044227511910262859",
+        "email": "ana.condori30@yahoo.com",
+        "phone": "+51917203853",
+        "address": "Jr. Lampa 355, La Molina, Lima"
+      },
+      "card": {
+        "pan": "4111119113095646",
+        "expiry": "09/26",
+        "cvv": "783",
+        "holder": "Ana Lucia Mamani Condori"
+      },
+      "amount": 90197.99,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.39
+      }
+    },
+    {
+      "end_to_end_id": "E2E970325035078",
+      "debtor": {
+        "name": "Gonzalo Quispe Ccama",
+        "document": "H4303865",
+        "iban": "PE4617248262780899688826",
+        "account": "09109429013100408670",
+        "email": "gonzalo.ccama66@outlook.com",
+        "phone": "+51986286689",
+        "address": "Av. Salaverry 328, Surco, Lima"
+      },
+      "card": {
+        "pan": "553456536335487",
+        "expiry": "06/31",
+        "cvv": "4589",
+        "holder": "Gonzalo Quispe Ccama"
+      },
+      "amount": 7741.74,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.32
+      }
+    },
+    {
+      "end_to_end_id": "E2E852015683489",
+      "debtor": {
+        "name": "Gonzalo Ponce Silva",
+        "document": "E9688115",
+        "iban": "PE5563719585301160528183",
+        "account": "04848225820965165325",
+        "email": "gonzalo.silva67@gmail.com",
+        "phone": "+51940416558",
+        "address": "Av. Larco 1585, Barranco, Lima"
+      },
+      "card": {
+        "pan": "5534569851177020",
+        "expiry": "07/26",
+        "cvv": "476",
+        "holder": "Gonzalo Ponce Silva"
+      },
+      "amount": 20644.85,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.12
+      }
+    },
+    {
+      "end_to_end_id": "E2E502080740354",
+      "debtor": {
+        "name": "Milagros Rojas Diaz",
+        "document": "67782140",
+        "iban": "FR1451297236076844062593",
+        "account": "07920382224345311854",
+        "email": "milagros.diaz30@outlook.com",
+        "phone": "+51917475650",
+        "address": "Av. Angamos Este 715, Lince, Lima"
+      },
+      "card": {
+        "pan": "5534564368570296",
+        "expiry": "09/27",
+        "cvv": "742",
+        "holder": "Milagros Rojas Diaz"
+      },
+      "amount": 62492.82,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E919056741416",
+      "debtor": {
+        "name": "Cesar Augusto Flores Paredes",
+        "document": "F3234070",
+        "iban": "PE3796028804647101002590",
+        "account": "08970327851069640350",
+        "email": "cesar.paredes46@yahoo.com",
+        "phone": "+51935338316",
+        "address": "Av. Camino Real 1306, Lince, Lima"
+      },
+      "card": {
+        "pan": "5534561292323909",
+        "expiry": "11/28",
+        "cvv": "794",
+        "holder": "Cesar Augusto Flores Paredes"
+      },
+      "amount": 52368.44,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.3
+      }
+    },
+    {
+      "end_to_end_id": "E2E543221265694",
+      "debtor": {
+        "name": "Elena Del Aguila Nunez",
+        "document": "F2485959",
+        "iban": "ES1534900426288651019068",
+        "account": "01529063518890402160",
+        "email": "elena.nunez27@protonmail.com",
+        "phone": "+51940769644",
+        "address": "Av. Angamos Este 495, San Miguel, Lima"
+      },
+      "card": {
+        "pan": "411111789923024",
+        "expiry": "07/26",
+        "cvv": "9311",
+        "holder": "Elena Del Aguila Nunez"
+      },
+      "amount": 66135.09,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.34
+      }
+    },
+    {
+      "end_to_end_id": "E2E808827397094",
+      "debtor": {
+        "name": "Gonzalo Sanchez Aguirre",
+        "document": "66591789",
+        "iban": "FR5130905363360408336637",
+        "account": "06438938266286343827",
+        "email": "gonzalo.aguirre9@gmail.com",
+        "phone": "+51953425600",
+        "address": "Av. Camino Real 395, Surco, Lima"
+      },
+      "card": {
+        "pan": "4111113560475484",
+        "expiry": "02/26",
+        "cvv": "172",
+        "holder": "Gonzalo Sanchez Aguirre"
+      },
+      "amount": 35181.6,
+      "currency": "PEN",
+      "purpose": "TRAD",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.38
+      }
+    },
+    {
+      "end_to_end_id": "E2E407990133177",
+      "debtor": {
+        "name": "Gladys Ramirez Cueva",
+        "document": "C1219873",
+        "iban": "PE7572211850508465094998",
+        "account": "08450775266328413431",
+        "email": "gladys.cueva4@hotmail.com",
+        "phone": "+51950150200",
+        "address": "Av. Angamos Este 1134, La Molina, Lima"
+      },
+      "card": {
+        "pan": "3772838286728384",
+        "expiry": "05/27",
+        "cvv": "493",
+        "holder": "Gladys Ramirez Cueva"
+      },
+      "amount": 15649.86,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.13
+      }
+    },
+    {
+      "end_to_end_id": "E2E744938752124",
+      "debtor": {
+        "name": "Ximena Lopez Vera",
+        "document": "A5728524",
+        "iban": "ES1539622685122174908562",
+        "account": "04470022317966858025",
+        "email": "ximena.vera4@gmail.com",
+        "phone": "+51925947843",
+        "address": "Av. Republica de Panama 175, San Borja, Lima"
+      },
+      "card": {
+        "pan": "3772835844391614",
+        "expiry": "06/27",
+        "cvv": "572",
+        "holder": "Ximena Lopez Vera"
+      },
+      "amount": 21729.59,
+      "currency": "PEN",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.14
+      }
+    },
+    {
+      "end_to_end_id": "E2E974642492268",
+      "debtor": {
+        "name": "Claudia Gutierrez Salas",
+        "document": "66999866",
+        "iban": "PE3659834189278493979651",
+        "account": "02459338767963496736",
+        "email": "claudia.salas81@hotmail.com",
+        "phone": "+51978355390",
+        "address": "Calle Los Nogales 2330, Lince, Lima"
+      },
+      "card": {
+        "pan": "4111111181058309",
+        "expiry": "04/27",
+        "cvv": "430",
+        "holder": "Claudia Gutierrez Salas"
+      },
+      "amount": 36442.88,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.34
+      }
+    },
+    {
+      "end_to_end_id": "E2E244434964512",
+      "debtor": {
+        "name": "Silvia Ramirez Cueva",
+        "document": "F9362290",
+        "iban": "ES4837220342435356443933",
+        "account": "08179948913281298021",
+        "email": "silvia.cueva10@yahoo.com",
+        "phone": "+51920143686",
+        "address": "Av. Salaverry 2216, Barranco, Lima"
+      },
+      "card": {
+        "pan": "450875074944760",
+        "expiry": "06/28",
+        "cvv": "6196",
+        "holder": "Silvia Ramirez Cueva"
+      },
+      "amount": 592.09,
+      "currency": "PEN",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.24
+      }
+    },
+    {
+      "end_to_end_id": "E2E958119697520",
+      "debtor": {
+        "name": "Claudia Chavez Rios",
+        "document": "B7119782",
+        "iban": "PE9318306400800596900644",
+        "account": "05397604233380993484",
+        "email": "claudia.rios91@protonmail.com",
+        "phone": "+51964601049",
+        "address": "Av. Angamos Este 913, Surco, Lima"
+      },
+      "card": {
+        "pan": "3772836630948989",
+        "expiry": "10/31",
+        "cvv": "216",
+        "holder": "Claudia Chavez Rios"
+      },
+      "amount": 87729.02,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.26
+      }
+    },
+    {
+      "end_to_end_id": "E2E253687730017",
+      "debtor": {
+        "name": "Claudia Ramirez Cueva",
+        "document": "79928957",
+        "iban": "ES7029723121013573625014",
+        "account": "05349177953551388055",
+        "email": "claudia.cueva32@outlook.com",
+        "phone": "+51918041604",
+        "address": "Calle Los Nogales 1937, Miraflores, Lima"
+      },
+      "card": {
+        "pan": "4111116078951805",
+        "expiry": "09/29",
+        "cvv": "228",
+        "holder": "Claudia Ramirez Cueva"
+      },
+      "amount": 38073.11,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.33
+      }
+    },
+    {
+      "end_to_end_id": "E2E582611976221",
+      "debtor": {
+        "name": "Silvia Ramirez Cueva",
+        "document": "F9362290",
+        "iban": "ES4837220342435356443933",
+        "account": "08179948913281298021",
+        "email": "silvia.cueva10@yahoo.com",
+        "phone": "+51920143686",
+        "address": "Av. Salaverry 2216, Barranco, Lima"
+      },
+      "card": {
+        "pan": "450875074944760",
+        "expiry": "06/28",
+        "cvv": "6196",
+        "holder": "Silvia Ramirez Cueva"
+      },
+      "amount": 82380.32,
+      "currency": "USD",
+      "purpose": "SALA",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.08
+      }
+    },
+    {
+      "end_to_end_id": "E2E136893545842",
+      "debtor": {
+        "name": "Patricia Espinoza Bravo",
+        "document": "E2732407",
+        "iban": "FR6178694467810082592367",
+        "account": "04872316076270794202",
+        "email": "patricia.bravo29@protonmail.com",
+        "phone": "+51963820292",
+        "address": "Calle Los Nogales 2006, Surco, Lima"
+      },
+      "card": {
+        "pan": "5534561673007634",
+        "expiry": "05/28",
+        "cvv": "298",
+        "holder": "Patricia Espinoza Bravo"
+      },
+      "amount": 25923.88,
+      "currency": "USD",
+      "purpose": "GDDS",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.02
+      }
+    },
+    {
+      "end_to_end_id": "E2E975310407910",
+      "debtor": {
+        "name": "Yolanda Mamani Condori",
+        "document": "26859839",
+        "iban": "PE8576728443707505769702",
+        "account": "06861067112480891935",
+        "email": "yolanda.condori45@protonmail.com",
+        "phone": "+51922177093",
+        "address": "Calle Los Nogales 1728, San Borja, Lima"
+      },
+      "card": {
+        "pan": "6011117041198892",
+        "expiry": "01/31",
+        "cvv": "512",
+        "holder": "Yolanda Mamani Condori"
+      },
+      "amount": 21303.76,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.22
+      }
+    },
+    {
+      "end_to_end_id": "E2E514536373110",
+      "debtor": {
+        "name": "Raul Mamani Condori",
+        "document": "H1691039",
+        "iban": "ES6652516421314510738570",
+        "account": "02820362382763234688",
+        "email": "raul.condori43@yahoo.com",
+        "phone": "+51978718878",
+        "address": "Av. Angamos Este 1742, Barranco, Lima"
+      },
+      "card": {
+        "pan": "3772833611377544",
+        "expiry": "08/30",
+        "cvv": "759",
+        "holder": "Raul Mamani Condori"
+      },
+      "amount": 67683.31,
+      "currency": "USD",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.39
+      }
+    },
+    {
+      "end_to_end_id": "E2E458477137362",
+      "debtor": {
+        "name": "Claudia Espinoza Bravo",
+        "document": "G8807253",
+        "iban": "PE7128475854802123164905",
+        "account": "05116834696005448892",
+        "email": "claudia.bravo54@hotmail.com",
+        "phone": "+51957691385",
+        "address": "Av. Camino Real 861, Jesus Maria, Lima"
+      },
+      "card": {
+        "pan": "5534569596893691",
+        "expiry": "09/29",
+        "cvv": "952",
+        "holder": "Claudia Espinoza Bravo"
+      },
+      "amount": 2886.25,
+      "currency": "PEN",
+      "purpose": "SUPP",
+      "screening": {
+        "ofac_hit": false,
+        "score": 0.35
+      }
+    }
+  ]
+}

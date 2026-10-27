@@ -1,0 +1,177 @@
+2024-07-02T14:00:01Z INFO  [boot] conectando a Kafka con sasl.username=IJ7XKQP4NR2MTVZA sasl.password=xY3Kq9TdLm2Rv8PwEa5NcHb7Zu4Xs1Gj6QoIeR0AtYnM3VfBdKlUp
+2024-07-02T14:00:02Z INFO  [boot] oracle dsn=cbs_app/Br1ll4nt3-Cbs-2024@cbs-prod-scan.telco.pe:1521/CBSPRD
+2024-07-02T14:00:03Z DEBUG [boot] Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmNfcmF0aW5nIiwic2NvcGUiOiJmbXM6d3JpdGUiLCJpYXQiOjE3MTk4NDAwMDB9.Qk1sVGJ2TjhwWXJXcTJkRmhLc0xtOXhBYzNFdjdSMQ
+2024-07-02T14:30:19Z INFO  [mediation] CCR-I recibido msisdn=+51984954429 imsi=716067825315846 imei=383209778228240 cell=71606-7468
+2024-07-02T14:51:13Z DEBUG [enrich] HLR hit dni=16833510 nombre="Maria Elena Flores Paredes" email=maria.paredes86@yahoo.es plan=Postpago Max 200
+2024-07-02T14:44:16Z INFO  [mediation] CCR-I recibido msisdn=+51960435453 imsi=716062295964676 imei=380250898116398 cell=71606-6991
+2024-07-02T14:47:13Z DEBUG [enrich] HLR hit dni=72476974 nombre="Sandra Huaman Torres" email=sandra.torres93@gmail.com plan=Postpago Max 200
+2024-07-02T14:23:12Z WARN  [billing] reintento de cobro pan=5534560949138553 monto=171.79 PEN
+2024-07-02T14:15:37Z INFO  [mediation] CCR-I recibido msisdn=+51992315579 imsi=716064822101524 imei=327051546015320 cell=71606-7851
+2024-07-02T14:14:25Z DEBUG [enrich] HLR hit dni=21155948 nombre="Carmen Castillo Meza" email=carmen.meza58@hotmail.com plan=Postpago Max 200
+2024-07-02T14:37:13Z INFO  [mediation] CCR-I recibido msisdn=+51981860708 imsi=716069509613012 imei=367850600907737 cell=71606-3028
+2024-07-02T14:24:50Z DEBUG [enrich] HLR hit dni=41495995 nombre="Carmen Flores Paredes" email=carmen.paredes67@hotmail.com plan=Corporativo Flota
+2024-07-02T14:13:46Z INFO  [mediation] CCR-I recibido msisdn=+51947925606 imsi=716063266581940 imei=368008172526042 cell=71606-7499
+2024-07-02T14:13:24Z DEBUG [enrich] HLR hit dni=23572719 nombre="Miguel Angel Chavez Ríos" email=miguel.ríos32@outlook.com plan=Postpago Full 120
+2024-07-02T14:18:28Z INFO  [mediation] CCR-I recibido msisdn=+51920724325 imsi=716065846477125 imei=373735854718379 cell=71606-7867
+2024-07-02T14:19:44Z DEBUG [enrich] HLR hit dni=54313643 nombre="Alejandro Vargas Leon" email=alejandro.leon89@claro.com.pe plan=Postpago Max 200
+2024-07-02T14:29:45Z INFO  [mediation] CCR-I recibido msisdn=+51930045805 imsi=716066281781118 imei=378635012504380 cell=71606-3961
+2024-07-02T14:16:47Z DEBUG [enrich] HLR hit dni=77001398 nombre="Raul Lopez Vera" email=raul.vera31@claro.com.pe plan=Corporativo Flota
+2024-07-02T14:22:33Z INFO  [mediation] CCR-I recibido msisdn=+51919054338 imsi=716067490535700 imei=335312712539410 cell=71606-2596
+2024-07-02T14:45:55Z DEBUG [enrich] HLR hit dni=78776607 nombre="Juan Carlos Ramirez Cueva" email=juan.cueva76@gmail.com plan=Control 60
+2024-07-02T14:13:49Z INFO  [mediation] CCR-I recibido msisdn=+51956693074 imsi=716066215338029 imei=372786728126648 cell=71606-4374
+2024-07-02T14:41:53Z DEBUG [enrich] HLR hit dni=50191766 nombre="Gladys Perez Ramos" email=gladys.ramos78@outlook.com plan=Control 60
+2024-07-02T14:59:30Z INFO  [mediation] CCR-I recibido msisdn=+51939832586 imsi=716063850906996 imei=310693969025549 cell=71606-8628
+2024-07-02T14:47:39Z DEBUG [enrich] HLR hit dni=65267694 nombre="Fernando Quispe Ccama" email=fernando.ccama88@gmail.com plan=Corporativo Flota
+2024-07-02T14:25:21Z INFO  [mediation] CCR-I recibido msisdn=+51971892750 imsi=716064253870876 imei=399372458181503 cell=71606-4999
+2024-07-02T14:15:46Z DEBUG [enrich] HLR hit dni=78961253 nombre="Raul Vargas Leon" email=raul.leon5@claro.com.pe plan=Corporativo Flota
+2024-07-02T14:41:31Z INFO  [mediation] CCR-I recibido msisdn=+51937403218 imsi=716064847281266 imei=388440553318306 cell=71606-8353
+2024-07-02T14:28:48Z DEBUG [enrich] HLR hit dni=36860005 nombre="Cesar Augusto Quispe Ccama" email=cesar.ccama92@outlook.com plan=Control 60
+2024-07-02T14:17:42Z WARN  [billing] reintento de cobro pan=5534566625435395 monto=113.56 PEN
+2024-07-02T14:36:20Z INFO  [mediation] CCR-I recibido msisdn=+51921288242 imsi=716065804335442 imei=334431859325065 cell=71606-6604
+2024-07-02T14:19:41Z DEBUG [enrich] HLR hit dni=28695627 nombre="Luis Alberto Rojas Diaz" email=luis.diaz49@yahoo.es plan=Postpago Max 200
+2024-07-02T14:52:14Z INFO  [mediation] CCR-I recibido msisdn=+51950899437 imsi=716064913503574 imei=328663001444535 cell=71606-6140
+2024-07-02T14:31:54Z DEBUG [enrich] HLR hit dni=54936645 nombre="Jose Antonio Ponce Silva" email=jose.silva64@hotmail.com plan=Control 60
+2024-07-02T14:41:47Z INFO  [mediation] CCR-I recibido msisdn=+51975371424 imsi=716067872651517 imei=362992174226614 cell=71606-8474
+2024-07-02T14:14:15Z DEBUG [enrich] HLR hit dni=34952821 nombre="Yolanda Quispe Ccama" email=yolanda.ccama38@yahoo.es plan=Corporativo Flota
+2024-07-02T14:40:54Z WARN  [billing] reintento de cobro pan=5534569349448835 monto=178.35 PEN
+2024-07-02T14:52:14Z INFO  [mediation] CCR-I recibido msisdn=+51966058536 imsi=716064143979882 imei=354898998465592 cell=71606-1994
+2024-07-02T14:56:54Z DEBUG [enrich] HLR hit dni=69747229 nombre="Ricardo Ponce Silva" email=ricardo.silva30@hotmail.com plan=Prepago Recarga
+2024-07-02T14:46:53Z INFO  [mediation] CCR-I recibido msisdn=+51948525810 imsi=716064915526493 imei=339786405317750 cell=71606-8301
+2024-07-02T14:28:55Z DEBUG [enrich] HLR hit dni=57143584 nombre="Gladys Espinoza Bravo" email=gladys.bravo30@outlook.com plan=Postpago Max 200
+2024-07-02T14:52:32Z INFO  [mediation] CCR-I recibido msisdn=+51965332572 imsi=716068556519210 imei=321733207422973 cell=71606-1369
+2024-07-02T14:39:32Z DEBUG [enrich] HLR hit dni=15386002 nombre="Milagros Castillo Meza" email=milagros.meza77@gmail.com plan=Postpago Full 120
+2024-07-02T14:17:41Z INFO  [mediation] CCR-I recibido msisdn=+51964314668 imsi=716061346017900 imei=373494717272187 cell=71606-1965
+2024-07-02T14:23:59Z DEBUG [enrich] HLR hit dni=79170403 nombre="Patricia Sanchez Aguirre" email=patricia.aguirre56@gmail.com plan=Control 60
+2024-07-02T14:57:25Z INFO  [mediation] CCR-I recibido msisdn=+51929832586 imsi=716063903153973 imei=388671221227835 cell=71606-7519
+2024-07-02T14:35:41Z DEBUG [enrich] HLR hit dni=70419273 nombre="Fernando Ramirez Cueva" email=fernando.cueva28@yahoo.es plan=Postpago Max 200
+2024-07-02T14:38:35Z INFO  [mediation] CCR-I recibido msisdn=+51982894609 imsi=716061874094162 imei=323286287598999 cell=71606-5552
+2024-07-02T14:18:37Z DEBUG [enrich] HLR hit dni=41570485 nombre="Juan Carlos Quispe Ccama" email=juan.ccama42@claro.com.pe plan=Postpago Full 120
+2024-07-02T14:27:55Z WARN  [billing] reintento de cobro pan=4508750596355650 monto=186.69 PEN
+2024-07-02T14:36:32Z INFO  [mediation] CCR-I recibido msisdn=+51945246554 imsi=716062192256094 imei=349948689376392 cell=71606-7233
+2024-07-02T14:24:19Z DEBUG [enrich] HLR hit dni=66738191 nombre="Cesar Augusto Chavez Ríos" email=cesar.ríos17@outlook.com plan=Control 60
+2024-07-02T14:19:24Z INFO  [mediation] CCR-I recibido msisdn=+51998695220 imsi=716067089801152 imei=345239109143867 cell=71606-4822
+2024-07-02T14:10:41Z DEBUG [enrich] HLR hit dni=23590192 nombre="Rosa Huaman Torres" email=rosa.torres65@gmail.com plan=Corporativo Flota
+2024-07-02T14:21:26Z INFO  [mediation] CCR-I recibido msisdn=+51912029823 imsi=716065966185891 imei=346470959435234 cell=71606-5619
+2024-07-02T14:10:19Z DEBUG [enrich] HLR hit dni=52555126 nombre="Maria Elena Lopez Vera" email=maria.vera75@outlook.com plan=Postpago Max 200
+2024-07-02T14:33:49Z INFO  [mediation] CCR-I recibido msisdn=+51914755177 imsi=716065748941931 imei=363984668402829 cell=71606-6220
+2024-07-02T14:18:54Z DEBUG [enrich] HLR hit dni=38429441 nombre="Patricia Flores Paredes" email=patricia.paredes56@hotmail.com plan=Prepago Recarga
+2024-07-02T14:49:51Z WARN  [billing] reintento de cobro pan=4508759544143829 monto=256.07 PEN
+2024-07-02T14:53:57Z INFO  [mediation] CCR-I recibido msisdn=+51955521067 imsi=716063699932383 imei=379146148400898 cell=71606-1884
+2024-07-02T14:39:59Z DEBUG [enrich] HLR hit dni=72668108 nombre="Sandra Lopez Vera" email=sandra.vera85@hotmail.com plan=Corporativo Flota
+2024-07-02T14:53:45Z WARN  [billing] reintento de cobro pan=3772835523607413 monto=227.88 PEN
+2024-07-02T14:35:35Z INFO  [mediation] CCR-I recibido msisdn=+51949653626 imsi=716062637182466 imei=378655467666679 cell=71606-7536
+2024-07-02T14:35:16Z DEBUG [enrich] HLR hit dni=13174945 nombre="Gladys Castillo Meza" email=gladys.meza83@claro.com.pe plan=Postpago Max 200
+2024-07-02T14:35:13Z INFO  [mediation] CCR-I recibido msisdn=+51959406157 imsi=716063951651349 imei=371878935201816 cell=71606-4122
+2024-07-02T14:14:23Z DEBUG [enrich] HLR hit dni=23440391 nombre="Sandra Vargas Leon" email=sandra.leon44@claro.com.pe plan=Postpago Max 200
+2024-07-02T14:17:31Z INFO  [mediation] CCR-I recibido msisdn=+51959605653 imsi=716068092481832 imei=391210958506608 cell=71606-1861
+2024-07-02T14:16:10Z DEBUG [enrich] HLR hit dni=43642548 nombre="Rosa Ponce Silva" email=rosa.silva89@gmail.com plan=Postpago Full 120
+2024-07-02T14:44:16Z INFO  [mediation] CCR-I recibido msisdn=+51942497533 imsi=716061265736989 imei=388532314875678 cell=71606-6957
+2024-07-02T14:49:11Z DEBUG [enrich] HLR hit dni=62590571 nombre="Patricia Mamani Condori" email=patricia.condori83@claro.com.pe plan=Control 60
+2024-07-02T14:23:49Z INFO  [mediation] CCR-I recibido msisdn=+51962920006 imsi=716063236017998 imei=384533149347653 cell=71606-7164
+2024-07-02T14:19:50Z DEBUG [enrich] HLR hit dni=22157904 nombre="Luis Alberto Gutierrez Salas" email=luis.salas39@hotmail.com plan=Postpago Full 120
+2024-07-02T14:32:48Z INFO  [mediation] CCR-I recibido msisdn=+51988894965 imsi=716065046843978 imei=340158566594057 cell=71606-6966
+2024-07-02T14:40:17Z DEBUG [enrich] HLR hit dni=71028686 nombre="Miguel Angel Vargas Leon" email=miguel.leon52@hotmail.com plan=Postpago Full 120
+2024-07-02T14:41:39Z INFO  [mediation] CCR-I recibido msisdn=+51956532052 imsi=716063191173335 imei=329675249850036 cell=71606-8870
+2024-07-02T14:40:29Z DEBUG [enrich] HLR hit dni=43570768 nombre="Elena Rojas Diaz" email=elena.diaz52@claro.com.pe plan=Prepago Recarga
+2024-07-02T14:16:57Z INFO  [mediation] CCR-I recibido msisdn=+51980848097 imsi=716065922187894 imei=396348983666943 cell=71606-6613
+2024-07-02T14:57:26Z DEBUG [enrich] HLR hit dni=13473480 nombre="Rosa Sanchez Aguirre" email=rosa.aguirre2@outlook.com plan=Control 60
+2024-07-02T14:54:20Z INFO  [mediation] CCR-I recibido msisdn=+51992596344 imsi=716064242007617 imei=376885511320297 cell=71606-9459
+2024-07-02T14:11:23Z DEBUG [enrich] HLR hit dni=70797607 nombre="Miguel Angel Perez Ramos" email=miguel.ramos86@outlook.com plan=Postpago Full 120
+2024-07-02T14:43:33Z WARN  [billing] reintento de cobro pan=4111111831918886 monto=25.1 PEN
+2024-07-02T14:19:54Z INFO  [mediation] CCR-I recibido msisdn=+51973933716 imsi=716064340383248 imei=348384737089179 cell=71606-9899
+2024-07-02T14:11:58Z DEBUG [enrich] HLR hit dni=78101589 nombre="Victor Hugo Espinoza Bravo" email=victor.bravo68@yahoo.es plan=Control 60
+2024-07-02T14:51:15Z INFO  [mediation] CCR-I recibido msisdn=+51958975587 imsi=716065244137970 imei=326869073353135 cell=71606-5278
+2024-07-02T14:43:33Z DEBUG [enrich] HLR hit dni=58099573 nombre="Jose Antonio Chavez Ríos" email=jose.ríos88@yahoo.es plan=Prepago Recarga
+2024-07-02T14:32:59Z WARN  [billing] reintento de cobro pan=5534566719892493 monto=234.97 PEN
+2024-07-02T14:24:44Z INFO  [mediation] CCR-I recibido msisdn=+51984037471 imsi=716061445350205 imei=374721924055067 cell=71606-9873
+2024-07-02T14:59:42Z DEBUG [enrich] HLR hit dni=19443083 nombre="Miguel Angel Gutierrez Salas" email=miguel.salas9@hotmail.com plan=Corporativo Flota
+2024-07-02T14:24:49Z INFO  [mediation] CCR-I recibido msisdn=+51920573918 imsi=716068885545829 imei=395465105226402 cell=71606-4197
+2024-07-02T14:25:35Z DEBUG [enrich] HLR hit dni=22256471 nombre="Raul Espinoza Bravo" email=raul.bravo95@gmail.com plan=Postpago Max 200
+2024-07-02T14:24:22Z INFO  [mediation] CCR-I recibido msisdn=+51910976933 imsi=716066764732683 imei=318605824736862 cell=71606-9480
+2024-07-02T14:41:32Z DEBUG [enrich] HLR hit dni=41695338 nombre="Ricardo Mamani Condori" email=ricardo.condori28@outlook.com plan=Postpago Full 120
+2024-07-02T14:11:27Z INFO  [mediation] CCR-I recibido msisdn=+51972599957 imsi=716064496013855 imei=347067329970803 cell=71606-8737
+2024-07-02T14:26:22Z DEBUG [enrich] HLR hit dni=38233844 nombre="Jose Antonio Espinoza Bravo" email=jose.bravo29@hotmail.com plan=Postpago Full 120
+2024-07-02T14:32:38Z INFO  [mediation] CCR-I recibido msisdn=+51910582951 imsi=716065242048317 imei=321391784008755 cell=71606-6726
+2024-07-02T14:33:15Z DEBUG [enrich] HLR hit dni=12351969 nombre="Gladys Chavez Ríos" email=gladys.ríos59@outlook.com plan=Prepago Recarga
+2024-07-02T14:24:40Z INFO  [mediation] CCR-I recibido msisdn=+51969201093 imsi=716066321796965 imei=334160737956870 cell=71606-4222
+2024-07-02T14:31:23Z DEBUG [enrich] HLR hit dni=12661646 nombre="Fernando Vargas Leon" email=fernando.leon94@yahoo.es plan=Prepago Recarga
+2024-07-02T14:49:10Z INFO  [mediation] CCR-I recibido msisdn=+51973147774 imsi=716068663421601 imei=343191596862048 cell=71606-8855
+2024-07-02T14:51:32Z DEBUG [enrich] HLR hit dni=47166486 nombre="Gladys Huaman Torres" email=gladys.torres72@outlook.com plan=Postpago Full 120
+2024-07-02T14:15:52Z INFO  [mediation] CCR-I recibido msisdn=+51986775148 imsi=716067331325943 imei=324455501815636 cell=71606-2964
+2024-07-02T14:34:55Z DEBUG [enrich] HLR hit dni=49418653 nombre="Carmen Perez Ramos" email=carmen.ramos45@hotmail.com plan=Postpago Full 120
+2024-07-02T14:40:21Z INFO  [mediation] CCR-I recibido msisdn=+51939522885 imsi=716066067544293 imei=321446815924960 cell=71606-8109
+2024-07-02T14:50:31Z DEBUG [enrich] HLR hit dni=27895628 nombre="Raul Rojas Diaz" email=raul.diaz80@gmail.com plan=Control 60
+2024-07-02T14:56:35Z INFO  [mediation] CCR-I recibido msisdn=+51929573685 imsi=716068606500220 imei=380939926724843 cell=71606-8588
+2024-07-02T14:35:57Z DEBUG [enrich] HLR hit dni=35961370 nombre="Fernando Rojas Diaz" email=fernando.diaz90@gmail.com plan=Postpago Full 120
+2024-07-02T14:56:20Z WARN  [billing] reintento de cobro pan=450875870737293 monto=37.61 PEN
+2024-07-02T14:20:18Z INFO  [mediation] CCR-I recibido msisdn=+51992146456 imsi=716061737947862 imei=322478706250805 cell=71606-1451
+2024-07-02T14:19:47Z DEBUG [enrich] HLR hit dni=27992399 nombre="Alejandro Mamani Condori" email=alejandro.condori64@yahoo.es plan=Postpago Full 120
+2024-07-02T14:51:19Z WARN  [billing] reintento de cobro pan=553456110446247 monto=133.02 PEN
+2024-07-02T14:49:48Z INFO  [mediation] CCR-I recibido msisdn=+51920542553 imsi=716069953063502 imei=367265487794798 cell=71606-8771
+2024-07-02T14:52:32Z DEBUG [enrich] HLR hit dni=75447857 nombre="Patricia Perez Ramos" email=patricia.ramos31@gmail.com plan=Prepago Recarga
+2024-07-02T14:45:18Z INFO  [mediation] CCR-I recibido msisdn=+51946856837 imsi=716066723873517 imei=399855636436867 cell=71606-1350
+2024-07-02T14:10:56Z DEBUG [enrich] HLR hit dni=56213938 nombre="Maria Elena Quispe Ccama" email=maria.ccama95@outlook.com plan=Corporativo Flota
+2024-07-02T14:43:57Z INFO  [mediation] CCR-I recibido msisdn=+51944480575 imsi=716061493125012 imei=385992479574903 cell=71606-3281
+2024-07-02T14:37:22Z DEBUG [enrich] HLR hit dni=76608112 nombre="Alejandro Castillo Meza" email=alejandro.meza17@gmail.com plan=Corporativo Flota
+2024-07-02T14:23:11Z INFO  [mediation] CCR-I recibido msisdn=+51929895355 imsi=716064711266533 imei=320703109571532 cell=71606-5126
+2024-07-02T14:23:28Z DEBUG [enrich] HLR hit dni=36037012 nombre="Fernando Lopez Vera" email=fernando.vera76@hotmail.com plan=Corporativo Flota
+2024-07-02T14:58:47Z INFO  [mediation] CCR-I recibido msisdn=+51923480798 imsi=716067832174715 imei=342822040206645 cell=71606-6341
+2024-07-02T14:26:44Z DEBUG [enrich] HLR hit dni=20449118 nombre="Sandra Chavez Ríos" email=sandra.ríos88@claro.com.pe plan=Postpago Max 200
+2024-07-02T14:18:13Z INFO  [mediation] CCR-I recibido msisdn=+51992868075 imsi=716061936244963 imei=329818950707344 cell=71606-6796
+2024-07-02T14:39:52Z DEBUG [enrich] HLR hit dni=47727289 nombre="Fernando Ponce Silva" email=fernando.silva74@yahoo.es plan=Postpago Full 120
+2024-07-02T14:43:36Z INFO  [mediation] CCR-I recibido msisdn=+51957159364 imsi=716064842235374 imei=317600563665508 cell=71606-9219
+2024-07-02T14:18:44Z DEBUG [enrich] HLR hit dni=14701646 nombre="Luis Alberto Huaman Torres" email=luis.torres34@yahoo.es plan=Postpago Full 120
+2024-07-02T14:42:11Z INFO  [mediation] CCR-I recibido msisdn=+51976386013 imsi=716061179378296 imei=381259543501473 cell=71606-8211
+2024-07-02T14:59:21Z DEBUG [enrich] HLR hit dni=27597966 nombre="Victor Hugo Ramirez Cueva" email=victor.cueva48@gmail.com plan=Control 60
+2024-07-02T14:59:19Z INFO  [mediation] CCR-I recibido msisdn=+51959441334 imsi=716061871104569 imei=333113212507121 cell=71606-3823
+2024-07-02T14:19:40Z DEBUG [enrich] HLR hit dni=45373361 nombre="Carmen Castillo Meza" email=carmen.meza1@gmail.com plan=Postpago Full 120
+2024-07-02T14:17:45Z INFO  [mediation] CCR-I recibido msisdn=+51928024478 imsi=716064980014774 imei=391057539225306 cell=71606-2011
+2024-07-02T14:30:53Z DEBUG [enrich] HLR hit dni=51629096 nombre="Jorge Luis Gutierrez Salas" email=jorge.salas71@claro.com.pe plan=Postpago Full 120
+2024-07-02T14:45:40Z INFO  [mediation] CCR-I recibido msisdn=+51922778534 imsi=716062217553781 imei=384348954495468 cell=71606-2738
+2024-07-02T14:45:13Z DEBUG [enrich] HLR hit dni=77025219 nombre="Alejandro Castillo Meza" email=alejandro.meza5@claro.com.pe plan=Prepago Recarga
+2024-07-02T14:27:12Z INFO  [mediation] CCR-I recibido msisdn=+51948005427 imsi=716066507605307 imei=396026591872138 cell=71606-2601
+2024-07-02T14:42:38Z DEBUG [enrich] HLR hit dni=32727616 nombre="Norma Lopez Vera" email=norma.vera67@claro.com.pe plan=Control 60
+2024-07-02T14:58:14Z INFO  [mediation] CCR-I recibido msisdn=+51935843152 imsi=716064296334508 imei=375945147985042 cell=71606-8262
+2024-07-02T14:30:49Z DEBUG [enrich] HLR hit dni=40316437 nombre="Jose Antonio Vargas Leon" email=jose.leon20@outlook.com plan=Postpago Full 120
+2024-07-02T14:48:42Z WARN  [billing] reintento de cobro pan=5534562540280925 monto=114.07 PEN
+2024-07-02T14:22:54Z INFO  [mediation] CCR-I recibido msisdn=+51958082207 imsi=716062244846444 imei=358783804818621 cell=71606-5541
+2024-07-02T14:38:42Z DEBUG [enrich] HLR hit dni=36187771 nombre="Elena Castillo Meza" email=elena.meza41@hotmail.com plan=Postpago Full 120
+2024-07-02T14:40:42Z INFO  [mediation] CCR-I recibido msisdn=+51932680586 imsi=716069274890686 imei=339706189634725 cell=71606-5057
+2024-07-02T14:54:43Z DEBUG [enrich] HLR hit dni=60174788 nombre="Cesar Augusto Flores Paredes" email=cesar.paredes53@outlook.com plan=Control 60
+2024-07-02T14:26:45Z WARN  [billing] reintento de cobro pan=3772835013176200 monto=141.89 PEN
+2024-07-02T14:22:38Z INFO  [mediation] CCR-I recibido msisdn=+51980256058 imsi=716061648790974 imei=379699753687186 cell=71606-3246
+2024-07-02T14:36:17Z DEBUG [enrich] HLR hit dni=67769165 nombre="Patricia Castillo Meza" email=patricia.meza66@claro.com.pe plan=Control 60
+2024-07-02T14:30:14Z INFO  [mediation] CCR-I recibido msisdn=+51969234848 imsi=716063367146080 imei=383477742607901 cell=71606-4942
+2024-07-02T14:37:14Z DEBUG [enrich] HLR hit dni=16218611 nombre="Elena Sanchez Aguirre" email=elena.aguirre43@hotmail.com plan=Corporativo Flota
+2024-07-02T14:29:17Z INFO  [mediation] CCR-I recibido msisdn=+51936982093 imsi=716062603338863 imei=321013232244639 cell=71606-3530
+2024-07-02T14:55:51Z DEBUG [enrich] HLR hit dni=52559007 nombre="Miguel Angel Vargas Leon" email=miguel.leon19@outlook.com plan=Control 60
+2024-07-02T14:19:26Z INFO  [mediation] CCR-I recibido msisdn=+51946005185 imsi=716069386870059 imei=352528748793228 cell=71606-3248
+2024-07-02T14:39:24Z DEBUG [enrich] HLR hit dni=27810521 nombre="Luis Alberto Flores Paredes" email=luis.paredes65@claro.com.pe plan=Postpago Full 120
+2024-07-02T14:16:35Z INFO  [mediation] CCR-I recibido msisdn=+51955586522 imsi=716066929725462 imei=315195306819362 cell=71606-8983
+2024-07-02T14:20:52Z DEBUG [enrich] HLR hit dni=37572827 nombre="Jose Antonio Espinoza Bravo" email=jose.bravo49@hotmail.com plan=Postpago Full 120
+2024-07-02T14:20:55Z INFO  [mediation] CCR-I recibido msisdn=+51949652801 imsi=716066260396251 imei=367219948756245 cell=71606-8070
+2024-07-02T14:42:35Z DEBUG [enrich] HLR hit dni=74748460 nombre="Cesar Augusto Huaman Torres" email=cesar.torres76@gmail.com plan=Postpago Max 200
+2024-07-02T14:22:32Z INFO  [mediation] CCR-I recibido msisdn=+51964876255 imsi=716067456707576 imei=379911294611630 cell=71606-6218
+2024-07-02T14:15:56Z DEBUG [enrich] HLR hit dni=16013747 nombre="Raul Flores Paredes" email=raul.paredes10@claro.com.pe plan=Postpago Full 120
+2024-07-02T14:31:45Z INFO  [mediation] CCR-I recibido msisdn=+51930716149 imsi=716066656092951 imei=316187259552762 cell=71606-8514
+2024-07-02T14:38:55Z DEBUG [enrich] HLR hit dni=66022861 nombre="Norma Ponce Silva" email=norma.silva50@yahoo.es plan=Postpago Full 120
+2024-07-02T14:31:43Z INFO  [mediation] CCR-I recibido msisdn=+51981552474 imsi=716069814113299 imei=387563593604258 cell=71606-5840
+2024-07-02T14:42:14Z DEBUG [enrich] HLR hit dni=37070950 nombre="Milagros Quispe Ccama" email=milagros.ccama33@outlook.com plan=Postpago Full 120
+2024-07-02T14:24:16Z INFO  [mediation] CCR-I recibido msisdn=+51917520058 imsi=716061187742175 imei=389303964007250 cell=71606-2377
+2024-07-02T14:26:27Z DEBUG [enrich] HLR hit dni=52554064 nombre="Ricardo Gutierrez Salas" email=ricardo.salas18@gmail.com plan=Corporativo Flota
+2024-07-02T14:59:21Z INFO  [mediation] CCR-I recibido msisdn=+51931910219 imsi=716066543098808 imei=366995577463009 cell=71606-5430
+2024-07-02T14:58:18Z DEBUG [enrich] HLR hit dni=70131758 nombre="Jose Antonio Espinoza Bravo" email=jose.bravo88@yahoo.es plan=Postpago Full 120
+2024-07-02T14:53:26Z INFO  [mediation] CCR-I recibido msisdn=+51990017804 imsi=716067538989694 imei=340529260506688 cell=71606-7651
+2024-07-02T14:19:44Z DEBUG [enrich] HLR hit dni=60245527 nombre="Elena Chavez Ríos" email=elena.ríos37@outlook.com plan=Corporativo Flota
+2024-07-02T14:46:41Z WARN  [billing] reintento de cobro pan=4111114422591781 monto=61.21 PEN
+2024-07-02T14:54:30Z INFO  [mediation] CCR-I recibido msisdn=+51977693007 imsi=716066633539228 imei=317336567312385 cell=71606-2465
+2024-07-02T14:27:13Z DEBUG [enrich] HLR hit dni=77684268 nombre="Fernando Ramirez Cueva" email=fernando.cueva75@hotmail.com plan=Prepago Recarga
+2024-07-02T14:21:37Z INFO  [mediation] CCR-I recibido msisdn=+51963788344 imsi=716064030191445 imei=348005205531649 cell=71606-2186
+2024-07-02T14:27:11Z DEBUG [enrich] HLR hit dni=56373938 nombre="Elena Rojas Diaz" email=elena.diaz24@gmail.com plan=Postpago Max 200
+2024-07-02T14:26:15Z INFO  [mediation] CCR-I recibido msisdn=+51977793737 imsi=716064545248566 imei=394556685788547 cell=71606-4643
+2024-07-02T14:14:26Z DEBUG [enrich] HLR hit dni=11542115 nombre="Alejandro Espinoza Bravo" email=alejandro.bravo15@claro.com.pe plan=Prepago Recarga
+2024-07-02T14:39:10Z WARN  [billing] reintento de cobro pan=3772835281305994 monto=104.31 PEN
+2024-07-02T14:31:45Z INFO  [mediation] CCR-I recibido msisdn=+51917267003 imsi=716062720237641 imei=312723266157411 cell=71606-7844
+2024-07-02T14:27:49Z DEBUG [enrich] HLR hit dni=76120324 nombre="Miguel Angel Castillo Meza" email=miguel.meza41@gmail.com plan=Control 60
+2024-07-02T14:43:55Z INFO  [mediation] CCR-I recibido msisdn=+51919852065 imsi=716067618342849 imei=322049126203418 cell=71606-4906
+2024-07-02T14:17:20Z DEBUG [enrich] HLR hit dni=11412470 nombre="Jose Antonio Gutierrez Salas" email=jose.salas8@outlook.com plan=Prepago Recarga
