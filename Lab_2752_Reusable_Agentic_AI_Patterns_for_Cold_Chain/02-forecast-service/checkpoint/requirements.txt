@@ -10,7 +10,7 @@ pandas>=2.1.0
 # HTTP Requests & Validation
 httpx==0.26.0
 requests==2.33.0
-pydantic==2.5.3
+pydantic==2.14.2
 
 # WhatsApp Notifications
 twilio==9.0.0
